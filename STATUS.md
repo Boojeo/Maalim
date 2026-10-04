@@ -92,7 +92,7 @@ Each phase ends with lint + typecheck + tests, a commit, a push, and a STATUS up
 - **Checks:** lint, typecheck, 86 unit tests, 31 e2e tests (incl. axe) pass; `next build` passes with the content gate.
 - **Not done / cut:** F9 A/B tooling (cut order), mentor dashboard charts (tables only), `/api/next` endpoint (logic is client-side), real-model eval numbers, pgvector queries (in-process cosine is used), approval UI for cached explanations, rate limiting, chips expand inline inside the text (works, could be nicer as a shared sources panel), `/dev/ui-options` (UI_BRIEF alternative mockups were optional; the brief's default is used).
 - **Next:** nothing started. See "Content needed" and "Blockers".
-- **Blockers:** **`git push` fails with HTTP 403** ("Claude doesn't have GitHub access to Boojeo/Maalim"; tried twice). The GitHub MCP tools can read the repo (only `main` exists), so the Claude GitHub App/connection lacks write access. Fix: install the app at https://github.com/apps/claude/installations/select_target or reconnect at https://claude.ai/connect-github. Until then commits are **local only** in this ephemeral container and will be lost if the session ends. I retry the push at the end of every phase.
+- **Blockers:** none for pushing. Earlier `git push` returned 403 (GitHub App lacked write access); once access was granted, all 12 commits were pushed to `claude/cool-wright-ob23xt` (nothing was opened as a PR). Remaining blockers are the content and credentials listed above.
 
 ## Notes
 - Next 16 renamed middleware to `proxy.ts`; not needed (locale is cookie-based).
