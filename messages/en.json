@@ -109,5 +109,11 @@
     "verbatim": "Verbatim source text",
     "open": "Open source",
     "from": "{source} · {id}"
+  },
+  "explain": {
+    "loading": "Preparing the explanation…",
+    "generatedNote": "Every sentence comes from a verified source. Tap a number to read the source.",
+    "verbatimNote": "Showing the verified source text exactly as published.",
+    "retry": "Try again"
   }
 }

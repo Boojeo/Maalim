@@ -26,9 +26,13 @@ test("unit flow: hook -> video with captions -> explanation with chips -> check 
 
   await page.getByRole("button", { name: "Next", exact: true }).click();
   // verified passages only: 3 chips, the unverified passage is never shown
-  await expect(page.getByText("SYNTHETIC TEST PASSAGE ONE").first()).toBeVisible();
+  await expect(page.locator("span", { hasText: "The sample procedure has three parts" }).first()).toBeVisible();
+  await expect(page.getByText("Every sentence comes from a verified source")).toBeVisible();
   await expect(page.getByText("SYNTHETIC UNVERIFIED")).toHaveCount(0);
-  await expect(page.locator("details summary", { hasText: "[1]" })).toBeVisible();
+  await expect(page.locator("details summary", { hasText: "[1]" }).first()).toBeVisible();
+  await page.locator("details summary", { hasText: "[1]" }).first().click();
+  await expect(page.getByText("Verbatim source text").first()).toBeVisible();
+  await page.screenshot({ path: "design/screens/unit-explanation.en.png", fullPage: true });
 
   await page.getByRole("button", { name: "Next", exact: true }).click();
   // check: wrong then right

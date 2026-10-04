@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
-import { Explanation } from "@/components/explanation";
+import { ExplanationPanel } from "@/components/explanation-panel";
 import { SOURCE_LABEL } from "@/components/citation-chip";
 import { UnitPlayer } from "@/components/unit-player";
 import { isLearnerUnit, needsBanner } from "@/lib/content-gate";
@@ -69,7 +69,7 @@ export default async function UnitPage({ params }: { params: Promise<{ concept: 
         hook={hook}
         misconception={misconception}
         videos={videos}
-        explanation={<Explanation passages={passages} showDev={showDev} />}
+        explanation={<ExplanationPanel conceptId={id} lang={locale} fallbackPassages={passages} showDev={showDev} />}
         checkItem={checkItem}
         checkSource={checkSource}
         nextConcept={nextC ? { id: nextC.id, title: locale === "ar" ? nextC.title_ar : nextC.title_en } : null}

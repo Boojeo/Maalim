@@ -18,4 +18,7 @@
 | lucide-react, class-variance-authority, clsx, tailwind-merge, @radix-ui/react-slot | Library | npm | shadcn-style UI primitives, icons | 2026-10-04 | ISC / Apache-2.0 / MIT |
 | zod, @supabase/supabase-js | Library | npm | Validation; Supabase client | 2026-10-04 | MIT |
 | vitest, tsx, @playwright/test | Dev tool | npm | Tests, scripts, screenshots | 2026-10-04 | MIT / Apache-2.0 |
+| Mock LLM adapter (`lib/llm.ts`) | Code (ours) | this repo | Deterministic extractive stand-in used when no LLM key is set: it only selects existing sentences from the passages | 2026-10-04 | Project licence |
+| Mock embedder (`lib/embeddings.ts`) | Code (ours) | this repo | Hashed bag-of-words + trigram vectors for retrieval when no embedding API key is set | 2026-10-04 | Project licence |
+| Synthetic test fixtures (`tests/fixtures/content`) | Test data (ours) | this repo | Obviously fake text and generated colour-bar clips for tests; never religious content, never shipped to learners | 2026-10-04 | Project licence |
 
