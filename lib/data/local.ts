@@ -33,7 +33,7 @@ function dataDir(): string {
   return process.env.VERCEL ? path.join(os.tmpdir(), "maalim") : path.join(process.cwd(), ".data");
 }
 
-export function createLocalStore(contentDir = path.join(process.cwd(), "content")): DataStore {
+export function createLocalStore(contentDir = process.env.CONTENT_DIR ?? path.join(process.cwd(), "content")): DataStore {
   const read = <T>(file: string): T => JSON.parse(fs.readFileSync(path.join(contentDir, file), "utf8")) as T;
   const runtimeFile = () => path.join(dataDir(), "runtime.json");
 

@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import type { Curriculum, Passage, VideoEntry } from "./types";
 
-const dir = path.join(process.cwd(), "content");
+const dir = process.env.CONTENT_DIR ?? path.join(process.cwd(), "content");
 
 function readJson<T>(file: string): T {
   return JSON.parse(fs.readFileSync(path.join(dir, file), "utf8")) as T;

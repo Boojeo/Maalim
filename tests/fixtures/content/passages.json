@@ -1,0 +1,57 @@
+{
+  "_note": "SYNTHETIC test fixture. Not religious content. Never shipped to learners.",
+  "passages": [
+    {
+      "id": "wudu-syn-1",
+      "concept_id": "wudu",
+      "lang": "en",
+      "source": "hadeethenc",
+      "source_id": "SYN-1",
+      "source_url": "https://example.invalid/synthetic",
+      "text": "SYNTHETIC TEST PASSAGE ONE. The sample procedure has three parts: part A comes first, part B comes second, and part C comes third.",
+      "level": "L2",
+      "verified": true,
+      "verified_by": "Synthetic Reviewer",
+      "verified_on": "2026-10-04"
+    },
+    {
+      "id": "wudu-syn-2",
+      "concept_id": "wudu",
+      "lang": "en",
+      "source": "hadeethenc",
+      "source_id": "SYN-2",
+      "source_url": "https://example.invalid/synthetic",
+      "text": "SYNTHETIC TEST PASSAGE TWO. Each part of the sample procedure is repeated twice before moving on.",
+      "level": "L2",
+      "verified": true,
+      "verified_by": "Synthetic Reviewer",
+      "verified_on": "2026-10-04"
+    },
+    {
+      "id": "wudu-syn-3",
+      "concept_id": "wudu",
+      "lang": "en",
+      "source": "hadeethenc",
+      "source_id": "SYN-3",
+      "source_url": "https://example.invalid/synthetic",
+      "text": "SYNTHETIC TEST PASSAGE THREE. The sample note applies only to the synthetic fixture and has no other meaning.",
+      "level": "L2",
+      "verified": true,
+      "verified_by": "Synthetic Reviewer",
+      "verified_on": "2026-10-04"
+    },
+    {
+      "id": "wudu-syn-4",
+      "concept_id": "wudu",
+      "lang": "en",
+      "source": "hadeethenc",
+      "source_id": "SYN-4",
+      "source_url": "https://example.invalid/synthetic",
+      "text": "SYNTHETIC UNVERIFIED PASSAGE. This text must never reach a learner.",
+      "level": "L2",
+      "verified": false,
+      "verified_by": null,
+      "verified_on": null
+    }
+  ]
+}

@@ -1,12 +1,113 @@
 {
-  "app": { "name": "Ma'ālim", "tagline": "A calm, guided path for new Muslims" },
-  "nav": { "label": "Main navigation", "map": "Map", "learn": "Learn", "practise": "Practise", "me": "Me" },
-  "lang": { "switchTo": "العربية", "switchLabel": "Switch language to Arabic" },
-  "banner": { "unverified": "UNVERIFIED CONTENT — development only, never shown to learners" },
-  "map": { "title": "Your path", "intro": "Six landmarks. Take them in order, at your own pace." },
-  "learn": { "title": "Learn", "empty": "Choose a landmark on the map to start a unit." },
-  "practise": { "title": "Practise", "empty": "Practice items will appear here once they have been reviewed." },
-  "me": { "title": "Me", "privacy": "Nothing is stored about you on our servers. Your progress stays on this device." },
-  "common": { "loading": "Loading…", "back": "Back" },
-  "dev": { "title": "Content status" }
+  "app": {
+    "name": "Ma'ālim",
+    "tagline": "A calm, guided path for new Muslims"
+  },
+  "nav": {
+    "label": "Main navigation",
+    "map": "Map",
+    "learn": "Learn",
+    "practise": "Practise",
+    "me": "Me"
+  },
+  "lang": {
+    "switchTo": "العربية",
+    "switchLabel": "Switch language to Arabic"
+  },
+  "banner": {
+    "unverified": "UNVERIFIED CONTENT — development only, never shown to learners"
+  },
+  "map": {
+    "title": "Your path",
+    "intro": "Six landmarks. Take them in order, at your own pace.",
+    "status": {
+      "locked": "Locked",
+      "available": "Ready",
+      "in_progress": "In progress",
+      "done": "Done"
+    },
+    "after": "After: {list}",
+    "start": "Start",
+    "continue": "Continue",
+    "review": "Review",
+    "pathLabel": "Learning path",
+    "next": "Next step: {title}",
+    "allDone": "You have finished every landmark. Well done."
+  },
+  "learn": {
+    "title": "Learn",
+    "empty": "Choose a landmark on the map to start a unit.",
+    "continue": "Continue where you left off",
+    "all": "All units",
+    "emptyAll": "No units yet."
+  },
+  "practise": {
+    "title": "Practise",
+    "empty": "Practice items will appear here once they have been reviewed."
+  },
+  "me": {
+    "title": "Me",
+    "privacy": "Nothing is stored about you on our servers. Your progress stays on this device."
+  },
+  "common": {
+    "loading": "Loading…",
+    "back": "Back"
+  },
+  "dev": {
+    "title": "Content status"
+  },
+  "unit": {
+    "stepOf": "Step {n} of {total}",
+    "progress": "Unit progress",
+    "hook": "To think about",
+    "video": "Watch",
+    "explanation": "Explanation",
+    "check": "Check yourself",
+    "wrapup": "Common misunderstanding",
+    "next": "Next",
+    "previous": "Back",
+    "finish": "Finish unit",
+    "finished": "Unit finished",
+    "nextUnit": "Next landmark",
+    "backToMap": "Back to the map",
+    "buildsOn": "This landmark builds on: {list}. You can still open it.",
+    "notFound": "We could not find this landmark.",
+    "objectives": "What you will be able to do"
+  },
+  "pending": {
+    "label": "Waiting for review",
+    "body": "This part is being prepared and reviewed by our content team. It is not shown until it has been checked."
+  },
+  "video": {
+    "placeholder": "Video to come",
+    "permission": "We are waiting for the creator's permission to show this clip.",
+    "missingFile": "This clip has not been added yet.",
+    "missingCaptions": "Captions are not ready yet, so the clip is not shown.",
+    "credit": "Video by {credit}",
+    "creditPending": "Creator credit pending",
+    "clipOf": "Clip {n} of {total}",
+    "nextClip": "Next clip",
+    "previousClip": "Previous clip",
+    "captionsOn": "Captions on",
+    "kindLesson": "Lesson clip",
+    "kindScenario": "Scenario clip"
+  },
+  "item": {
+    "submit": "Check answer",
+    "correct": "That's right.",
+    "tryAgain": "Not quite. Here is what the source says:",
+    "source": "Source",
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "position": "Position {n}",
+    "orderHint": "Put the steps in order, then check.",
+    "retry": "Try again",
+    "next": "Continue"
+  },
+  "sources": {
+    "title": "Sources",
+    "verbatim": "Verbatim source text",
+    "open": "Open source",
+    "from": "{source} · {id}"
+  }
 }

@@ -1,11 +1,17 @@
 import { getTranslations } from "next-intl/server";
+import { ConceptPath } from "@/components/concept-path";
+import { getStore } from "@/lib/data";
 
-export default async function Page() {
+export const dynamic = "force-dynamic";
+
+export default async function MapPage() {
   const t = await getTranslations("map");
+  const { concepts } = await getStore().getCurriculum();
   return (
-    <section className="space-y-3">
+    <section className="space-y-4">
       <h1 className="text-2xl font-bold">{t("title")}</h1>
       <p className="text-muted">{t("intro")}</p>
+      <ConceptPath concepts={concepts} />
     </section>
   );
 }

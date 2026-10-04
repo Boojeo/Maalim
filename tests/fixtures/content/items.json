@@ -1,0 +1,117 @@
+{
+  "_note": "SYNTHETIC test fixture.",
+  "items": [
+    {
+      "id": "item-syn-mcq",
+      "concept_id": "wudu",
+      "type": "mcq",
+      "lang": "en",
+      "prompt": "SYNTHETIC: Which part of the sample procedure comes first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Part A"
+        },
+        {
+          "id": "b",
+          "text": "Part B"
+        },
+        {
+          "id": "c",
+          "text": "Part C"
+        }
+      ],
+      "answer": "a",
+      "source_passage_id": "wudu-syn-1",
+      "source_span": "part A comes first",
+      "video_id": null,
+      "status": "approved",
+      "generated_by": "fixture",
+      "reviewed_by": "Synthetic Reviewer",
+      "reviewed_on": null
+    },
+    {
+      "id": "item-syn-order",
+      "concept_id": "wudu",
+      "type": "order",
+      "lang": "en",
+      "prompt": "SYNTHETIC: Put the parts of the sample procedure in order.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Part A"
+        },
+        {
+          "id": "b",
+          "text": "Part B"
+        },
+        {
+          "id": "c",
+          "text": "Part C"
+        }
+      ],
+      "answer": [
+        "a",
+        "b",
+        "c"
+      ],
+      "source_passage_id": "wudu-syn-1",
+      "source_span": "part A comes first, part B comes second, and part C comes third",
+      "video_id": null,
+      "status": "approved",
+      "generated_by": "fixture",
+      "reviewed_by": "Synthetic Reviewer",
+      "reviewed_on": null
+    },
+    {
+      "id": "item-syn-draft",
+      "concept_id": "wudu",
+      "type": "mcq",
+      "lang": "en",
+      "prompt": "SYNTHETIC draft item that must not be shown.",
+      "options": [
+        {
+          "id": "a",
+          "text": "x"
+        },
+        {
+          "id": "b",
+          "text": "y"
+        }
+      ],
+      "answer": "a",
+      "source_passage_id": "wudu-syn-1",
+      "source_span": "part A comes first",
+      "video_id": null,
+      "status": "draft",
+      "generated_by": "fixture",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "item-syn-unverified-src",
+      "concept_id": "wudu",
+      "type": "mcq",
+      "lang": "en",
+      "prompt": "SYNTHETIC approved item whose source is unverified.",
+      "options": [
+        {
+          "id": "a",
+          "text": "x"
+        },
+        {
+          "id": "b",
+          "text": "y"
+        }
+      ],
+      "answer": "a",
+      "source_passage_id": "wudu-syn-4",
+      "source_span": "This text must never reach a learner.",
+      "video_id": null,
+      "status": "approved",
+      "generated_by": "fixture",
+      "reviewed_by": "Synthetic Reviewer",
+      "reviewed_on": null
+    }
+  ]
+}

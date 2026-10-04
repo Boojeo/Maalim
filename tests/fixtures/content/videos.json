@@ -1,0 +1,33 @@
+{
+  "_note": "SYNTHETIC test fixture.",
+  "videos": [
+    {
+      "id": "wudu-main",
+      "concept_id": "wudu",
+      "kind": "lesson",
+      "title_ar": "synthetic clip",
+      "source_file": "none",
+      "permission": "granted",
+      "creator_credit": "Synthetic Creator",
+      "timestamps_verified": true,
+      "steps": [
+        {
+          "n": 1,
+          "key": "one",
+          "label_en": "Part one",
+          "start": "0:00",
+          "end": "0:02",
+          "use": true
+        },
+        {
+          "n": 2,
+          "key": "two",
+          "label_en": "Part two",
+          "start": "0:02",
+          "end": "0:04",
+          "use": true
+        }
+      ]
+    }
+  ]
+}
