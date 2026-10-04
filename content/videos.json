@@ -1,0 +1,55 @@
+{
+  "_note": "Step timestamps for the main wudu clip were read from the video frames only (no audio check), accuracy about +/-3 s. Mohammed must confirm them and the order/number of washes against the source text before 'timestamps_verified' is set to true. Do not use any clip whose permission is not 'granted'.",
+  "videos": [
+    {
+      "id": "wudu-main",
+      "concept_id": "wudu",
+      "kind": "lesson",
+      "title_ar": "تعلم الوضوء في 120 ثانية",
+      "source_file": "public/videos/src/wudu_120.webm",
+      "youtube_id": "6iSdWuL4zlQ",
+      "format": "vertical 1080x1920, 2:23",
+      "permission": "pending",
+      "creator_credit": "TODO: creator name / channel",
+      "timestamps_verified": false,
+      "steps": [
+        { "n": 0, "key": "intro", "label_en": "Introduction (cut this)", "start": "0:00", "end": "0:24", "use": false },
+        { "n": 1, "key": "hands", "label_en": "Wash the hands", "start": "0:25", "end": "0:34", "use": true },
+        { "n": 2, "key": "mouth-nose", "label_en": "Rinse the mouth and nose", "start": "0:34", "end": "0:52", "use": true, "note": "presenter pauses to explain about 0:37-0:41" },
+        { "n": 3, "key": "face", "label_en": "Wash the face", "start": "0:53", "end": "1:08", "use": true },
+        { "n": 4, "key": "arms", "label_en": "Wash the arms", "start": "1:09", "end": "1:32", "use": true, "note": "right then left, switch about 1:24" },
+        { "n": 5, "key": "head", "label_en": "Wipe the head", "start": "1:33", "end": "1:39", "use": true, "note": "ears not clearly visible" },
+        { "n": 6, "key": "feet", "label_en": "Wash the feet", "start": "1:44", "end": "2:10", "use": true, "note": "switch foot about 1:56" },
+        { "n": 7, "key": "outro", "label_en": "Closing talk", "start": "2:11", "end": "2:23", "use": false }
+      ]
+    },
+    {
+      "id": "wudu-workplace",
+      "concept_id": "wudu",
+      "kind": "scenario",
+      "title_ar": "تعلم الوضوء الصحيح",
+      "source_file": "public/videos/src/wudu_workplace.webm",
+      "youtube_id": "qH_JEpge3Gc",
+      "format": "vertical 720x1254, 1:24",
+      "permission": "pending",
+      "creator_credit": "TODO: creator name / channel",
+      "timestamps_verified": false,
+      "steps": [],
+      "note": "Use for the 'Dhuhr at work' scenario (washing feet in a bathroom sink). Whole clip or cut by Mohammed."
+    },
+    {
+      "id": "wudu-reference",
+      "concept_id": "wudu",
+      "kind": "reference",
+      "title_ar": "السنن النبوية - صفة الوضوء",
+      "source_file": "public/videos/src/wudu_sunan.mkv",
+      "youtube_id": "fnQR3In8HTQ",
+      "format": "4:3 640x480, 2:38, channel logo on screen",
+      "permission": "pending",
+      "creator_credit": "TODO",
+      "timestamps_verified": false,
+      "steps": [],
+      "note": "Reference for content review only. Low resolution and logo, do not use in the app."
+    }
+  ]
+}

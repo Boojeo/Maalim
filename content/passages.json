@@ -1,0 +1,31 @@
+{
+  "_note": "FILL THIS IN WITH VERIFIED TEXT ONLY (QuranEnc, HadeethEnc, IslamHouse). Copy the text exactly as published, with its source and ID. Set verified=true only after Mohammed (or a named reviewer) has checked it. Claude Code must never write or edit the 'text' field.",
+  "schema": {
+    "id": "unique string, e.g. wudu-001",
+    "concept_id": "must match an id in curriculum.json",
+    "lang": "ar | en",
+    "source": "quranenc | hadeethenc | islamhouse",
+    "source_id": "the exact ID or reference on the source site",
+    "source_url": "link to the exact item",
+    "text": "verbatim text",
+    "level": "L1 | L2 | L3 | L4",
+    "verified": false,
+    "verified_by": null,
+    "verified_on": null
+  },
+  "passages": [
+    {
+      "id": "wudu-001",
+      "concept_id": "wudu",
+      "lang": "en",
+      "source": "hadeethenc",
+      "source_id": "TODO",
+      "source_url": "TODO",
+      "text": "[CONTENT NEEDED: verbatim hadith/explanation describing the steps of wudu, from HadeethEnc]",
+      "level": "L2",
+      "verified": false,
+      "verified_by": null,
+      "verified_on": null
+    }
+  ]
+}

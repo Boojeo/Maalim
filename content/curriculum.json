@@ -1,0 +1,71 @@
+{
+  "_note": "Structure only. Titles, order and prerequisites are a DRAFT for Mohammed (Sharia member) to confirm. No religious rulings are written here. Levels: L1 core beliefs, L2 settled practical rulings, L3 differing views, L4 personal/out of scope.",
+  "stages": [
+    { "id": 0, "slug": "explore", "title_ar": "استكشاف", "title_en": "Explore" },
+    { "id": 1, "slug": "understand", "title_ar": "فهم", "title_en": "Understand" },
+    { "id": 2, "slug": "practise", "title_ar": "ممارسة", "title_en": "Practise" },
+    { "id": 3, "slug": "follow-up", "title_ar": "متابعة", "title_en": "Follow up" }
+  ],
+  "concepts": [
+    {
+      "id": "shahada",
+      "title_ar": "معنى الشهادتين",
+      "title_en": "The meaning of the shahada",
+      "level": "L1",
+      "order": 1,
+      "prerequisites": [],
+      "objectives_en": ["Learner can state in their own words what the two testimonies mean.", "Learner can say why the shahada is the entry point to the journey."],
+      "reviewed_by": null
+    },
+    {
+      "id": "tawhid",
+      "title_ar": "التوحيد",
+      "title_en": "Tawhid (the oneness of God)",
+      "level": "L1",
+      "order": 2,
+      "prerequisites": ["shahada"],
+      "objectives_en": ["Learner can explain the core idea of Tawhid in simple words."],
+      "reviewed_by": null
+    },
+    {
+      "id": "quran",
+      "title_ar": "القرآن الكريم",
+      "title_en": "The Quran",
+      "level": "L1",
+      "order": 3,
+      "prerequisites": ["shahada"],
+      "objectives_en": ["Learner knows what the Quran is and how Muslims relate to it."],
+      "reviewed_by": null
+    },
+    {
+      "id": "five-pillars",
+      "title_ar": "أركان الإسلام",
+      "title_en": "The five pillars (overview)",
+      "level": "L1",
+      "order": 4,
+      "prerequisites": ["shahada", "tawhid"],
+      "objectives_en": ["Learner can name the five pillars and what each is for."],
+      "reviewed_by": null
+    },
+    {
+      "id": "wudu",
+      "title_ar": "الوضوء",
+      "title_en": "Wudu (ablution)",
+      "level": "L2",
+      "order": 5,
+      "prerequisites": ["five-pillars"],
+      "objectives_en": ["Learner can put the steps of wudu in order.", "Learner can perform a practice scenario at a workplace sink."],
+      "reviewed_by": null
+    },
+    {
+      "id": "salah",
+      "title_ar": "الصلاة (الأوقات والخطوات)",
+      "title_en": "Salah (times and steps)",
+      "level": "L2",
+      "order": 6,
+      "prerequisites": ["wudu"],
+      "objectives_en": ["Learner can name the prayer times and put the basic steps in order."],
+      "reviewed_by": null
+    }
+  ]
+}
