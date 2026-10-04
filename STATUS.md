@@ -66,6 +66,12 @@ Each phase ends with lint + typecheck + tests, a commit, a push, and a STATUS up
 
 ## Done / Next / Blockers
 
-- **Done:** Step 0 read-through, STATUS.md.
-- **Next:** Phase 1.
-- **Blockers:** **`git push` fails with HTTP 403** ("Claude doesn't have GitHub access to Boojeo/Maalim"; tried twice). The GitHub MCP tools can read the repo (only `main` exists), so the Claude GitHub App/connection lacks write access. Fix: install the app at https://github.com/apps/claude/installations/select_target or reconnect at https://claude.ai/connect-github. Until then commits are **local only** in this ephemeral container and will be lost if the session ends. I retry the push at the end of every phase. Other than that, no blockers for building. Content and credentials above limit how real the demo can be.
+- **Done:** Step 0 read-through. **Phase 1**: Next.js 16 (App Router) + TS + Tailwind 4, shadcn-style `Button/Card/Badge` (written by hand, `components.json` present), next-intl with cookie locale (ar default RTL, en, no URL prefix), tokens in `app/globals.css` + `lib/tokens.ts` (contrast test: 14 pairs ≥ 4.5), bottom nav Map · Learn · Practise · Me, language switch, `lib/env.ts` (mock fallbacks), `/dev` content status, red UNVERIFIED banner (`DEV_ALLOW_UNVERIFIED=1`), production build refuses that flag. Screenshots: `design/screens/*.{ar,en}.png` via `npx tsx scripts/screens.ts` (360px, console-error and overflow check).
+- **Checks:** lint, typecheck, vitest (14 tests) and `next build` pass.
+- **Next:** Phase 2 (data layer).
+- **Blockers:** **`git push` fails with HTTP 403** ("Claude doesn't have GitHub access to Boojeo/Maalim"; tried twice). The GitHub MCP tools can read the repo (only `main` exists), so the Claude GitHub App/connection lacks write access. Fix: install the app at https://github.com/apps/claude/installations/select_target or reconnect at https://claude.ai/connect-github. Until then commits are **local only** in this ephemeral container and will be lost if the session ends. I retry the push at the end of every phase.
+
+## Notes
+- Next 16 renamed middleware to `proxy.ts`; not needed (locale is cookie-based).
+- Font: `@fontsource/ibm-plex-sans-arabic` (npm, OFL) instead of `next/font/google`, so builds do not depend on Google Fonts.
+- `@types/node` pinned to 22 (vitest peer conflict with 20).

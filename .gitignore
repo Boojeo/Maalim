@@ -9,3 +9,6 @@ public/videos/src/*
 *.mkv
 *.log
 .DS_Store
+tsconfig.tsbuildinfo
+next-env.d.ts
+/test-results/

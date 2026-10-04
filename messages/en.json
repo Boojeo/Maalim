@@ -1,0 +1,12 @@
+{
+  "app": { "name": "Ma'ālim", "tagline": "A calm, guided path for new Muslims" },
+  "nav": { "label": "Main navigation", "map": "Map", "learn": "Learn", "practise": "Practise", "me": "Me" },
+  "lang": { "switchTo": "العربية", "switchLabel": "Switch language to Arabic" },
+  "banner": { "unverified": "UNVERIFIED CONTENT — development only, never shown to learners" },
+  "map": { "title": "Your path", "intro": "Six landmarks. Take them in order, at your own pace." },
+  "learn": { "title": "Learn", "empty": "Choose a landmark on the map to start a unit." },
+  "practise": { "title": "Practise", "empty": "Practice items will appear here once they have been reviewed." },
+  "me": { "title": "Me", "privacy": "Nothing is stored about you on our servers. Your progress stays on this device." },
+  "common": { "loading": "Loading…", "back": "Back" },
+  "dev": { "title": "Content status" }
+}

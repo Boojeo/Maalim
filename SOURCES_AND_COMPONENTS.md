@@ -12,3 +12,10 @@
 | Wudu video: "تعلم الوضوء في 120 ثانية" (6iSdWuL4zlQ) | Video | creator permission | Main lesson clip | | Permission: PENDING |
 | Wudu video: "تعلم الوضوء الصحيح" (qH_JEpge3Gc) | Video | creator permission | Scenario clip | | Permission: PENDING |
 | Wudu video: "السنن النبوية – صفة الوضوء" (fnQR3In8HTQ) | Video | creator permission | Reference only | | Permission: PENDING |
+| Next.js 16, React 19, Tailwind 4, TypeScript | Library | npm | App framework | 2026-10-04 | MIT |
+| next-intl | Library | npm | ar/en i18n, RTL | 2026-10-04 | MIT |
+| @fontsource/ibm-plex-sans-arabic | Font | npm (IBM Plex) | UI font (Arabic + Latin) | 2026-10-04 | SIL OFL 1.1 |
+| lucide-react, class-variance-authority, clsx, tailwind-merge, @radix-ui/react-slot | Library | npm | shadcn-style UI primitives, icons | 2026-10-04 | ISC / Apache-2.0 / MIT |
+| zod, @supabase/supabase-js | Library | npm | Validation; Supabase client | 2026-10-04 | MIT |
+| vitest, tsx, @playwright/test | Dev tool | npm | Tests, scripts, screenshots | 2026-10-04 | MIT / Apache-2.0 |
+

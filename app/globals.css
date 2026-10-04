@@ -1,0 +1,64 @@
+@import "tailwindcss";
+@import "@fontsource/ibm-plex-sans-arabic/arabic-400.css";
+@import "@fontsource/ibm-plex-sans-arabic/arabic-500.css";
+@import "@fontsource/ibm-plex-sans-arabic/arabic-700.css";
+@import "@fontsource/ibm-plex-sans-arabic/latin-400.css";
+@import "@fontsource/ibm-plex-sans-arabic/latin-500.css";
+@import "@fontsource/ibm-plex-sans-arabic/latin-700.css";
+
+/* Design tokens from UI_BRIEF.md. Change colours only here (and in lib/tokens.ts, which tests contrast). */
+@theme {
+  --color-bg: #faf7f2;
+  --color-surface: #ffffff;
+  --color-ink: #1f2933;
+  --color-muted: #52606d;
+  --color-line: #e4ddd0;
+  --color-primary: #0f5e5a;
+  --color-primary-hover: #0b4744;
+  --color-primary-fg: #ffffff;
+  --color-accent: #c9a24b; /* landmarks & mastery fills only, never body text */
+  --color-accent-soft: #f3e9d0;
+  --color-success: #2f855a;
+  --color-error: #b83232;
+  --color-danger-bg: #b00020; /* dev-only UNVERIFIED banner */
+
+  --radius-card: 16px;
+  --radius-btn: 12px;
+
+  --font-sans: "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  font-size: 17px;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+
+html[lang="ar"] body {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
