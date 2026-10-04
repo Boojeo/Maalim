@@ -10,6 +10,7 @@ import { ItemPlayer, type ItemSource } from "@/components/item-player";
 import { VideoPlayer } from "@/components/video-player";
 import { markDone, markStarted, recordAttempt, unmetPrerequisites } from "@/lib/progress";
 import { useProgress } from "@/lib/progress-client";
+import { track } from "@/lib/telemetry";
 import { isPlaceholder, type Concept, type Item, type Lang } from "@/lib/types";
 import type { ResolvedVideo } from "@/lib/videos";
 
@@ -100,7 +101,10 @@ export function UnitPlayer(p: UnitPlayerProps) {
             <ItemPlayer
               item={p.checkItem}
               source={p.checkSource}
-              onResult={(ok) => update((s) => recordAttempt(s, p.concept.id, ok))}
+              onResult={(ok) => {
+                update((s) => recordAttempt(s, p.concept.id, ok));
+                track(p.concept.id, ok ? "check_correct" : "check_wrong");
+              }}
               onContinue={() => setI(i + 1)}
             />
           ) : (
@@ -119,7 +123,14 @@ export function UnitPlayer(p: UnitPlayerProps) {
             {t("next")}
           </Button>
         ) : (
-          <Button onClick={() => update((s) => markDone(s, p.concept.id))} disabled={!!done} className="flex-1">
+          <Button
+            onClick={() => {
+              update((s) => markDone(s, p.concept.id));
+              track(p.concept.id, "unit_done");
+            }}
+            disabled={!!done}
+            className="flex-1"
+          >
             {done ? t("finished") : t("finish")}
           </Button>
         )}

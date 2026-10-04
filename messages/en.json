@@ -32,14 +32,19 @@
     "review": "Review",
     "pathLabel": "Learning path",
     "next": "Next step: {title}",
-    "allDone": "You have finished every landmark. Well done."
+    "allDone": "You have finished every landmark. Well done.",
+    "askCta": "Ask a question"
   },
   "learn": {
     "title": "Learn",
     "empty": "Choose a landmark on the map to start a unit.",
     "continue": "Continue where you left off",
     "all": "All units",
-    "emptyAll": "No units yet."
+    "emptyAll": "No units yet.",
+    "review": "Worth another look",
+    "reviewBody": "A few answers here were tricky. A short review can help.",
+    "reviewCta": "Review",
+    "ask": "Ask a question"
   },
   "practise": {
     "title": "Practise",
@@ -55,7 +60,24 @@
   },
   "me": {
     "title": "Me",
-    "privacy": "Nothing is stored about you on our servers. Your progress stays on this device."
+    "privacy": "Nothing is stored about you on our servers. Your progress stays on this device.",
+    "stage": "Where are you in your journey?",
+    "stageHint": "You choose this, and you can change it at any time. It stays on this device.",
+    "progress": "Your progress",
+    "mastery": "Practice: {pct}%",
+    "masteryNone": "Not enough practice yet",
+    "done": "Done",
+    "share": "Share anonymous progress counts",
+    "shareHint": "Off by default. If you turn it on, only counts like \"a unit was finished\" are shared with mentors to improve the course. Never your name or answers.",
+    "reset": "Clear my progress on this device",
+    "resetConfirm": "Clear everything on this device? This cannot be undone.",
+    "ask": "Ask a question",
+    "stages": {
+      "0": "Exploring",
+      "1": "Understanding",
+      "2": "Practising",
+      "3": "Following up"
+    }
   },
   "common": {
     "loading": "Loading…",
@@ -143,5 +165,82 @@
     "unauthorized": "Enter the access token to continue.",
     "saved": "Saved",
     "needName": "Enter your name before deciding."
+  },
+  "ask": {
+    "title": "Ask a question",
+    "intro": "Type your question. We answer only from verified sources, and for anything else we can pass it to a person.",
+    "label": "Your question",
+    "placeholder": "For example: What are the steps of wudu?",
+    "submit": "Ask",
+    "asking": "Thinking…",
+    "about": "About: {topic}",
+    "notFound": "We could not find this in our verified sources.",
+    "notReady": "We have not finished reviewing sources for this topic yet.",
+    "citationNote": "We always answer with sources, never without.",
+    "stillNeed": "Not what you needed?",
+    "error": "Something went wrong. Please try again.",
+    "referTitle": "This needs a person",
+    "referDefault": "This question needs a person to look at it with you. We do not answer it ourselves. We can pass it to a mentor.",
+    "urgentTitle": "You are not alone",
+    "urgentDefault": "It sounds like things are heavy right now. You deserve support from a real person. If you may be in danger, please contact local emergency services or someone you trust right now.",
+    "talk": "Talk to a person",
+    "noRulings": "We never give personal rulings or fatwas.",
+    "reasons": {
+      "crisis": "Needs urgent support",
+      "invention-request": "Request outside our sources",
+      "fatwa-request": "Request for a personal ruling",
+      "personal-situation": "Personal situation",
+      "sensitive-topic": "Sensitive topic",
+      "disputed-topic": "Topic where views may differ",
+      "ruling-question": "Question about a ruling",
+      "adversarial": "Request outside our rules",
+      "citation-bypass": "Request",
+      "in-scope": "Question",
+      "unclear-form": "Unclear question",
+      "no-reference": "Not covered by our sources"
+    }
+  },
+  "handoff": {
+    "title": "Before we send anything",
+    "intro": "This is exactly what a mentor will see. You can change it. Nothing is sent until you press Send.",
+    "summary": "Summary to share",
+    "privacy": "Please do not write your name, phone number, email or links. We do not store who you are.",
+    "send": "Send to a mentor",
+    "cancel": "Cancel",
+    "sending": "Sending…",
+    "sentTitle": "Sent",
+    "sentBody": "A mentor will look at this. Your reference code is {code}. Keep it if you want to mention it later.",
+    "identifier": "Please remove contact details (email, phone number or links) and try again.",
+    "failed": "We could not send it. Please try again.",
+    "topic": "Topic",
+    "type": "Type",
+    "question": "Question",
+    "noTopic": "Not specified"
+  },
+  "mentor": {
+    "title": "Mentor dashboard",
+    "intro": "Referrals the learners chose to send, and anonymised counts. No names, no contact details.",
+    "inbox": "Referral inbox",
+    "empty": "No referrals yet.",
+    "date": "Date",
+    "topic": "Topic",
+    "level": "Level",
+    "status": "Status",
+    "summary": "Shared summary",
+    "statusNew": "New",
+    "statusSeen": "Seen",
+    "statusClosed": "Closed",
+    "aggregates": "Anonymous aggregates",
+    "byLevel": "Referrals by level",
+    "byConcept": "Referrals by topic",
+    "progress": "Course progress (opt-in counts)",
+    "unitsDone": "Units finished",
+    "answers": "Check answers",
+    "accuracy": "Accuracy",
+    "hidden": "<3",
+    "suppressed": "Counts below 3 are hidden so no one can be singled out.",
+    "total": "Total referrals: {n}",
+    "none": "No topic",
+    "synthetic": "Demo data is synthetic."
   }
 }

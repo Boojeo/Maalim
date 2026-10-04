@@ -11,6 +11,7 @@ import type {
   Curriculum,
   Item,
   Passage,
+  ProgressEvent,
   Referral,
   ReferralStatus,
   ReferralTexts,
@@ -24,9 +25,10 @@ interface Runtime {
   extraItems: Item[];
   explanations: CachedExplanation[];
   referrals: Referral[];
+  events: ProgressEvent[];
 }
 
-const emptyRuntime = (): Runtime => ({ itemOverrides: {}, extraItems: [], explanations: [], referrals: [] });
+const emptyRuntime = (): Runtime => ({ itemOverrides: {}, extraItems: [], explanations: [], referrals: [], events: [] });
 
 function dataDir(): string {
   if (process.env.LOCAL_DATA_DIR) return process.env.LOCAL_DATA_DIR;
@@ -151,6 +153,14 @@ export function createLocalStore(contentDir = process.env.CONTENT_DIR ?? path.jo
     },
     async listReferrals() {
       return loadRuntime().referrals.slice().sort((a, b) => b.created_at.localeCompare(a.created_at));
+    },
+    async addEvent(e) {
+      const rt = loadRuntime();
+      rt.events.push(e);
+      saveRuntime(rt);
+    },
+    async listEvents() {
+      return loadRuntime().events;
     },
     async setReferralStatus(id: string, status: ReferralStatus) {
       const rt = loadRuntime();

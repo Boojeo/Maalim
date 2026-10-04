@@ -6,6 +6,7 @@ import type {
   ItemStatus,
   Lang,
   Passage,
+  ProgressEvent,
   Referral,
   ReferralStatus,
   ReferralTexts,
@@ -41,4 +42,6 @@ export interface DataStore {
   addReferral(r: Omit<Referral, "id" | "created_at" | "status">): Promise<Referral>;
   listReferrals(): Promise<Referral[]>;
   setReferralStatus(id: string, status: ReferralStatus): Promise<void>;
+  addEvent(e: ProgressEvent): Promise<void>;
+  listEvents(): Promise<ProgressEvent[]>;
 }

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { Check, Lock, Play } from "lucide-react";
-import { conceptStatus, nextConcept, unmetPrerequisites, type ConceptStatus } from "@/lib/progress";
+import { conceptStatus, recommend, unmetPrerequisites, type ConceptStatus } from "@/lib/progress";
 import { useProgress } from "@/lib/progress-client";
 import { cn } from "@/lib/utils";
 import type { Concept, Lang } from "@/lib/types";
@@ -18,7 +18,7 @@ export function ConceptPath({ concepts }: { concepts: Concept[] }) {
   const name = (c: Concept) => (locale === "ar" ? c.title_ar : c.title_en);
   const ordered = [...concepts].sort((a, b) => a.order - b.order);
   const byId = new Map(concepts.map((c) => [c.id, c]));
-  const next = nextConcept(concepts, state);
+  const next = recommend(concepts, state).primary;
 
   return (
     <div className="space-y-4">

@@ -50,7 +50,7 @@ const toCitation = (p: Passage): Citation => ({
 });
 
 export async function explain(
-  input: { conceptId: string; lang: Lang; query?: string },
+  input: { conceptId: string; lang: Lang; query?: string; fallbackToConcept?: boolean },
   deps: ExplainDeps = {},
 ): Promise<ExplainResult> {
   const t0 = performance.now();
@@ -63,15 +63,22 @@ export async function explain(
   });
   if (!concept) return empty();
 
-  const retrieved = await retrieve(input.conceptId, query, input.lang, { k: 4 }, { store, embedder: deps.embedder });
+  let retrieved = await retrieve(input.conceptId, query, input.lang, { k: 4 }, { store, embedder: deps.embedder });
+  // Ask flow: the router already matched this concept, so if the specific wording finds nothing,
+  // fall back to the concept's own verified passages (still guarded, still cited).
+  let topicQuery = query;
+  if (retrieved.length === 0 && query && input.fallbackToConcept) {
+    retrieved = await retrieve(input.conceptId, "", input.lang, { k: 4 }, { store, embedder: deps.embedder });
+    topicQuery = "";
+  }
   if (retrieved.length === 0) return empty(); // nothing verified to say: never call the model
 
   const passages = retrieved.map((r) => r.passage);
   const outLang = passages[0].lang;
-  const topic = query || (outLang === "ar" ? concept.title_ar : concept.title_en);
+  const topic = topicQuery || (outLang === "ar" ? concept.title_ar : concept.title_en);
 
   // Cache key covers prompt version + exact passage texts, so edits to sources invalidate it.
-  const query_hash = sha([EXPLAIN_PROMPT_VERSION, PIPELINE_VERSION, query, ...passages.map((p) => `${p.id}:${sha(p.text)}`)].join("|"));
+  const query_hash = sha([EXPLAIN_PROMPT_VERSION, PIPELINE_VERSION, topicQuery, ...passages.map((p) => `${p.id}:${sha(p.text)}`)].join("|"));
   const key = { concept_id: concept.id, level: concept.level, lang: outLang, query_hash };
   const hit = await store.getCachedExplanation(key);
   const byId = new Map(passages.map((p) => [p.id, p]));

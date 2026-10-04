@@ -128,6 +128,14 @@ describe("explain()", () => {
     expect(irrelevant.mode).toBe("none");
     expect(llm.calls).toBe(0);
   });
+  it("ask flow: an unmatched wording falls back to the concept's verified passages only when asked to", async () => {
+    const llm = stub("The sample procedure has three parts [1].\nEach part of the sample procedure is repeated twice [2].");
+    const q = "quarterly tax filing deadlines";
+    expect((await explain({ conceptId: "wudu", lang: "en", query: q }, { store, llm })).mode).toBe("none");
+    const r = await explain({ conceptId: "wudu", lang: "en", query: q, fallbackToConcept: true }, { store, llm });
+    expect(r.mode).toBe("generated");
+    expect(r.passages.every((p) => p.verified)).toBe(true);
+  });
   it("caches guarded results (second call does not hit the model)", async () => {
     const llm = stub("The sample procedure has three parts [1].\nEach part of the sample procedure is repeated twice [2].");
     const a = await explain({ conceptId: "wudu", lang: "en" }, { store, llm });

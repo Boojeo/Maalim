@@ -13,6 +13,7 @@ import type {
   Item,
   ItemStatus,
   Passage,
+  ProgressEvent,
   Referral,
   ReferralStatus,
   ReferralTexts,
@@ -153,6 +154,12 @@ export function createSupabaseStore(client?: SupabaseClient): DataStore {
       return (must(await db.from("referrals").select("*").order("created_at", { ascending: false })) as Row[]).map(
         (r) => r as unknown as Referral,
       );
+    },
+    async addEvent(e: ProgressEvent) {
+      must(await db.from("progress_events").insert(e));
+    },
+    async listEvents() {
+      return (must(await db.from("progress_events").select("concept_id,kind,day")) as Row[]).map((r) => r as unknown as ProgressEvent);
     },
     async setReferralStatus(id: string, status: ReferralStatus) {
       must(await db.from("referrals").update({ status }).eq("id", id));

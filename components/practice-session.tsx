@@ -8,6 +8,7 @@ import { ItemPlayer, type ItemSource } from "@/components/item-player";
 import { VideoPlayer } from "@/components/video-player";
 import { recordAttempt } from "@/lib/progress";
 import { useProgress } from "@/lib/progress-client";
+import { track } from "@/lib/telemetry";
 import type { Item } from "@/lib/types";
 import type { ResolvedVideo } from "@/lib/videos";
 
@@ -44,7 +45,10 @@ export function PracticeSession({ entries }: { entries: PracticeEntry[] }) {
           key={`${round}-${e.item.id}`}
           item={e.item}
           source={e.source}
-          onResult={(ok) => update((s) => recordAttempt(s, e.item.concept_id, ok))}
+          onResult={(ok) => {
+            update((s) => recordAttempt(s, e.item.concept_id, ok));
+            track(e.item.concept_id, ok ? "check_correct" : "check_wrong");
+          }}
           onContinue={() => setI(i + 1)}
         />
       </Card>

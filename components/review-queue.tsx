@@ -1,7 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { TokenGate } from "@/components/token-gate";
 import { CheckCircle2, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -20,98 +21,53 @@ interface Payload {
 
 /** Reviewer queue: approve / reject draft items. Approval is refused server-side if the checks fail. */
 export function ReviewQueue() {
+  return <TokenGate endpoint="/api/admin/review" storageKey="maalim.admin">{(headers) => <ReviewBody headers={headers} />}</TokenGate>;
+}
+
+function ReviewBody({ headers }: { headers: Record<string, string> }) {
   const t = useTranslations("admin");
-  const [token, setToken] = useState(() => {
-    try {
-      return typeof window === "undefined" ? "" : (sessionStorage.getItem("maalim.admin") ?? "");
-    } catch {
-      return "";
-    }
-  });
   const [reviewer, setReviewer] = useState("");
   const [data, setData] = useState<Payload | null>(null);
-  const [auth, setAuth] = useState<"unknown" | "needs-token" | "ok">("unknown");
   const [message, setMessage] = useState<string | null>(null);
-
-  const load = useCallback(
-    async (tok: string) => {
-      const headers: Record<string, string> = tok ? { "x-admin-token": tok } : {};
-      const probe = (await (await fetch("/api/admin/review?probe=1", { headers })).json()) as { authorized: boolean };
-      if (!probe.authorized) return setAuth("needs-token");
-      const res = await fetch("/api/admin/review", { headers });
-      setData((await res.json()) as Payload);
-      setAuth("ok");
-    },
-    [],
-  );
+  const [version, setVersion] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
-    const headers: Record<string, string> = token ? { "x-admin-token": token } : {};
-    fetch("/api/admin/review?probe=1", { headers })
-      .then(async (probe) => {
-        if (cancelled) return;
-        if (!((await probe.json()) as { authorized: boolean }).authorized) return setAuth("needs-token");
-        const res = await fetch("/api/admin/review", { headers });
-        if (cancelled) return;
-        setData((await res.json()) as Payload);
-        setAuth("ok");
+    fetch("/api/admin/review", { headers })
+      .then((r) => r.json() as Promise<Payload>)
+      .then((j) => {
+        if (!cancelled) setData(j);
       })
       .catch(() => undefined);
     return () => {
       cancelled = true;
     };
-    // initial load only; later loads come from the form and from decisions
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [version]);
 
   async function decide(id: string, decision: "approved" | "rejected") {
     if (reviewer.trim().length < 2) return setMessage(t("needName"));
     const res = await fetch("/api/admin/review", {
       method: "POST",
-      headers: { "content-type": "application/json", ...(token ? { "x-admin-token": token } : {}) },
+      headers: { "content-type": "application/json", ...headers },
       body: JSON.stringify({ id, decision, reviewer }),
     });
     if (res.ok) setMessage(t("saved"));
     else setMessage(((await res.json()) as { problems?: string[] }).problems?.join("; ") ?? "error");
-    void load(token);
+    setVersion((v) => v + 1);
   }
 
-  if (auth === "unknown") return null;
-  if (auth === "needs-token") {
-    return (
-      <form
-        className="space-y-3"
-        onSubmit={(e) => {
-          e.preventDefault();
-          try {
-            sessionStorage.setItem("maalim.admin", token);
-          } catch {
-            /* ignore */
-          }
-          void load(token);
-        }}
-      >
-        <p>{t("unauthorized")}</p>
-        <label className="block space-y-1">
-          <span className="font-medium">{t("token")}</span>
-          <input type="password" value={token} onChange={(e) => setToken(e.target.value)} className="min-h-11 w-full rounded-[var(--radius-btn)] border border-line bg-surface px-3" />
-        </label>
-        <Button type="submit">{t("enter")}</Button>
-      </form>
-    );
-  }
-
+  if (!data) return null;
   return (
     <div className="space-y-4">
-      <p className="text-sm text-muted">{t("counts", data!.counts)}</p>
+      <p className="text-sm text-muted">{t("counts", data.counts)}</p>
       <label className="block space-y-1">
         <span className="font-medium">{t("reviewer")}</span>
         <input value={reviewer} onChange={(e) => setReviewer(e.target.value)} autoComplete="off" className="min-h-11 w-full rounded-[var(--radius-btn)] border border-line bg-surface px-3" />
       </label>
       {message ? <p role="status" className="font-medium text-primary">{message}</p> : null}
-      {data!.rows.length === 0 ? <p>{t("empty")}</p> : null}
-      {data!.rows.map(({ item, passage, check }) => (
+      {data.rows.length === 0 ? <p>{t("empty")}</p> : null}
+      {data.rows.map(({ item, passage, check }) => (
         <Card key={item.id} className="space-y-3" data-testid="review-row">
           <p className="text-xs text-muted" dir="ltr">{item.id} · {item.type} · {item.lang}</p>
           <p className="font-medium" lang={item.lang} dir={item.lang === "ar" ? "rtl" : "ltr"}>{item.prompt}</p>

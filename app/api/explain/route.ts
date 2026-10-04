@@ -8,6 +8,7 @@ const Body = z.object({
   conceptId: z.string().min(1).max(64),
   lang: z.enum(["ar", "en"]),
   query: z.string().max(500).optional(),
+  fallbackToConcept: z.boolean().optional(),
 });
 
 /** retrieve -> generate -> citation guard -> cache. Only verified passages are ever retrieved. */

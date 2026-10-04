@@ -146,3 +146,13 @@ export interface ReferralTexts {
   L4: Record<Lang, string>;
   out_of_scope: Record<Lang, string>;
 }
+
+/** Anonymous, opt-in progress counters. No identifiers, no timestamps finer than a day. */
+export type ProgressEventKind = "unit_done" | "check_correct" | "check_wrong";
+
+export interface ProgressEvent {
+  concept_id: string;
+  kind: ProgressEventKind;
+  /** YYYY-MM-DD */
+  day: string;
+}

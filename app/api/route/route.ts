@@ -20,7 +20,7 @@ export async function POST(req: Request) {
   const decision = routeQuestion(question);
   let answerable: boolean | null = null;
   if (decision.action === "answer") {
-    answerable = decision.conceptId ? (await retrieve(decision.conceptId, question, lang)).length > 0 : false;
+    answerable = decision.conceptId ? (await retrieve(decision.conceptId, "", lang)).length > 0 : false; // concept-level: verified passages exist
   }
 
   let referralText: string | null = null;

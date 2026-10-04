@@ -19,12 +19,14 @@ export function ExplanationPanel({
   lang,
   fallbackPassages,
   query,
+  fallbackToConcept,
   showDev,
 }: {
   conceptId: string;
   lang: Lang;
   fallbackPassages: Passage[];
   query?: string;
+  fallbackToConcept?: boolean;
   showDev: boolean;
 }) {
   const t = useTranslations("explain");
@@ -37,7 +39,7 @@ export function ExplanationPanel({
     fetch("/api/explain", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ conceptId, lang, query }),
+      body: JSON.stringify({ conceptId, lang, query, fallbackToConcept }),
       signal: ctrl.signal,
     })
       .then((r) => (r.ok ? (r.json() as Promise<ExplainResult>) : Promise.reject(new Error(String(r.status)))))
@@ -46,7 +48,7 @@ export function ExplanationPanel({
         if ((e as Error).name !== "AbortError") setSettled({ key, result: null });
       });
     return () => ctrl.abort();
-  }, [conceptId, lang, query, key]);
+  }, [conceptId, lang, query, fallbackToConcept, key]);
 
   if (!settled || settled.key !== key) {
     return (
