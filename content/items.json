@@ -1,0 +1,61 @@
+{
+  "_note": "Practice item bank. Only status='approved' items reach learners (CLAUDE.md rule 7), and an item with a [CONTENT NEEDED] placeholder or an unverified source passage cannot be approved. The three entries below are structural placeholders only.",
+  "schema": {
+    "type": "mcq | order | scenario",
+    "lang": "ar | en",
+    "options": "[{id, text}]",
+    "answer": "mcq: option id; order/scenario: ordered list of option ids",
+    "source_span": "verbatim substring of the source passage text that answers the item",
+    "status": "draft | approved | rejected"
+  },
+  "items": [
+    {
+      "id": "item-wudu-order-001",
+      "concept_id": "wudu",
+      "type": "order",
+      "lang": "en",
+      "prompt": "[CONTENT NEEDED: prompt asking the learner to order the steps of wudu]",
+      "options": [],
+      "answer": [],
+      "source_passage_id": "wudu-001",
+      "source_span": null,
+      "video_id": null,
+      "status": "draft",
+      "generated_by": "placeholder",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "item-wudu-scenario-001",
+      "concept_id": "wudu",
+      "type": "scenario",
+      "lang": "en",
+      "prompt": "[CONTENT NEEDED: Dhuhr-at-work scenario prompt]",
+      "options": [],
+      "answer": [],
+      "source_passage_id": "wudu-001",
+      "source_span": null,
+      "video_id": "wudu-workplace",
+      "status": "draft",
+      "generated_by": "placeholder",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "item-shahada-mcq-001",
+      "concept_id": "shahada",
+      "type": "mcq",
+      "lang": "en",
+      "prompt": "[CONTENT NEEDED: multiple-choice question about the meaning of the shahada]",
+      "options": [],
+      "answer": "",
+      "source_passage_id": null,
+      "source_span": null,
+      "video_id": null,
+      "status": "draft",
+      "generated_by": "placeholder",
+      "reviewed_by": null,
+      "reviewed_on": null
+    }
+  ]
+}

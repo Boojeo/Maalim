@@ -12,3 +12,4 @@ public/videos/src/*
 tsconfig.tsbuildinfo
 next-env.d.ts
 /test-results/
+.data/

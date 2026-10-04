@@ -68,3 +68,81 @@ export const PLACEHOLDER_RE = /\[CONTENT NEEDED[^\]]*\]/;
 export function isPlaceholder(text: string): boolean {
   return PLACEHOLDER_RE.test(text);
 }
+
+export interface Unit {
+  id: string;
+  concept_id: string;
+  order: number;
+  hook_ar: string;
+  hook_en: string;
+  video_ids: string[];
+  check_item_id: string | null;
+  misconception_ar: string;
+  misconception_en: string;
+  verified: boolean;
+  reviewed_by: string | null;
+}
+
+export type ItemType = "mcq" | "order" | "scenario";
+export type ItemStatus = "draft" | "approved" | "rejected";
+
+export interface ItemOption {
+  id: string;
+  text: string;
+}
+
+export interface Item {
+  id: string;
+  concept_id: string;
+  type: ItemType;
+  lang: Lang;
+  prompt: string;
+  options: ItemOption[];
+  /** mcq: option id. order/scenario: ordered list of option ids. */
+  answer: string | string[];
+  source_passage_id: string | null;
+  /** Verbatim substring of the source passage that answers the item. */
+  source_span: string | null;
+  video_id: string | null;
+  status: ItemStatus;
+  generated_by: string | null;
+  reviewed_by: string | null;
+  reviewed_on: string | null;
+}
+
+export interface Citation {
+  passage_id: string;
+  source: Passage["source"];
+  source_id: string;
+  source_url: string;
+}
+
+export interface CachedExplanation {
+  concept_id: string;
+  level: Level;
+  lang: Lang;
+  query_hash: string;
+  text: string;
+  citations: Citation[];
+  status: "pending" | "approved";
+  created_at: string;
+}
+
+export type ReferralStatus = "new" | "seen" | "closed";
+
+/** No user identifiers (CLAUDE.md rule 6). */
+export interface Referral {
+  id: string;
+  concept_id: string | null;
+  question_hash: string;
+  level: Level;
+  consented_summary: string;
+  created_at: string;
+  status: ReferralStatus;
+}
+
+export interface ReferralTexts {
+  L3: Record<Lang, string>;
+  L4: Record<Lang, string>;
+  out_of_scope: Record<Lang, string>;
+}

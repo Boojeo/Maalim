@@ -1,0 +1,17 @@
+{
+  "_note": "Referral text shown to the learner for L3 (refer) and L4 (abstain). CONTENT_TODO #7: Mohammed must write these. Placeholders only.",
+  "referrals": {
+    "L3": {
+      "ar": "[CONTENT NEEDED: L3 referral text, Arabic]",
+      "en": "[CONTENT NEEDED: L3 referral text, English]"
+    },
+    "L4": {
+      "ar": "[CONTENT NEEDED: L4 referral text, Arabic]",
+      "en": "[CONTENT NEEDED: L4 referral text, English]"
+    },
+    "out_of_scope": {
+      "ar": "[CONTENT NEEDED: out-of-scope text, Arabic]",
+      "en": "[CONTENT NEEDED: out-of-scope text, English]"
+    }
+  }
+}

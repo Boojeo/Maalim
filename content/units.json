@@ -1,0 +1,85 @@
+{
+  "_note": "Unit scaffolding. hook/misconception text is religious-adjacent learning content and must be written or approved by Mohammed. Claude Code only provides the structure and [CONTENT NEEDED] placeholders. verified=true only after review.",
+  "units": [
+    {
+      "id": "unit-shahada",
+      "concept_id": "shahada",
+      "order": 1,
+      "hook_ar": "[CONTENT NEEDED: hook question in Arabic for shahada]",
+      "hook_en": "[CONTENT NEEDED: hook question in English for shahada]",
+      "video_ids": [],
+      "check_item_id": null,
+      "misconception_ar": "[CONTENT NEEDED: common misconception and its fix in Arabic for shahada]",
+      "misconception_en": "[CONTENT NEEDED: common misconception and its fix in English for shahada]",
+      "verified": false,
+      "reviewed_by": null
+    },
+    {
+      "id": "unit-tawhid",
+      "concept_id": "tawhid",
+      "order": 2,
+      "hook_ar": "[CONTENT NEEDED: hook question in Arabic for tawhid]",
+      "hook_en": "[CONTENT NEEDED: hook question in English for tawhid]",
+      "video_ids": [],
+      "check_item_id": null,
+      "misconception_ar": "[CONTENT NEEDED: common misconception and its fix in Arabic for tawhid]",
+      "misconception_en": "[CONTENT NEEDED: common misconception and its fix in English for tawhid]",
+      "verified": false,
+      "reviewed_by": null
+    },
+    {
+      "id": "unit-quran",
+      "concept_id": "quran",
+      "order": 3,
+      "hook_ar": "[CONTENT NEEDED: hook question in Arabic for quran]",
+      "hook_en": "[CONTENT NEEDED: hook question in English for quran]",
+      "video_ids": [],
+      "check_item_id": null,
+      "misconception_ar": "[CONTENT NEEDED: common misconception and its fix in Arabic for quran]",
+      "misconception_en": "[CONTENT NEEDED: common misconception and its fix in English for quran]",
+      "verified": false,
+      "reviewed_by": null
+    },
+    {
+      "id": "unit-five-pillars",
+      "concept_id": "five-pillars",
+      "order": 4,
+      "hook_ar": "[CONTENT NEEDED: hook question in Arabic for five-pillars]",
+      "hook_en": "[CONTENT NEEDED: hook question in English for five-pillars]",
+      "video_ids": [],
+      "check_item_id": null,
+      "misconception_ar": "[CONTENT NEEDED: common misconception and its fix in Arabic for five-pillars]",
+      "misconception_en": "[CONTENT NEEDED: common misconception and its fix in English for five-pillars]",
+      "verified": false,
+      "reviewed_by": null
+    },
+    {
+      "id": "unit-wudu",
+      "concept_id": "wudu",
+      "order": 5,
+      "hook_ar": "[CONTENT NEEDED: hook question in Arabic for wudu]",
+      "hook_en": "[CONTENT NEEDED: hook question in English for wudu]",
+      "video_ids": [
+        "wudu-main"
+      ],
+      "check_item_id": null,
+      "misconception_ar": "[CONTENT NEEDED: common misconception and its fix in Arabic for wudu]",
+      "misconception_en": "[CONTENT NEEDED: common misconception and its fix in English for wudu]",
+      "verified": false,
+      "reviewed_by": null
+    },
+    {
+      "id": "unit-salah",
+      "concept_id": "salah",
+      "order": 6,
+      "hook_ar": "[CONTENT NEEDED: hook question in Arabic for salah]",
+      "hook_en": "[CONTENT NEEDED: hook question in English for salah]",
+      "video_ids": [],
+      "check_item_id": null,
+      "misconception_ar": "[CONTENT NEEDED: common misconception and its fix in Arabic for salah]",
+      "misconception_en": "[CONTENT NEEDED: common misconception and its fix in English for salah]",
+      "verified": false,
+      "reviewed_by": null
+    }
+  ]
+}
