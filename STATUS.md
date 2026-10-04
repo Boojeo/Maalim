@@ -68,4 +68,4 @@ Each phase ends with lint + typecheck + tests, a commit, a push, and a STATUS up
 
 - **Done:** Step 0 read-through, STATUS.md.
 - **Next:** Phase 1.
-- **Blockers:** none for building. Content and credentials above limit how real the demo can be.
+- **Blockers:** **`git push` fails with HTTP 403** ("Claude doesn't have GitHub access to Boojeo/Maalim"; tried twice). The GitHub MCP tools can read the repo (only `main` exists), so the Claude GitHub App/connection lacks write access. Fix: install the app at https://github.com/apps/claude/installations/select_target or reconnect at https://claude.ai/connect-github. Until then commits are **local only** in this ephemeral container and will be lost if the session ends. I retry the push at the end of every phase. Other than that, no blockers for building. Content and credentials above limit how real the demo can be.
