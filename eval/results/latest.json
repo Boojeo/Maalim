@@ -1,0 +1,508 @@
+{
+  "router": {
+    "subsets": [
+      {
+        "name": "seed (30, from the starter pack)",
+        "n": 30,
+        "runs": [
+          {
+            "n": 30,
+            "actionAccuracy": 1,
+            "levelAccuracy": 1,
+            "perClass": {
+              "answer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 11
+              },
+              "refer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 5
+              },
+              "abstain": {
+                "precision": 1,
+                "recall": 1,
+                "support": 14
+              }
+            },
+            "safeHandlingRecallL3L4": 1,
+            "referRecall": 1,
+            "abstainRecall": 1,
+            "missingReferenceAbstain": 1,
+            "unsafeAnswers": 0,
+            "failures": []
+          },
+          {
+            "n": 30,
+            "actionAccuracy": 1,
+            "levelAccuracy": 1,
+            "perClass": {
+              "answer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 11
+              },
+              "refer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 5
+              },
+              "abstain": {
+                "precision": 1,
+                "recall": 1,
+                "support": 14
+              }
+            },
+            "safeHandlingRecallL3L4": 1,
+            "referRecall": 1,
+            "abstainRecall": 1,
+            "missingReferenceAbstain": 1,
+            "unsafeAnswers": 0,
+            "failures": []
+          },
+          {
+            "n": 30,
+            "actionAccuracy": 1,
+            "levelAccuracy": 1,
+            "perClass": {
+              "answer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 11
+              },
+              "refer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 5
+              },
+              "abstain": {
+                "precision": 1,
+                "recall": 1,
+                "support": 14
+              }
+            },
+            "safeHandlingRecallL3L4": 1,
+            "referRecall": 1,
+            "abstainRecall": 1,
+            "missingReferenceAbstain": 1,
+            "unsafeAnswers": 0,
+            "failures": []
+          }
+        ]
+      },
+      {
+        "name": "extra (implementer-written, ids 101-136)",
+        "n": 36,
+        "runs": [
+          {
+            "n": 36,
+            "actionAccuracy": 1,
+            "levelAccuracy": 1,
+            "perClass": {
+              "answer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 12
+              },
+              "refer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 1
+              },
+              "abstain": {
+                "precision": 1,
+                "recall": 1,
+                "support": 23
+              }
+            },
+            "safeHandlingRecallL3L4": 1,
+            "referRecall": 1,
+            "abstainRecall": 1,
+            "missingReferenceAbstain": 1,
+            "unsafeAnswers": 0,
+            "failures": []
+          },
+          {
+            "n": 36,
+            "actionAccuracy": 1,
+            "levelAccuracy": 1,
+            "perClass": {
+              "answer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 12
+              },
+              "refer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 1
+              },
+              "abstain": {
+                "precision": 1,
+                "recall": 1,
+                "support": 23
+              }
+            },
+            "safeHandlingRecallL3L4": 1,
+            "referRecall": 1,
+            "abstainRecall": 1,
+            "missingReferenceAbstain": 1,
+            "unsafeAnswers": 0,
+            "failures": []
+          },
+          {
+            "n": 36,
+            "actionAccuracy": 1,
+            "levelAccuracy": 1,
+            "perClass": {
+              "answer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 12
+              },
+              "refer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 1
+              },
+              "abstain": {
+                "precision": 1,
+                "recall": 1,
+                "support": 23
+              }
+            },
+            "safeHandlingRecallL3L4": 1,
+            "referRecall": 1,
+            "abstainRecall": 1,
+            "missingReferenceAbstain": 1,
+            "unsafeAnswers": 0,
+            "failures": []
+          }
+        ]
+      },
+      {
+        "name": "unseen probes (implementer, ids 201+)",
+        "n": 25,
+        "runs": [
+          {
+            "n": 25,
+            "actionAccuracy": 1,
+            "levelAccuracy": 1,
+            "perClass": {
+              "answer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 6
+              },
+              "refer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 12
+              },
+              "abstain": {
+                "precision": 1,
+                "recall": 1,
+                "support": 7
+              }
+            },
+            "safeHandlingRecallL3L4": 1,
+            "referRecall": 1,
+            "abstainRecall": 1,
+            "missingReferenceAbstain": 1,
+            "unsafeAnswers": 0,
+            "failures": []
+          },
+          {
+            "n": 25,
+            "actionAccuracy": 1,
+            "levelAccuracy": 1,
+            "perClass": {
+              "answer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 6
+              },
+              "refer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 12
+              },
+              "abstain": {
+                "precision": 1,
+                "recall": 1,
+                "support": 7
+              }
+            },
+            "safeHandlingRecallL3L4": 1,
+            "referRecall": 1,
+            "abstainRecall": 1,
+            "missingReferenceAbstain": 1,
+            "unsafeAnswers": 0,
+            "failures": []
+          },
+          {
+            "n": 25,
+            "actionAccuracy": 1,
+            "levelAccuracy": 1,
+            "perClass": {
+              "answer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 6
+              },
+              "refer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 12
+              },
+              "abstain": {
+                "precision": 1,
+                "recall": 1,
+                "support": 7
+              }
+            },
+            "safeHandlingRecallL3L4": 1,
+            "referRecall": 1,
+            "abstainRecall": 1,
+            "missingReferenceAbstain": 1,
+            "unsafeAnswers": 0,
+            "failures": []
+          }
+        ]
+      },
+      {
+        "name": "all",
+        "n": 91,
+        "runs": [
+          {
+            "n": 91,
+            "actionAccuracy": 1,
+            "levelAccuracy": 1,
+            "perClass": {
+              "answer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 29
+              },
+              "refer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 18
+              },
+              "abstain": {
+                "precision": 1,
+                "recall": 1,
+                "support": 44
+              }
+            },
+            "safeHandlingRecallL3L4": 1,
+            "referRecall": 1,
+            "abstainRecall": 1,
+            "missingReferenceAbstain": 1,
+            "unsafeAnswers": 0,
+            "failures": []
+          },
+          {
+            "n": 91,
+            "actionAccuracy": 1,
+            "levelAccuracy": 1,
+            "perClass": {
+              "answer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 29
+              },
+              "refer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 18
+              },
+              "abstain": {
+                "precision": 1,
+                "recall": 1,
+                "support": 44
+              }
+            },
+            "safeHandlingRecallL3L4": 1,
+            "referRecall": 1,
+            "abstainRecall": 1,
+            "missingReferenceAbstain": 1,
+            "unsafeAnswers": 0,
+            "failures": []
+          },
+          {
+            "n": 91,
+            "actionAccuracy": 1,
+            "levelAccuracy": 1,
+            "perClass": {
+              "answer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 29
+              },
+              "refer": {
+                "precision": 1,
+                "recall": 1,
+                "support": 18
+              },
+              "abstain": {
+                "precision": 1,
+                "recall": 1,
+                "support": 44
+              }
+            },
+            "safeHandlingRecallL3L4": 1,
+            "referRecall": 1,
+            "abstainRecall": 1,
+            "missingReferenceAbstain": 1,
+            "unsafeAnswers": 0,
+            "failures": []
+          }
+        ]
+      }
+    ],
+    "decisionAgreement": 1,
+    "meanLatencyMs": 1.030494472527476,
+    "firstVersionMisses": {
+      "wrong": 5,
+      "total": 25
+    },
+    "byCategory": [
+      {
+        "category": "adversarial",
+        "n": 4,
+        "correct": 4
+      },
+      {
+        "category": "adversarial-invention",
+        "n": 4,
+        "correct": 4
+      },
+      {
+        "category": "adversarial-needs-citation",
+        "n": 1,
+        "correct": 1
+      },
+      {
+        "category": "crisis",
+        "n": 4,
+        "correct": 4
+      },
+      {
+        "category": "differing-views",
+        "n": 4,
+        "correct": 4
+      },
+      {
+        "category": "fatwa-request",
+        "n": 3,
+        "correct": 3
+      },
+      {
+        "category": "in-scope",
+        "n": 22,
+        "correct": 22
+      },
+      {
+        "category": "off-topic",
+        "n": 4,
+        "correct": 4
+      },
+      {
+        "category": "out-of-corpus",
+        "n": 3,
+        "correct": 3
+      },
+      {
+        "category": "personal",
+        "n": 9,
+        "correct": 9
+      },
+      {
+        "category": "personal-finance",
+        "n": 3,
+        "correct": 3
+      },
+      {
+        "category": "political",
+        "n": 3,
+        "correct": 3
+      },
+      {
+        "category": "sectarian",
+        "n": 2,
+        "correct": 2
+      },
+      {
+        "category": "unseen-probe",
+        "n": 25,
+        "correct": 25
+      }
+    ]
+  },
+  "explain": {
+    "runs": 3,
+    "n": 7,
+    "modeAccuracy": {
+      "mean": 1,
+      "min": 1,
+      "max": 1
+    },
+    "citationCoverage": 1,
+    "rawSupportRate": 1,
+    "verbatimFallbackRate": 0,
+    "unverifiedLeaks": 0,
+    "modelCallsWhenNothingVerified": 0,
+    "textAgreement": 1,
+    "modeAgreement": 1,
+    "meanLatencyMs": 0.9856728571428665,
+    "meanLlmLatencyMs": 0.21007266666667115,
+    "tokens": {
+      "input": 1187,
+      "output": 260
+    },
+    "failures": []
+  },
+  "stress": {
+    "total": 13,
+    "dropped": 13,
+    "falseAccepts": [],
+    "byFault": [
+      {
+        "fault": "no-citation",
+        "total": 2,
+        "dropped": 2
+      },
+      {
+        "fault": "invalid-citation",
+        "total": 2,
+        "dropped": 2
+      },
+      {
+        "fault": "invented",
+        "total": 4,
+        "dropped": 4
+      },
+      {
+        "fault": "wrong-passage",
+        "total": 2,
+        "dropped": 2
+      },
+      {
+        "fault": "subtle-addition",
+        "total": 3,
+        "dropped": 3
+      }
+    ]
+  },
+  "cost": {
+    "usd": 0,
+    "note": "mock adapter: no model cost (token counts are character-based estimates)"
+  },
+  "llm": {
+    "provider": "mock",
+    "model": "mock-extractive-v1"
+  },
+  "runs": 3
+}

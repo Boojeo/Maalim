@@ -23,6 +23,10 @@ export interface ExplainResult {
   /** The passages cited or shown, verbatim, keyed by id. Always verified, learner-safe passages. */
   passages: Passage[];
   droppedCount: number;
+  /** Sentences the model produced before the guard (0 on a cache hit or when the model was not called). */
+  rawSentences: number;
+  /** How many of those the guard kept (before the "fewer than 2 survive" fallback). */
+  keptSentences: number;
   cached: boolean;
   llm: { provider: string; model: string; inputTokens: number; outputTokens: number; latencyMs: number } | null;
   latencyMs: number;
@@ -58,7 +62,7 @@ export async function explain(
   const query = (input.query ?? "").trim();
   const concept = await store.getConcept(input.conceptId);
   const empty = (): ExplainResult => ({
-    mode: "none", conceptId: input.conceptId, lang: input.lang, sentences: [], passages: [], droppedCount: 0,
+    mode: "none", conceptId: input.conceptId, lang: input.lang, sentences: [], passages: [], droppedCount: 0, rawSentences: 0, keptSentences: 0,
     cached: false, llm: null, latencyMs: performance.now() - t0,
   });
   if (!concept) return empty();
@@ -86,11 +90,11 @@ export async function explain(
     const cachedIds = hit.citations.map((c) => c.passage_id);
     const shown = cachedIds.map((id) => byId.get(id)).filter((p): p is Passage => !!p);
     if (hit.text === "") {
-      return { mode: "verbatim", conceptId: concept.id, lang: outLang, sentences: [], passages, droppedCount: 0, cached: true, llm: null, latencyMs: performance.now() - t0 };
+      return { mode: "verbatim", conceptId: concept.id, lang: outLang, sentences: [], passages, droppedCount: 0, rawSentences: 0, keptSentences: 0, cached: true, llm: null, latencyMs: performance.now() - t0 };
     }
     const sentences: GuardedSentence[] = JSON.parse(hit.text) as GuardedSentence[];
     if (sentences.every((s) => s.passageIds.every((id) => byId.has(id)))) {
-      return { mode: "generated", conceptId: concept.id, lang: outLang, sentences, passages: shown.length ? shown : passages, droppedCount: 0, cached: true, llm: null, latencyMs: performance.now() - t0 };
+      return { mode: "generated", conceptId: concept.id, lang: outLang, sentences, passages: shown.length ? shown : passages, droppedCount: 0, rawSentences: 0, keptSentences: 0, cached: true, llm: null, latencyMs: performance.now() - t0 };
     }
   }
 
@@ -104,7 +108,7 @@ export async function explain(
       concept_id: concept.id, level: concept.level, lang: outLang, query_hash, text: "",
       citations: passages.map(toCitation), status: "pending", created_at: new Date().toISOString(),
     });
-    return { mode: "verbatim", conceptId: concept.id, lang: outLang, sentences: [], passages, droppedCount: g.dropped.length, cached: false, llm: llmInfo, latencyMs: performance.now() - t0 };
+    return { mode: "verbatim", conceptId: concept.id, lang: outLang, sentences: [], passages, droppedCount: g.dropped.length, rawSentences: g.sentences.length + g.dropped.length, keptSentences: g.sentences.length, cached: false, llm: llmInfo, latencyMs: performance.now() - t0 };
   }
 
   const citedIds = [...new Set(g.sentences.flatMap((s) => s.passageIds))];
@@ -113,5 +117,5 @@ export async function explain(
     concept_id: concept.id, level: concept.level, lang: outLang, query_hash, text: JSON.stringify(g.sentences),
     citations: cited.map(toCitation), status: "pending", created_at: new Date().toISOString(),
   });
-  return { mode: "generated", conceptId: concept.id, lang: outLang, sentences: g.sentences, passages: cited, droppedCount: g.dropped.length, cached: false, llm: llmInfo, latencyMs: performance.now() - t0 };
+  return { mode: "generated", conceptId: concept.id, lang: outLang, sentences: g.sentences, passages: cited, droppedCount: g.dropped.length, rawSentences: g.sentences.length + g.dropped.length, keptSentences: g.sentences.length, cached: false, llm: llmInfo, latencyMs: performance.now() - t0 };
 }

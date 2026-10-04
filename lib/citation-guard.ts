@@ -4,7 +4,8 @@
 import { contentTokens, splitSentences } from "./text";
 
 export const MIN_SURVIVORS = 2;
-export const MIN_OVERLAP = 0.6;
+/** Share of a sentence's content words that must appear in the cited passage(s). 0.9 = at most about one novel word per ten; stricter beats looser here: a rejected paraphrase just falls back to the verbatim source. */
+export const MIN_OVERLAP = 0.9;
 
 export interface GuardPassage {
   /** 1-based number used in the prompt and in [n] markers. */
