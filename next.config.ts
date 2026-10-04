@@ -11,7 +11,7 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   // Source videos are never served; only encoded clips in public/videos.
-  outputFileTracingIncludes: { "/**": ["./content/**", "./prompts/**"] },
+  outputFileTracingIncludes: { "/**": ["./content/**", "./prompts/**", "./eval/results/**"] },
   outputFileTracingExcludes: { "*": ["public/videos/src/**"] },
 };
 

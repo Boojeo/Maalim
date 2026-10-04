@@ -23,10 +23,10 @@ interface RouteResponse {
 }
 
 /** F5 + F7 on one screen: route the question, answer with citations, or hand off to a person. */
-export function AskFlow({ concepts, showDev }: { concepts: { id: string; title: string }[]; showDev: boolean }) {
+export function AskFlow({ concepts, showDev, initialQuestion = "" }: { concepts: { id: string; title: string }[]; showDev: boolean; initialQuestion?: string }) {
   const t = useTranslations("ask");
   const locale = useLocale() as Lang;
-  const [question, setQuestion] = useState("");
+  const [question, setQuestion] = useState(initialQuestion);
   const [asked, setAsked] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [route, setRoute] = useState<RouteResponse | null>(null);

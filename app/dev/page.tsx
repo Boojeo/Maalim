@@ -12,7 +12,7 @@ export default function DevPage() {
   const totalVerified = rows.reduce((n, r) => n + r.verified, 0);
 
   return (
-    <main className="mx-auto max-w-3xl space-y-8 px-4 py-6" dir="ltr" lang="en">
+    <main id="main" className="mx-auto max-w-3xl space-y-8 px-4 py-6" dir="ltr" lang="en">
       <header className="space-y-2">
         <h1 className="text-2xl font-bold">Dev · content status</h1>
         <p className="text-muted">
@@ -31,7 +31,7 @@ export default function DevPage() {
 
       <section aria-labelledby="concepts-h" className="space-y-3">
         <h2 id="concepts-h" className="text-xl font-bold">Concepts</h2>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Concepts table (scrollable)">
           <table className="w-full min-w-[34rem] border-collapse text-start text-sm">
             <thead>
               <tr className="border-b border-line text-start">

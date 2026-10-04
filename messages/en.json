@@ -81,7 +81,16 @@
   },
   "common": {
     "loading": "Loading…",
-    "back": "Back"
+    "back": "Back",
+    "skip": "Skip to content",
+    "error": "Something went wrong",
+    "errorBody": "This page could not load. Your progress is safe on this device.",
+    "retry": "Try again",
+    "fallback": "Open the simple version",
+    "notFound": "Page not found",
+    "notFoundBody": "We could not find that page.",
+    "home": "Back to the map",
+    "loadingPage": "Loading…"
   },
   "dev": {
     "title": "Content status"
@@ -242,5 +251,11 @@
     "total": "Total referrals: {n}",
     "none": "No topic",
     "synthetic": "Demo data is synthetic."
+  },
+  "welcome": {
+    "title": "Welcome",
+    "body": "Take your time. Learn at your own pace, with real clips and sources you can check. Nothing is stored about you on our servers.",
+    "stage": "Choose where you are",
+    "dismiss": "Got it"
   }
 }

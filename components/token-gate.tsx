@@ -44,7 +44,7 @@ export function TokenGate({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [endpoint, attempt]);
 
-  if (auth === "unknown") return null;
+  if (auth === "unknown") return <p role="status" className="text-muted">…</p>;
   if (auth === "needs-token") {
     return (
       <form

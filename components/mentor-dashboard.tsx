@@ -57,7 +57,7 @@ function Body({ headers }: { headers: Record<string, string> }) {
         {data.referrals.length === 0 ? (
           <p>{t("empty")}</p>
         ) : (
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={t("inbox")}>
             <table className="w-full min-w-[40rem] border-collapse text-sm" data-testid="referral-table">
               <thead>
                 <tr className="border-b border-line">
@@ -116,7 +116,7 @@ function Body({ headers }: { headers: Record<string, string> }) {
             </tbody>
           </table>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={t("progress")}>
           <table className="w-full min-w-[28rem] border-collapse text-sm" data-testid="agg-progress">
             <caption className="pb-2 text-start font-bold">{t("progress")}</caption>
             <thead>
