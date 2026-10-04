@@ -43,7 +43,15 @@
   },
   "practise": {
     "title": "Practise",
-    "empty": "Practice items will appear here once they have been reviewed."
+    "empty": "Practice items will appear here once they have been reviewed.",
+    "start": "Start practice",
+    "count": "{n} items ready",
+    "item": "Item {n} of {total}",
+    "doneTitle": "Practice complete",
+    "doneBody": "Take your time. You can repeat any item whenever you like.",
+    "again": "Practise again",
+    "scenario": "Scenario",
+    "emptyHint": "Nothing to practise yet: items appear here only after a reviewer has approved them."
   },
   "me": {
     "title": "Me",
@@ -115,5 +123,25 @@
     "generatedNote": "Every sentence comes from a verified source. Tap a number to read the source.",
     "verbatimNote": "Showing the verified source text exactly as published.",
     "retry": "Try again"
+  },
+  "admin": {
+    "title": "Review queue",
+    "intro": "Approve or reject draft practice items. An item can be approved only if it passes the automatic checks.",
+    "token": "Access token",
+    "enter": "Open",
+    "reviewer": "Reviewer name",
+    "approve": "Approve",
+    "reject": "Reject",
+    "checks": "Automatic checks",
+    "passed": "All checks passed",
+    "failed": "Cannot be approved yet",
+    "source": "Source passage",
+    "span": "Source span",
+    "answer": "Correct answer",
+    "empty": "No draft items waiting.",
+    "counts": "Draft {draft} · Approved {approved} · Rejected {rejected}",
+    "unauthorized": "Enter the access token to continue.",
+    "saved": "Saved",
+    "needName": "Enter your name before deciding."
   }
 }

@@ -17,7 +17,7 @@ export default defineConfig({
     command: "rm -rf /tmp/maalim-e2e-data && node e2e/make-fixtures.mjs && npx next start -p 3101",
     url: "http://localhost:3101/dev",
     reuseExistingServer: false,
-    env: { CONTENT_DIR: "tests/fixtures/content", LOCAL_DATA_DIR: "/tmp/maalim-e2e-data", PORT: "3101" },
+    env: { CONTENT_DIR: "tests/fixtures/content", LOCAL_DATA_DIR: "/tmp/maalim-e2e-data", PORT: "3101", ADMIN_TOKEN: "e2e-admin-token", MENTOR_TOKEN: "e2e-mentor-token" },
     timeout: 60_000,
   },
 });

@@ -25,6 +25,33 @@ export interface LlmClient {
   generate(req: LlmRequest): Promise<LlmResponse>;
 }
 
+/** Deterministic cloze items built only from words that already appear in the passage. */
+function mockItemsJson(user: string): string {
+  const passage = user.replace(/^Passage:\s*/i, "").trim();
+  const sentences = splitSentences(passage);
+  const words = (t: string) => t.match(/[\p{L}\p{N}]+/gu) ?? [];
+  const items = [];
+  for (const sentence of sentences) {
+    if (contentTokens(sentence).length < 5) continue;
+    const target = [...words(sentence)].sort((a, b) => b.length - a.length)[0];
+    if (!target || target.length < 5) continue;
+    const inSentence = new Set(words(sentence).map((w) => w.toLowerCase()));
+    const pool = [...new Set(words(passage).filter((w) => w.length >= 5 && !inSentence.has(w.toLowerCase())).map((w) => w.toLowerCase()))].slice(0, 3);
+    if (pool.length < 1) continue;
+    const texts = [target, ...pool].sort((a, b) => a.localeCompare(b));
+    const options = texts.map((text, i) => ({ id: String.fromCharCode(97 + i), text }));
+    items.push({
+      type: "mcq",
+      prompt: sentence.replace(target, "_____"),
+      options,
+      answer: options.find((o) => o.text === target)!.id,
+      source_span: sentence,
+    });
+    if (items.length >= 3) break;
+  }
+  return JSON.stringify(items);
+}
+
 const approxTokens = (s: string) => Math.ceil(s.length / 4);
 
 /**
@@ -36,6 +63,13 @@ export const mockLlm: LlmClient = {
   model: "mock-extractive-v1",
   async generate({ system, user }) {
     const t0 = performance.now();
+    if (/generate practice items/i.test(system)) {
+      const text = mockItemsJson(user);
+      return {
+        text, provider: "mock", model: "mock-extractive-v1",
+        inputTokens: approxTokens(system + user), outputTokens: approxTokens(text), latencyMs: performance.now() - t0,
+      };
+    }
     const topic = /^Topic:\s*(.*)$/m.exec(user)?.[1] ?? "";
     const parts = user.split(/^\[(\d+)\]\s+\(id:[^)]*\)\s*/m).slice(1); // [n, text, n, text, ...]
     const cands: { n: string; s: string; score: number; order: number }[] = [];

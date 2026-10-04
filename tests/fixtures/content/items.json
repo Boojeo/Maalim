@@ -112,6 +112,35 @@
       "generated_by": "fixture",
       "reviewed_by": "Synthetic Reviewer",
       "reviewed_on": null
+    },
+    {
+      "id": "item-syn-draft-ok",
+      "concept_id": "wudu",
+      "type": "mcq",
+      "lang": "en",
+      "prompt": "SYNTHETIC draft: which part comes second?",
+      "options": [
+        {
+          "id": "a",
+          "text": "part A"
+        },
+        {
+          "id": "b",
+          "text": "part B"
+        },
+        {
+          "id": "c",
+          "text": "unrelated thing"
+        }
+      ],
+      "answer": "b",
+      "source_passage_id": "wudu-syn-1",
+      "source_span": "part B comes second",
+      "video_id": null,
+      "status": "draft",
+      "generated_by": "fixture",
+      "reviewed_by": null,
+      "reviewed_on": null
     }
   ]
 }
