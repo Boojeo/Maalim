@@ -1,5 +1,5 @@
 {
-  "_note": "Step timestamps for the main wudu clip were read from the video frames only (no audio check), accuracy about +/-3 s. Mohammed must confirm them and the order/number of washes against the source text before 'timestamps_verified' is set to true. Do not use any clip whose permission is not 'granted'. Creator credits were filled from YouTube's public oEmbed data (channel names) on 2026-10-06; permission is still 'pending' for every clip and must be set to 'granted' only after the creator's written permission.",
+  "_note": "Step timestamps for the main wudu clip were read from the video frames only (no audio check), accuracy about +/-3 s; on 2026-10-06 the boundaries were re-checked against 1-frame-per-second frame sheets and the speech timing and tightened to about +/-1.5 s (still NOT verified by the Sharia reviewer). Mohammed must confirm them and the order/number of washes against the source text before 'timestamps_verified' is set to true. Do not use any clip whose permission is not 'granted'. Creator credits were filled from YouTube's public oEmbed data (channel names) on 2026-10-06; permission is still 'pending' for every clip and must be set to 'granted' only after the creator's written permission.",
   "videos": [
     {
       "id": "wudu-main",
@@ -34,7 +34,7 @@
           "key": "mouth-nose",
           "label_en": "Rinse the mouth and nose",
           "start": "0:34",
-          "end": "0:52",
+          "end": "0:50",
           "use": true,
           "note": "presenter pauses to explain about 0:37-0:41"
         },
@@ -42,7 +42,7 @@
           "n": 3,
           "key": "face",
           "label_en": "Wash the face",
-          "start": "0:53",
+          "start": "0:51",
           "end": "1:08",
           "use": true
         },
@@ -59,8 +59,8 @@
           "n": 5,
           "key": "head",
           "label_en": "Wipe the head",
-          "start": "1:33",
-          "end": "1:39",
+          "start": "1:34",
+          "end": "1:41",
           "use": true,
           "note": "ears not clearly visible"
         },
@@ -69,7 +69,7 @@
           "key": "feet",
           "label_en": "Wash the feet",
           "start": "1:44",
-          "end": "2:10",
+          "end": "2:09",
           "use": true,
           "note": "switch foot about 1:56"
         },
