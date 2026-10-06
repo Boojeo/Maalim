@@ -51,10 +51,11 @@ describe("resolveVideo", () => {
     expect(r.credit).toBe("Someone");
     expect(resolveVideo(video({ creator_credit: "TODO: x" }), pub([])).creditPending).toBe(true);
   });
-  it("the repo's real videos.json is all blocked today (permission pending)", async () => {
+  it("in the repo's real videos.json every video whose permission is not 'granted' is blocked", async () => {
     const { createLocalStore } = await import("@/lib/data/local");
     const vids = await createLocalStore().getVideos("wudu");
     expect(vids.length).toBeGreaterThan(0);
-    for (const v of vids) expect(resolveVideo(v).blocked).not.toBeNull();
+    // wudu-main was set to 'granted' by the owner on 2026-10-06 (temporary override, see STATUS.md)
+    for (const v of vids.filter((x) => x.permission !== "granted")) expect(resolveVideo(v).blocked).not.toBeNull();
   });
 });
