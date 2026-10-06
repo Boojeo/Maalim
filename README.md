@@ -18,7 +18,7 @@ A guided, video-based learning journey for new Muslims, with grounded explanatio
 | F8 | Eval harness (router + explainer ×3 at temperature 0 → `EVAL.md`) | `npm run eval` |
 | – | Demo script page following the 5-minute story | `/demo` |
 | – | Content status for developers | `/dev` |
-| not built | F9 A/B pre/post test | – |
+| F9 | Optional anonymous A/B pre/post study (static page vs unit); results with limits in the mentor dashboard | `/study`, `/mentor` |
 
 ## Run it
 
@@ -36,18 +36,21 @@ In a cloud session or on Vercel, set the variables from `.env.example` in the en
 | `EMBEDDING_*` | hashed bag-of-words mock embedder |
 | `SUPABASE_*` | local JSON in `/content` + a runtime file in `.data/` (`/tmp` on Vercel, ephemeral) |
 | `ADMIN_TOKEN` / `MENTOR_TOKEN` | open in development, **closed in production** |
+| `EXPLAIN_REQUIRE_APPROVED=1` (optional) | generated explanations stay hidden (verbatim source shown) until a reviewer approves them in `/admin/review` |
 
 ### Commands
 
 | Command | What it does |
 |---|---|
-| `npm run lint` · `npm run typecheck` · `npm test` | Static checks and unit tests (86 tests) |
+| `npm run lint` · `npm run typecheck` · `npm test` | Static checks and unit tests (111 tests) |
 | `npm run test:e2e` | Builds, serves with **synthetic** fixture content, runs Playwright (flows, RTL, axe accessibility, no console errors) |
 | `npm run eval` | Router + explainer ×3, guard stress test → `EVAL.md` |
 | `npm run eval:router` | Router pass rate with every failure listed |
 | `npm run check:content` | Content integrity gate (also runs before `npm run build`) |
 | `npm run generate:items` | Draft practice items from verified passages (needs verified content) |
 | `npm run seed` | Load `/content/*.json` into Supabase (no-op without credentials) |
+| `npm run import:passages -- <csv>` · `npm run verify:passages -- --by "Name" --ids …` | Intake of passages a person copied verbatim (stored unverified), then reviewer verification (`content/intake/README.md`) |
+| `npm run split:captions -- wudu-main` | Cut a full-video caption file into per-clip captions |
 | `npm run seed:demo` | Load **synthetic** referrals/counters for the mentor dashboard demo |
 | `npx tsx scripts/screens.ts [routes]` | 360 px screenshots (ar + en) into `design/screens/` |
 
@@ -62,7 +65,7 @@ In a cloud session or on Vercel, set the variables from `.env.example` in the en
 
 ## Deploy (Vercel + Supabase)
 
-1. Create a Supabase project, run `supabase/migrations/0001_init.sql` and `0002_events.sql` (pgvector must be available), then `npm run seed` with `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` set.
+1. Create a Supabase project, run `supabase/migrations/0001_init.sql`, `0002_events.sql` and `0003_explanation_review_and_study.sql` (pgvector must be available), then `npm run seed` with `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` set.
 2. Import the repo in Vercel, set the environment variables, deploy. `vercel.json` adds a daily `/api/health` keep-alive. `public/fallback.html` is a static version of the map if the app is down.
 3. Encode clips locally with `scripts/make_clips.sh` (after the creator's written permission) and commit only the small MP4s in `public/videos/` plus captions in `public/videos/captions/<id>.<ar|en>.vtt`. Never commit the raw sources (`public/videos/src/` is git-ignored).
 

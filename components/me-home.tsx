@@ -67,6 +67,9 @@ export function MeHome({ concepts, locale }: { concepts: { id: string; title_ar:
         <Button asChild>
           <Link href="/ask">{t("ask")}</Link>
         </Button>
+        <Button asChild variant="ghost">
+          <Link href="/study">{t("study")}</Link>
+        </Button>
         <Button
           variant="outline"
           onClick={() => {

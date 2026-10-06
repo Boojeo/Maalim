@@ -108,8 +108,8 @@ export default async function DemoPage() {
           </thead>
           <tbody>
             <tr className="align-top">
-              <td className="py-2 pe-3">Concept map, unit player, captions, citation guard, scope router, approved-only practice, reviewer queue with auto-check, preview-before-send handoff, anonymous mentor dashboard, eval harness</td>
-              <td className="py-2">Sharia-verified passages and unit text, creator permissions and captions for clips, independent router labels, a real LLM and embedding model, a mentor follow-up channel, Tagalog/Urdu, the A/B pre/post test</td>
+              <td className="py-2 pe-3">Concept map, unit player, captions, citation guard, scope router, approved-only practice, reviewer queue with auto-check, preview-before-send handoff, anonymous mentor dashboard with charts, A/B study tooling, reviewer approval of generated explanations, eval harness</td>
+              <td className="py-2">Sharia-verified passages and unit text, creator permissions and captions for clips, independent router labels, a real LLM and embedding model, a mentor follow-up channel, Tagalog/Urdu, the A/B pre/post study with real participants</td>
             </tr>
           </tbody>
         </table>

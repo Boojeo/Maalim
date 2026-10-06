@@ -2,13 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import { BarList } from "@/components/bar-list";
 import { TokenGate } from "@/components/token-gate";
 import type { Aggregates } from "@/lib/aggregates";
+import type { StudySummary } from "@/lib/study";
 import type { Level, ReferralStatus } from "@/lib/types";
 
 interface Payload {
   referrals: { id: string; concept_id: string | null; level: Level; consented_summary: string; created_at: string; status: ReferralStatus }[];
   aggregates: Aggregates;
+  study: StudySummary;
   concepts: { id: string; title_ar: string; title_en: string }[];
 }
 
@@ -49,6 +52,7 @@ function Body({ headers }: { headers: Record<string, string> }) {
   const cell = (n: number | null) => (n === null ? t("hidden") : n);
   const a = data.aggregates;
   const th = "py-2 pe-3 text-start font-bold";
+  const pctOrHidden = (x: number | null) => (x === null ? t("hidden") : `${Math.round(x * 100)}%`);
 
   return (
     <div className="space-y-8">
@@ -98,6 +102,11 @@ function Body({ headers }: { headers: Record<string, string> }) {
       <section aria-labelledby="agg-h" className="space-y-4">
         <h2 id="agg-h" className="text-xl font-bold">{t("aggregates")}</h2>
         <p className="text-sm text-muted">{t("total", { n: a.referrals.total })} · {t("suppressed")}</p>
+        <div className="grid gap-6 md:grid-cols-2" data-testid="charts">
+          <BarList title={t("byLevel")} hiddenLabel={t("hidden")} bars={(Object.entries(a.referrals.byLevel) as [string, number | null][]).map(([label, value]) => ({ label, value }))} />
+          <BarList title={t("unitsDone")} hiddenLabel={t("hidden")} bars={a.progress.map((p) => ({ label: title(p.concept), value: p.unitsDone }))} />
+        </div>
+        <p className="text-sm text-muted">{t("tableView")}</p>
         <div className="grid gap-6 md:grid-cols-2">
           <table className="border-collapse text-sm" data-testid="agg-level">
             <caption className="pb-2 text-start font-bold">{t("byLevel")}</caption>
@@ -138,6 +147,45 @@ function Body({ headers }: { headers: Record<string, string> }) {
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="study-h" className="space-y-3">
+        <h2 id="study-h" className="text-xl font-bold">{t("study")}</h2>
+        <p className="text-sm text-muted">{t("studyIntro")}</p>
+        <table className="w-full max-w-xl border-collapse text-sm" data-testid="study-table">
+          <thead>
+            <tr className="border-b border-line">
+              <th scope="col" className={th}>{t("studyGroup")}</th>
+              <th scope="col" className={th}>{t("studyN")}</th>
+              <th scope="col" className={th}>{t("studyPre")}</th>
+              <th scope="col" className={th}>{t("studyPost")}</th>
+              <th scope="col" className={th}>{t("studyGain")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.study.groups.map((g) => (
+              <tr key={g.group} className="border-b border-line">
+                <th scope="row" className={th}>{g.group === "A" ? t("studyA") : t("studyB")}</th>
+                <td>{cell(g.n)}</td>
+                <td>{g.n === 0 ? "–" : pctOrHidden(g.meanPre)}</td>
+                <td>{g.n === 0 ? "–" : pctOrHidden(g.meanPost)}</td>
+                <td>{g.n === 0 ? "–" : g.gain === null ? t("hidden") : `${g.gain >= 0 ? "+" : ""}${Math.round(g.gain * 100)} ${t("points")}`}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p className="font-medium">
+          {data.study.difference === null ? t("studyNoDiff") : `${t("studyDiff")}: ${data.study.difference >= 0 ? "+" : ""}${Math.round(data.study.difference * 100)} ${t("points")}`}
+        </p>
+        <div className="rounded-[var(--radius-btn)] bg-accent-soft p-3 text-sm">
+          <p className="font-bold">{t("studyLimits")}</p>
+          <ul className="list-disc ps-5">
+            <li>{t("limit1")}</li>
+            <li>{t("limit2")}</li>
+            <li>{t("limit3")}</li>
+            <li>{t("limit4")}</li>
+          </ul>
         </div>
       </section>
     </div>

@@ -77,7 +77,8 @@
       "1": "Understanding",
       "2": "Practising",
       "3": "Following up"
-    }
+    },
+    "study": "Join the short learning study (optional)"
   },
   "common": {
     "loading": "Loading…",
@@ -253,12 +254,51 @@
     "suppressed": "Counts below 3 are hidden so no one can be singled out.",
     "total": "Total referrals: {n}",
     "none": "No topic",
-    "synthetic": "Demo data is synthetic."
+    "synthetic": "Demo data is synthetic.",
+    "tableView": "The same numbers as tables:",
+    "study": "Learning study (A/B)",
+    "studyIntro": "Group A read a static page, group B used the Ma'ālim unit. Each run has a short pre-test and post-test on the same topic. Fewer than 3 runs per group are hidden.",
+    "studyGroup": "Group",
+    "studyN": "Runs",
+    "studyPre": "Pre-test",
+    "studyPost": "Post-test",
+    "studyGain": "Gain",
+    "studyA": "A: static page",
+    "studyB": "B: Ma'ālim unit",
+    "points": "points",
+    "studyDiff": "Gain of B minus gain of A",
+    "studyNoDiff": "Not enough runs in both groups to compare.",
+    "studyLimits": "Limits (say these out loud)",
+    "limit1": "Small sample and self-selected volunteers: this shows a direction, not proof.",
+    "limit2": "Same-session test: it measures short-term recall, not retention.",
+    "limit3": "Pre and post tests are two halves of the same approved item bank, so they are similar but not identical in difficulty.",
+    "limit4": "The groups are random but anonymous, so we cannot check that they were comparable beforehand."
   },
   "welcome": {
     "title": "Welcome",
     "body": "Take your time. Learn at your own pace, with real clips and sources you can check. Nothing is stored about you on our servers.",
     "stage": "Choose where you are",
     "dismiss": "Got it"
+  },
+  "study": {
+    "title": "Short learning study",
+    "intro": "Help us learn whether the unit helps. It takes about 10 minutes, is anonymous and optional. You will answer a few questions, learn the topic in one of two ways (chosen at random), then answer a few more. Nothing identifies you.",
+    "topic": "Choose a topic",
+    "notEnough": "No topic has enough reviewed practice items for the study yet.",
+    "start": "Start",
+    "preTitle": "First, a few questions",
+    "preBody": "Answer as best you can. You will not see the answers now.",
+    "learnTitle": "Now learn the topic",
+    "learnA": "Read this page, then continue.",
+    "learnB": "Open the unit, go through it, then come back here and continue.",
+    "openUnit": "Open the unit",
+    "noPassages": "Nothing reviewed to read yet for this topic.",
+    "toPost": "I'm ready for the last questions",
+    "postTitle": "Last questions",
+    "doneTitle": "Thank you",
+    "doneBody": "Your result was added to anonymous counts. You can close this page.",
+    "again": "Back to Me",
+    "item": "Question {n} of {total}",
+    "group": "Group"
   }
 }

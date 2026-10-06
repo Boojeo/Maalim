@@ -18,11 +18,14 @@ export function ItemPlayer({
   source,
   onResult,
   onContinue,
+  quiet = false,
 }: {
   item: Item;
   source: ItemSource | null;
   onResult?: (correct: boolean) => void;
   onContinue?: () => void;
+  /** Test mode (study): no feedback is shown and the item moves on at once, so the test does not teach. */
+  quiet?: boolean;
 }) {
   const t = useTranslations("item");
   const dir = item.lang === "ar" ? "rtl" : "ltr";
@@ -36,8 +39,9 @@ export function ItemPlayer({
   function submit() {
     const response: Response = item.type === "mcq" ? (choice ?? "") : order;
     const ok = gradeItem(item, response);
-    setResult(ok);
     onResult?.(ok);
+    if (quiet) return onContinue?.();
+    setResult(ok);
   }
   function move(i: number, d: -1 | 1) {
     setOrder((o) => {
