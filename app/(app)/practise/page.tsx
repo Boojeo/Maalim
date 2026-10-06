@@ -34,7 +34,7 @@ export default async function PractisePage() {
 
   return (
     <section className="space-y-4">
-      <h1 className="text-2xl font-bold">{t("title")}</h1>
+      <h1 className="text-3xl font-bold">{t("title")}</h1>
       {entries.length === 0 ? (
         <>
           <p className="text-muted">{t("empty")}</p>

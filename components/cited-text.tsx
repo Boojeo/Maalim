@@ -53,7 +53,7 @@ export function CitedText({
                   aria-controls={panelId}
                   aria-label={`${t("title")} ${n}: ${SOURCE_LABEL[p.source]} ${p.source_id}`}
                   onClick={() => setOpen(isOpen ? null : id)}
-                  className={`mx-0.5 inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border px-3 text-sm font-medium ${isOpen ? "border-primary bg-primary text-primary-fg" : "border-primary bg-surface text-primary hover:bg-accent-soft"}`}
+                  className={`mx-0.5 inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border-2 border-outline px-3 text-sm font-bold ${isOpen ? "bg-primary text-primary-fg" : "bg-surface text-primary hover:bg-accent-soft"}`}
                 >
                   [{n}]
                 </button>
@@ -64,7 +64,7 @@ export function CitedText({
       </div>
       <div id={panelId} role="region" aria-live="polite">
         {active ? (
-          <div className="space-y-2 rounded-[var(--radius-btn)] border border-line bg-surface p-3">
+          <div className="space-y-2 rounded-[var(--radius-btn)] border-[3px] border-outline bg-surface p-3">
             {showPassageText ? (
               <>
                 <p className="text-sm font-bold text-muted">{t("verbatim")}</p>

@@ -14,7 +14,7 @@ export default function DevPage() {
   return (
     <main id="main" className="mx-auto max-w-3xl space-y-8 px-4 py-6" dir="ltr" lang="en">
       <header className="space-y-2">
-        <h1 className="text-2xl font-bold">Dev · content status</h1>
+        <h1 className="text-3xl font-bold">Dev · content status</h1>
         <p className="text-muted">
           Developer view. Learners never see unverified content. Verified passages in total:{" "}
           <strong>{totalVerified}</strong>.

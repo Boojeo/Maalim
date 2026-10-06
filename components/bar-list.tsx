@@ -21,7 +21,7 @@ export function BarList({ title, bars, hiddenLabel, unit }: { title: string; bar
               <span className="text-ink">{b.label}</span>
               <span className="flex items-center gap-2">
                 {b.value ? (
-                  <span aria-hidden className="h-4 rounded-e bg-primary" style={{ width: `${Math.max(2, (b.value / max) * 100)}%`, maxWidth: "calc(100% - 3rem)" }} />
+                  <span aria-hidden className="h-4 rounded-e border-2 border-outline bg-primary" style={{ width: `${Math.max(2, (b.value / max) * 100)}%`, maxWidth: "calc(100% - 3rem)" }} />
                 ) : null}
                 <span className="shrink-0 tabular-nums text-ink">{text}</span>
               </span>

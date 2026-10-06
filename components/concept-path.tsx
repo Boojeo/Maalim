@@ -40,14 +40,14 @@ export function ConceptPath({ concepts }: { concepts: Concept[] }) {
                 <span
                   aria-hidden
                   className={cn(
-                    "grid size-12 shrink-0 place-items-center rounded-full border-2 text-ink",
-                    status === "done" && "border-accent bg-accent",
-                    status === "in_progress" && "border-primary bg-surface ring-4 ring-accent-soft",
-                    status === "available" && "border-primary bg-surface",
+                    "grid size-14 shrink-0 place-items-center rounded-full border-[3px] border-outline text-ink",
+                    status === "done" && "bg-accent shadow-btn",
+                    status === "in_progress" && "bg-primary text-primary-fg shadow-btn ring-4 ring-accent-soft",
+                    status === "available" && "bg-surface shadow-btn",
                     status === "locked" && "border-line bg-bg",
                   )}
                 >
-                  <Icon className={cn("size-5", status === "locked" ? "text-muted" : "text-ink")} />
+                  <Icon className={cn("size-6", status === "locked" ? "text-muted" : status === "in_progress" ? "text-primary-fg" : "text-ink")} />
                 </span>
                 {idx < ordered.length - 1 ? <span aria-hidden className="mt-1 w-0.5 flex-1 bg-line" /> : null}
               </div>
@@ -55,8 +55,8 @@ export function ConceptPath({ concepts }: { concepts: Concept[] }) {
                 href={`/learn/${c.id}`}
                 data-status={status}
                 className={cn(
-                  "mb-1 block min-h-11 flex-1 rounded-[var(--radius-card)] border bg-surface p-4 shadow-sm",
-                  status === "locked" ? "border-line" : "border-primary",
+                  "mb-1 block min-h-11 flex-1 rounded-[var(--radius-card)] border-[3px] bg-surface p-4",
+                  status === "locked" ? "border-line" : "border-outline shadow-hard",
                 )}
               >
                 <span className="text-sm font-medium text-muted">{c.level}</span>

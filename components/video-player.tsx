@@ -27,7 +27,7 @@ export function VideoPlayer({ video }: { video: ResolvedVideo }) {
         <div
           role="img"
           aria-label={`${t("placeholder")}. ${t(BLOCK_KEY[reason])}`}
-          className="flex aspect-video flex-col items-center justify-center gap-2 rounded-[var(--radius-card)] border-2 border-dashed border-accent bg-accent-soft p-4 text-center"
+          className="flex aspect-video flex-col items-center justify-center gap-2 rounded-[var(--radius-card)] border-[3px] border-dashed border-outline bg-accent-soft p-4 text-center"
         >
           <Film aria-hidden className="size-8 text-primary" />
           <p className="font-bold">{t("placeholder")}</p>

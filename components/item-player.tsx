@@ -68,7 +68,7 @@ export function ItemPlayer({
           {item.options.map((o) => (
             <label
               key={o.id}
-              className="flex min-h-11 cursor-pointer items-center gap-3 rounded-[var(--radius-btn)] border border-line bg-surface px-4 py-2 has-[:checked]:border-primary has-[:checked]:bg-accent-soft"
+              className="flex min-h-11 cursor-pointer items-center gap-3 rounded-[var(--radius-btn)] border-[3px] border-outline bg-surface px-4 py-2 has-[:checked]:border-primary has-[:checked]:bg-accent-soft"
             >
               <input
                 type="radio"
@@ -87,7 +87,7 @@ export function ItemPlayer({
           <p className="text-sm text-muted">{t("orderHint")}</p>
           <ol className="space-y-2">
             {order.map((id, i) => (
-              <li key={id} className="flex items-center gap-2 rounded-[var(--radius-btn)] border border-line bg-surface px-3 py-2">
+              <li key={id} className="flex items-center gap-2 rounded-[var(--radius-btn)] border-[3px] border-outline bg-surface px-3 py-2">
                 <span className="w-6 text-center font-bold text-primary" aria-label={t("position", { n: i + 1 })}>
                   {i + 1}
                 </span>

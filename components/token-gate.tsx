@@ -62,7 +62,7 @@ export function TokenGate({
         <p>{t("unauthorized")}</p>
         <label className="block space-y-1">
           <span className="font-medium">{t("token")}</span>
-          <input type="password" value={token} onChange={(e) => setToken(e.target.value)} className="min-h-11 w-full rounded-[var(--radius-btn)] border border-line bg-surface px-3" />
+          <input type="password" value={token} onChange={(e) => setToken(e.target.value)} className="min-h-11 w-full rounded-[var(--radius-btn)] border-[3px] border-outline bg-surface px-3" />
         </label>
         <Button type="submit">{t("enter")}</Button>
       </form>

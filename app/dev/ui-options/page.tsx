@@ -9,9 +9,9 @@ export default function UiOptionsPage() {
   return (
     <main id="main" className="mx-auto max-w-5xl space-y-10 px-4 py-6" dir="ltr" lang="en">
       <header className="space-y-2">
-        <h1 className="text-2xl font-bold">Design options</h1>
+        <h1 className="text-3xl font-bold">Design options</h1>
         <p className="text-muted">
-          Three directions for the home (map) and unit screens, as static mockups at phone width. The live app still uses option A (the brief&apos;s default) until you choose.
+          Three directions for the home (map) and unit screens, as static mockups at phone width. <strong>Chosen by the owner on 2026-10-06: option C.</strong> The live app now uses C; A and B stay here for reference.
           Switch the language with the button in the app header on any page to see Arabic (RTL) or English. Tell the assistant: <strong>A</strong>, <strong>B</strong>, <strong>C</strong>, or a mix such as
           &ldquo;B&apos;s layout with A&apos;s colours&rdquo;.
         </p>

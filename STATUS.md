@@ -119,7 +119,11 @@ Each phase ends with lint + typecheck + tests, a commit, a push, and a STATUS up
 - **Drafted (all `verified: false`, hidden from learners until a named reviewer verifies):** unit hook questions (6, ar + en, built from the concept titles only) and hand-off wording (L3, L4, out-of-scope, crisis). Learners keep seeing the app's built-in neutral wording until `npm run verify:content -- referrals --by "Name"` / `-- units --by "Name"`. Not drafted: misconception/fix text and check questions.
 - **Review pack:** `review/REVIEW_PACK.pdf` (+ `.html`, regenerate with `npm run review:pack`): curriculum, drafted wording, sensitive UI strings, router rules and all 91 labelled questions with the app's result, video steps/timestamps/permission, passages with source links, and what each approval unlocks. Every row has Approve / Edit / Reject boxes.
 - **Design options (UI_BRIEF "if asked to propose alternatives"):** `/dev/ui-options` shows three static home + unit mockups (A calm and warm = brief default, B clean and modern, C bold and playful) in Arabic and English; contrast of every text pair is tested (≥ 4.5:1). Screenshots in `design/screens/options/`.
-  - **UI CHOICE: PENDING.** The owner will pick A, B, C or a mix; record it here and apply it app-wide (tokens in `app/globals.css` + `lib/tokens.ts`). Until then the live app stays on option A.
+  - **UI CHOICE: C (bold and playful), chosen by the owner 2026-10-06 and applied app-wide** (tokens in `app/globals.css` + `lib/tokens.ts`: violet primary, amber accent, thick 3px outlines, hard offset shadows, 24px/16px radii; buttons, cards, nav, inputs, progress, map landmarks, static fallback page). Contrast re-tested (unit + axe e2e).
 - **Checks:** lint, typecheck, 145 unit tests, 37 e2e tests (axe on 10 pages × ar/en) pass.
 - **Needs the owner (not code):** Network access → Full/Custom in the environment settings so the source sites can be reached; API keys as environment variables (names in `.env.example`); a Remote Control or Desktop session on the owner's PC for the video; the creator's written permission for the clip; the reviewer's approvals.
+
+## Update 2026-10-06 (4): option C applied; network now open
+- Option C applied across the app (see above). 145 unit tests, 37 e2e tests (axe on 10 pages × ar/en) pass.
+- The environment's network policy now allows hadeethenc.com, quranenc.com and youtube.com (checked from this session).
 

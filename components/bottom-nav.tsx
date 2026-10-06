@@ -20,7 +20,7 @@ export function BottomNav() {
   return (
     <nav
       aria-label={t("label")}
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface pb-[env(safe-area-inset-bottom)]"
+      className="fixed inset-x-0 bottom-0 z-40 border-t-[3px] border-outline bg-surface pb-[env(safe-area-inset-bottom)]"
     >
       <ul className="mx-auto flex max-w-xl">
         {items.map(({ href, key, Icon }) => {
@@ -32,7 +32,7 @@ export function BottomNav() {
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "flex min-h-14 flex-col items-center justify-center gap-0.5 text-sm",
-                  active ? "font-bold text-primary" : "text-muted",
+                  active ? "bg-accent-soft font-bold text-primary" : "text-muted",
                 )}
               >
                 <Icon aria-hidden className="size-5" />

@@ -54,7 +54,7 @@ export function UnitPlayer(p: UnitPlayerProps) {
   return (
     <article className="space-y-5" aria-labelledby="unit-title">
       <header className="space-y-1">
-        <h1 id="unit-title" className="text-2xl font-bold">{title}</h1>
+        <h1 id="unit-title" className="text-3xl font-bold">{title}</h1>
         <p className="text-sm text-muted" id="unit-step">
           {t("stepOf", { n: i + 1, total: STEPS.length })}
         </p>
@@ -64,9 +64,9 @@ export function UnitPlayer(p: UnitPlayerProps) {
           aria-valuemin={1}
           aria-valuemax={STEPS.length}
           aria-valuenow={i + 1}
-          className="h-2 overflow-hidden rounded-full bg-accent-soft"
+          className="h-4 overflow-hidden rounded-full border-[3px] border-outline bg-accent-soft"
         >
-          <div className="h-full rounded-full bg-accent transition-all" style={{ width: `${((i + 1) / STEPS.length) * 100}%` }} />
+          <div className="h-full bg-accent transition-all" style={{ width: `${((i + 1) / STEPS.length) * 100}%` }} />
         </div>
       </header>
 

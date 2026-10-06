@@ -28,7 +28,7 @@ export function MeHome({ concepts, locale }: { concepts: { id: string; title_ar:
           <legend className="text-lg font-bold">{t("stage")}</legend>
           <p className="text-sm text-muted">{t("stageHint")}</p>
           {([0, 1, 2, 3] as const).map((s) => (
-            <label key={s} className="flex min-h-11 cursor-pointer items-center gap-3 rounded-[var(--radius-btn)] border border-line px-4 py-2 has-[:checked]:border-primary has-[:checked]:bg-accent-soft">
+            <label key={s} className="flex min-h-11 cursor-pointer items-center gap-3 rounded-[var(--radius-btn)] border-[3px] border-outline px-4 py-2 has-[:checked]:border-primary has-[:checked]:bg-accent-soft">
               <input type="radio" name="stage" checked={state.stage === s} onChange={() => update((p) => setStage(p, s))} className="size-5 accent-[var(--color-primary)]" />
               {t(`stages.${s}`)}
             </label>
@@ -88,12 +88,12 @@ function ProgressRow({ state, id, title }: { state: ProgressState; id: string; t
   const m = mastery(state, id);
   const done = state.concepts[id]?.done;
   return (
-    <div className="rounded-[var(--radius-btn)] border border-line bg-surface px-4 py-3">
+    <div className="rounded-[var(--radius-btn)] border-[3px] border-outline bg-surface px-4 py-3">
       <div className="flex items-center justify-between gap-2">
         <span className="font-medium">{title}</span>
         {done ? <span className="text-sm font-medium text-success">{t("done")}</span> : null}
       </div>
-      <div className="mt-2 h-2 overflow-hidden rounded-full bg-accent-soft" role="img" aria-label={m === null ? t("masteryNone") : t("mastery", { pct: Math.round(m * 100) })}>
+      <div className="mt-2 h-3 overflow-hidden rounded-full border-2 border-outline bg-accent-soft" role="img" aria-label={m === null ? t("masteryNone") : t("mastery", { pct: Math.round(m * 100) })}>
         <div className="h-full rounded-full bg-accent" style={{ width: `${m === null ? 0 : Math.round(m * 100)}%` }} />
       </div>
       <p className="mt-1 text-sm text-muted">{m === null ? t("masteryNone") : t("mastery", { pct: Math.round(m * 100) })}</p>

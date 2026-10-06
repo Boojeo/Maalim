@@ -7,7 +7,7 @@ export function ContentPending({ raw, showRaw = false }: { raw?: string; showRaw
   return (
     <div
       role="note"
-      className="flex gap-3 rounded-[var(--radius-card)] border-2 border-dashed border-accent bg-accent-soft p-4 text-ink"
+      className="flex gap-3 rounded-[var(--radius-card)] border-[3px] border-dashed border-outline bg-accent-soft p-4 text-ink"
     >
       <Clock aria-hidden className="mt-1 size-5 shrink-0 text-primary" />
       <div className="space-y-1">

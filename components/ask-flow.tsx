@@ -75,7 +75,7 @@ export function AskFlow({ concepts, showDev, initialQuestion = "" }: { concepts:
             maxLength={500}
             rows={3}
             placeholder={t("placeholder")}
-            className="w-full rounded-[var(--radius-btn)] border border-line bg-surface p-3"
+            className="w-full rounded-[var(--radius-btn)] border-[3px] border-outline bg-surface p-3"
           />
         </label>
         <Button type="submit" disabled={status === "loading" || !question.trim()} className="w-full">

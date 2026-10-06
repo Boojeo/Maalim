@@ -8,22 +8,26 @@
 
 /* Design tokens from UI_BRIEF.md. Change colours only here (and in lib/tokens.ts, which tests contrast). */
 @theme {
-  --color-bg: #faf7f2;
+  /* Option C "bold and playful" (chosen by the owner 2026-10-06; see /dev/ui-options). */
+  --color-bg: #fff7ed;
   --color-surface: #ffffff;
-  --color-ink: #1f2933;
-  --color-muted: #52606d;
-  --color-line: #e4ddd0;
-  --color-primary: #0f5e5a;
-  --color-primary-hover: #0b4744;
+  --color-ink: #1e1b4b;
+  --color-muted: #4b4a6b;
+  --color-line: #cfc8e8; /* soft separators (tables, list rules) */
+  --color-outline: #1e1b4b; /* thick outlines on cards, buttons, inputs */
+  --color-primary: #6d28d9;
+  --color-primary-hover: #5b21b6;
   --color-primary-fg: #ffffff;
-  --color-accent: #c9a24b; /* landmarks & mastery fills only, never body text */
-  --color-accent-soft: #f3e9d0;
-  --color-success: #2f855a;
-  --color-error: #b83232;
+  --color-accent: #f59e0b; /* progress fills and landmarks only, never body text */
+  --color-accent-soft: #fde68a;
+  --color-success: #166534;
+  --color-error: #b91c1c;
   --color-danger-bg: #b00020; /* dev-only UNVERIFIED banner */
 
-  --radius-card: 16px;
-  --radius-btn: 12px;
+  --radius-card: 24px;
+  --radius-btn: 16px;
+  --shadow-hard: 4px 4px 0 var(--color-outline);
+  --shadow-btn: 3px 3px 0 var(--color-outline);
 
   --font-sans: "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
 }

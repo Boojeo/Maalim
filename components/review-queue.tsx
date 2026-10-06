@@ -64,7 +64,7 @@ function ReviewBody({ headers }: { headers: Record<string, string> }) {
       <p className="text-sm text-muted">{t("counts", data.counts)}</p>
       <label className="block space-y-1">
         <span className="font-medium">{t("reviewer")}</span>
-        <input value={reviewer} onChange={(e) => setReviewer(e.target.value)} autoComplete="off" className="min-h-11 w-full rounded-[var(--radius-btn)] border border-line bg-surface px-3" />
+        <input value={reviewer} onChange={(e) => setReviewer(e.target.value)} autoComplete="off" className="min-h-11 w-full rounded-[var(--radius-btn)] border-[3px] border-outline bg-surface px-3" />
       </label>
       {message ? <p role="status" className="font-medium text-primary">{message}</p> : null}
       {data.rows.length === 0 ? <p>{t("empty")}</p> : null}

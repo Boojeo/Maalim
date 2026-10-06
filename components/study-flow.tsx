@@ -67,7 +67,7 @@ export function StudyFlow({ topics, showDev }: { topics: StudyTopic[]; showDev: 
         <fieldset className="space-y-2">
           <legend className="font-bold">{t("topic")}</legend>
           {topics.map((tp) => (
-            <label key={tp.id} className="flex min-h-11 cursor-pointer items-center gap-3 rounded-[var(--radius-btn)] border border-line px-4 py-2 has-[:checked]:border-primary has-[:checked]:bg-accent-soft">
+            <label key={tp.id} className="flex min-h-11 cursor-pointer items-center gap-3 rounded-[var(--radius-btn)] border-[3px] border-outline px-4 py-2 has-[:checked]:border-primary has-[:checked]:bg-accent-soft">
               <input type="radio" name="topic" value={tp.id} checked={choice === tp.id} onChange={() => setChoice(tp.id)} className="size-5 accent-[var(--color-primary)]" />
               {tp.title}
             </label>

@@ -33,3 +33,6 @@ Heavy calligraphy backgrounds, copied religious logos, imagery of the Prophet ï·
 
 ## Selecting among options
 If asked to propose alternatives, produce 3 static home + unit mockups (calm and warm / clean and modern / bold and playful) behind `/dev/ui-options` and wait for the choice recorded in STATUS.md. Default to this brief if no choice is recorded.
+
+## Decision (2026-10-06)
+The owner chose **option C (bold and playful)** from `/dev/ui-options`. The tokens above are superseded by the values in `app/globals.css` (violet #6D28D9, amber #F59E0B, ink #1E1B4B, cream #FFF7ED, thick outlines). Keep the brief's other rules: calm copy, no pressure, no streak guilt, one primary button per screen, no imagery of the Prophet ï·º or the Companions.

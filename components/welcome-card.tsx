@@ -26,7 +26,7 @@ export function WelcomeCard() {
   ).endsWith(":true");
   if (seen) return null;
   return (
-    <Card className="space-y-3 border-accent" role="region" aria-label={t("title")}>
+    <Card className="space-y-3" role="region" aria-label={t("title")}>
       <h2 className="text-lg font-bold">{t("title")}</h2>
       <p>{t("body")}</p>
       <div className="flex gap-2">

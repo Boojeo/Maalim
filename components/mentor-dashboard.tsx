@@ -84,7 +84,7 @@ function Body({ headers }: { headers: Record<string, string> }) {
                         aria-label={`${t("status")}: ${r.id.slice(0, 8)}`}
                         value={r.status}
                         onChange={(e) => setStatus(r.id, e.target.value as ReferralStatus)}
-                        className="min-h-11 rounded-[var(--radius-btn)] border border-line bg-surface px-2"
+                        className="min-h-11 rounded-[var(--radius-btn)] border-[3px] border-outline bg-surface px-2"
                       >
                         <option value="new">{t("statusNew")}</option>
                         <option value="seen">{t("statusSeen")}</option>

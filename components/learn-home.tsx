@@ -46,7 +46,7 @@ export function LearnHome({ concepts, locale }: { concepts: Concept[]; locale: L
         <ul className="space-y-2">
           {[...concepts].sort((a, b) => a.order - b.order).map((c) => (
             <li key={c.id}>
-              <Link href={`/learn/${c.id}`} className="flex min-h-11 items-center justify-between rounded-[var(--radius-btn)] border border-line bg-surface px-4 py-2">
+              <Link href={`/learn/${c.id}`} className="flex min-h-11 items-center justify-between rounded-[var(--radius-btn)] border-[3px] border-outline bg-surface px-4 py-2">
                 <span>{name(c)}</span>
                 <span className="text-sm text-muted">{m(`status.${conceptStatus(c, state)}`)}</span>
               </Link>

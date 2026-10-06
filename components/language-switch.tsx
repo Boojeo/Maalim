@@ -21,7 +21,7 @@ export function LanguageSwitch() {
       onClick={toggle}
       aria-label={t("switchLabel")}
       lang={locale === "ar" ? "en" : "ar"}
-      className="min-h-11 min-w-11 rounded-[var(--radius-btn)] border border-primary px-4 text-base font-medium text-primary hover:bg-accent-soft"
+      className="min-h-11 min-w-11 rounded-[var(--radius-btn)] border-[3px] border-outline bg-surface px-4 text-base font-bold text-primary shadow-btn hover:bg-accent-soft active:translate-x-[3px] active:translate-y-[3px] active:shadow-none"
     >
       {t("switchTo")}
     </button>

@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: { default: t("name"), template: `%s · ${t("name")}` }, description: t("tagline") };
 }
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#0F5E5A" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#6D28D9" };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const locale = (await getLocale()) as Locale;

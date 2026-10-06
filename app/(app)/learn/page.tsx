@@ -11,7 +11,7 @@ export default async function LearnPage() {
   const { concepts } = await getStore().getCurriculum();
   return (
     <section className="space-y-4">
-      <h1 className="text-2xl font-bold">{t("title")}</h1>
+      <h1 className="text-3xl font-bold">{t("title")}</h1>
       <LearnHome concepts={concepts} locale={locale} />
     </section>
   );

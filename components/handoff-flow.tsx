@@ -73,7 +73,7 @@ export function HandoffFlow({ draft, onCancel }: { draft: HandoffDraft; onCancel
           rows={6}
           maxLength={800}
           dir={locale === "ar" ? "rtl" : "ltr"}
-          className="w-full rounded-[var(--radius-btn)] border border-line bg-surface p-3"
+          className="w-full rounded-[var(--radius-btn)] border-[3px] border-outline bg-surface p-3"
         />
       </label>
       <p className="text-sm text-muted">{t("privacy")}</p>

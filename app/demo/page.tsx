@@ -48,11 +48,11 @@ export default async function DemoPage() {
   return (
     <main id="main" className="mx-auto max-w-3xl space-y-8 px-4 py-6" dir="ltr" lang="en">
       <header className="space-y-2">
-        <h1 className="text-2xl font-bold">Demo script · 5 minutes</h1>
+        <h1 className="text-3xl font-bold">Demo script · 5 minutes</h1>
         <p className="text-muted">The story from PLAN.md: Maria → map → wudu → practice → personal question → mentor → results.</p>
       </header>
 
-      <section aria-labelledby="ready-h" className="space-y-2 rounded-[var(--radius-card)] border border-line bg-surface p-4">
+      <section aria-labelledby="ready-h" className="space-y-2 rounded-[var(--radius-card)] border-[3px] border-outline bg-surface p-4">
         <h2 id="ready-h" className="text-lg font-bold">Is the demo ready? (live status)</h2>
         <ul className="list-disc space-y-1 ps-5">
           <li>Verified passages: <strong>{verified}</strong> {verified === 0 ? "(the explanation step will show &ldquo;waiting for review&rdquo;)" : ""}</li>
@@ -65,7 +65,7 @@ export default async function DemoPage() {
 
       <ol className="space-y-4">
         {STEPS.map((s) => (
-          <li key={s.t} className="rounded-[var(--radius-card)] border border-line bg-surface p-4">
+          <li key={s.t} className="rounded-[var(--radius-card)] border-[3px] border-outline bg-surface p-4">
             <p className="text-sm font-bold text-primary">{s.t}</p>
             <h2 className="text-lg font-bold">{s.title}</h2>
             <p className="mt-1">{s.say}</p>
