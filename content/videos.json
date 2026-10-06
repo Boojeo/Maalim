@@ -1,5 +1,5 @@
 {
-  "_note": "Step timestamps for the main wudu clip were read from the video frames only (no audio check), accuracy about +/-3 s; on 2026-10-06 the boundaries were re-checked against 1-frame-per-second frame sheets and the speech timing and tightened to about +/-1.5 s (still NOT verified by the Sharia reviewer). Mohammed must confirm them and the order/number of washes against the source text before 'timestamps_verified' is set to true. Do not use any clip whose permission is not 'granted'. Creator credits were filled from YouTube's public oEmbed data (channel names) on 2026-10-06; permission is still 'pending' for every clip and must be set to 'granted' only after the creator's written permission.",
+  "_note": "Step timestamps for the main wudu clip were read from the video frames only (no audio check), accuracy about +/-3 s; on 2026-10-06 the boundaries were re-checked against 1-frame-per-second frame sheets and the speech timing and tightened to about +/-1.5 s (still NOT verified by the Sharia reviewer). Mohammed must confirm them and the order/number of washes against the source text before 'timestamps_verified' is set to true. OWNER OVERRIDE 2026-10-06 (wudu-main only): the owner instructed that permission be set to 'granted' and timestamps_verified to true for now. These are NOT confirmations from the creator or the Sharia reviewer; the owner will change them later (revert to 'pending'/false if written permission or review is not obtained). The Arabic/English captions are unchecked machine drafts. Do not use any clip whose permission is not 'granted'. Creator credits were filled from YouTube's public oEmbed data (channel names) on 2026-10-06; permission is still 'pending' for every clip and must be set to 'granted' only after the creator's written permission.",
   "videos": [
     {
       "id": "wudu-main",
@@ -9,9 +9,9 @@
       "source_file": "public/videos/src/wudu_120.webm",
       "youtube_id": "6iSdWuL4zlQ",
       "format": "vertical 1080x1920, 2:23",
-      "permission": "pending",
+      "permission": "granted",
       "creator_credit": "قناة أبوجودي AboJody Channel (youtube.com/@abojody99)",
-      "timestamps_verified": false,
+      "timestamps_verified": true,
       "steps": [
         {
           "n": 0,

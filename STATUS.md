@@ -136,3 +136,8 @@ Each phase ends with lint + typecheck + tests, a commit, a push, and a STATUS up
 - **Video blocked here:** YouTube returns "Sign in to confirm you're not a bot" for this server (datacenter IP); I will not work around that. The video must be processed on the owner's PC (the downloaded file is there): `scripts/windows/make-wudu-clips.ps1` for the clips, then captions (`yt-dlp --write-subs`/manual) + `npm run split:captions -- wudu-main`.
 - **Checks:** lint, typecheck, 151 unit tests pass (e2e unchanged and passing as of the previous update).
 
+
+## Update 2026-10-06 (6): wudu clips, draft captions, owner override
+- Six wudu step clips cut (all < 8 MB), step timestamps tightened to about +/-1.5 s (mouth-nose, face, head, feet adjusted; head now includes the ears).
+- Arabic + English captions exist but are **unchecked machine drafts** (Whisper large-v3, dialect speech, visible errors): a person must correct every cue.
+- **Owner override:** at the owner's instruction `wudu-main` has `permission: "granted"` and `timestamps_verified: true` for now. This is NOT the creator's written permission nor the Sharia reviewer's check; revert to `pending` / `false` if they are not obtained. Details: `review/VIDEO_WORK_2026-10-06.md`.
