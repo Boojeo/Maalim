@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { POST as next } from "@/app/api/next/route";
 import { clientKey, rateLimit, resetRateLimits } from "@/lib/rate-limit";
 
@@ -29,6 +29,8 @@ describe("rate limit", () => {
 });
 
 describe("/api/next", () => {
+  beforeEach(() => { process.env.FUTURE_CONCEPTS = ""; }); // test the prerequisite graph itself, not the launch scope
+  afterEach(() => { delete process.env.FUTURE_CONCEPTS; });
   const call = (progress: unknown) => next(new Request("http://x/api/next", { method: "POST", body: JSON.stringify({ progress }) }));
   it("recommends from the prerequisite graph and stores nothing", async () => {
     expect(await (await call(null)).json()).toEqual({ kind: "next", primary: "shahada", review: null });

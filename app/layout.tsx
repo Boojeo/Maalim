@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import { dirOf, type Locale } from "@/i18n/config";
 import { SkipLink } from "@/components/skip-link";
+import { DemoBanner } from "@/components/demo-banner";
 import { UnverifiedBanner } from "@/components/unverified-banner";
 import "./globals.css";
 
@@ -22,6 +23,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SkipLink />
           <UnverifiedBanner />
+          <DemoBanner />
           {children}
         </NextIntlClientProvider>
       </body>

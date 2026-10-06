@@ -2,6 +2,8 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { SOURCE_LABEL } from "@/components/citation-chip";
 import { PracticeSession, type PracticeEntry } from "@/components/practice-session";
 import { getStore } from "@/lib/data";
+import { futureConceptIds } from "@/lib/availability";
+import { buildDemoItems, demoEnabled } from "@/lib/demo";
 import type { Lang } from "@/lib/types";
 import { resolveVideo } from "@/lib/videos";
 
@@ -32,9 +34,19 @@ export default async function PractisePage() {
     });
   }
 
+  const demo = demoEnabled();
+  if (demo) {
+    const wudu = (await store.getVideos("wudu")).find((v) => v.kind === "lesson" && v.permission === "granted");
+    if (wudu) for (const d of buildDemoItems(wudu, locale)) entries.push({ item: d.item, source: d.source, video: null });
+  }
+
   return (
     <section className="space-y-4">
       <h1 className="text-3xl font-bold">{t("title")}</h1>
+      {demo && entries.length > 0 ? <p role="note" className="rounded-[var(--radius-btn)] bg-accent-soft p-3 text-sm">{t("demoNote")}</p> : null}
+      {futureConceptIds().length > 0 ? (
+        <p role="note" className="rounded-[var(--radius-btn)] border-[3px] border-dashed border-line p-3 text-sm">{t("future")}</p>
+      ) : null}
       {entries.length === 0 ? (
         <>
           <p className="text-muted">{t("empty")}</p>

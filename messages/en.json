@@ -15,7 +15,8 @@
     "switchLabel": "Switch language to Arabic"
   },
   "banner": {
-    "unverified": "UNVERIFIED CONTENT — development only, never shown to learners"
+    "unverified": "UNVERIFIED CONTENT — development only, never shown to learners",
+    "demo": "DEMO — illustration only. The wudu clip captions and questions are unreviewed drafts. Other topics are future work."
   },
   "map": {
     "title": "Your path",
@@ -32,8 +33,11 @@
     "review": "Review",
     "pathLabel": "Learning path",
     "next": "Next step: {title}",
-    "allDone": "You have finished every landmark. Well done.",
-    "askCta": "Ask a question"
+    "allDone": "You have finished every landmark that is built so far. The rest is future work.",
+    "askCta": "Ask a question",
+    "future": "Future work — not built yet",
+    "futureShort": "Future work",
+    "available": "Only the wudu landmark is built in this version."
   },
   "learn": {
     "title": "Learn",
@@ -56,7 +60,9 @@
     "doneBody": "Take your time. You can repeat any item whenever you like.",
     "again": "Practise again",
     "scenario": "Scenario",
-    "emptyHint": "Nothing to practise yet: items appear here only after a reviewer has approved them."
+    "emptyHint": "Nothing to practise yet: items appear here only after a reviewer has approved them.",
+    "future": "Practice for the other topics is future work. Only wudu is built in this version.",
+    "demoNote": "Demo questions: built only from the order of steps shown in the wudu clip. Not reviewed."
   },
   "me": {
     "title": "Me",
@@ -112,7 +118,10 @@
     "backToMap": "Back to the map",
     "buildsOn": "This landmark builds on: {list}. You can still open it.",
     "notFound": "We could not find this landmark.",
-    "objectives": "What you will be able to do"
+    "objectives": "What you will be able to do",
+    "demoNote": "Demo: the steps below are taken only from the order shown in the clip. They are not an explanation and have not been reviewed.",
+    "demoSteps": "Steps shown in the clip",
+    "demoStep": "Step {n}"
   },
   "pending": {
     "label": "Waiting for review",
@@ -130,7 +139,8 @@
     "previousClip": "Previous clip",
     "captionsOn": "Captions on",
     "kindLesson": "Lesson clip",
-    "kindScenario": "Scenario clip"
+    "kindScenario": "Scenario clip",
+    "draftCaptions": "Draft captions (machine transcription, not yet checked by a person). Some lines may be wrong."
   },
   "item": {
     "submit": "Check answer",
@@ -300,5 +310,11 @@
     "again": "Back to Me",
     "item": "Question {n} of {total}",
     "group": "Group"
+  },
+  "future": {
+    "title": "Future work",
+    "body": "This topic is not built yet. It will be added after its content has been reviewed by a Sharia reviewer.",
+    "cta": "Go to the wudu landmark",
+    "back": "Back to the map"
   }
 }

@@ -10,6 +10,8 @@ export interface Concept {
   prerequisites: string[];
   objectives_en: string[];
   reviewed_by: string | null;
+  /** "future" = not built yet (shown as future work, never as a unit). Set by lib/availability.ts. */
+  availability?: "future";
 }
 
 export interface Stage {

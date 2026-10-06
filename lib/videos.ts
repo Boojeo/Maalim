@@ -4,6 +4,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { isPlayableVideo, unverifiedAllowed } from "./content-gate";
+import { demoEnabled } from "./demo";
 import type { Lang, VideoEntry } from "./types";
 
 export type VideoBlock = "permission" | "missing-file" | "missing-captions" | null;
@@ -24,6 +25,8 @@ export interface ResolvedVideo {
   credit: string | null;
   creditPending: boolean;
   blocked: VideoBlock;
+  /** True when any shown caption file is an unchecked draft (only possible in demo / dev mode). */
+  draftCaptions: boolean;
   /** Playable clips only (permission granted, file present, captions present for that clip). */
   clips: ResolvedClip[];
 }
@@ -48,7 +51,7 @@ function isDraftCaption(file: string): boolean {
 export function resolveVideo(
   v: VideoEntry,
   publicDir = path.join(process.cwd(), "public"),
-  allowDraftCaptions = unverifiedAllowed(),
+  allowDraftCaptions = unverifiedAllowed() || demoEnabled(),
 ): ResolvedVideo {
   const exists = (rel: string) => fs.existsSync(path.join(publicDir, rel));
   const captionsFor = (base: string): Partial<Record<Lang, string>> => {
@@ -88,6 +91,7 @@ export function resolveVideo(
     credit: creditPending ? null : v.creator_credit,
     creditPending,
     blocked,
+    draftCaptions: !blocked && captioned.some((c) => Object.values(c.captions).some((rel) => isDraftCaption(path.join(publicDir, rel!)))),
     clips: blocked ? [] : captioned,
   };
 }

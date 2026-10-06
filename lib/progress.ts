@@ -41,7 +41,7 @@ export function unmetPrerequisites(concept: Concept, state: ProgressState): stri
 
 /** First unfinished concept (curriculum order) whose prerequisites are done; else the first unfinished one. */
 export function nextConcept(concepts: Concept[], state: ProgressState): Concept | null {
-  const ordered = [...concepts].sort((a, b) => a.order - b.order);
+  const ordered = [...concepts].filter((c) => c.availability !== "future").sort((a, b) => a.order - b.order);
   const open = ordered.filter((c) => !state.concepts[c.id]?.done);
   return open.find((c) => unmetPrerequisites(c, state).length === 0) ?? open[0] ?? null;
 }
@@ -122,7 +122,7 @@ export interface Recommendation {
  * landmark; this only decides what is suggested.
  */
 export function recommend(concepts: Concept[], state: ProgressState): Recommendation {
-  const ordered = [...concepts].sort((a, b) => a.order - b.order);
+  const ordered = [...concepts].filter((c) => c.availability !== "future").sort((a, b) => a.order - b.order);
   const review = weakConcepts(ordered, state)[0] ?? null;
   const open = ordered.filter((c) => !state.concepts[c.id]?.done);
   const inProgress = open.find((c) => state.concepts[c.id]?.started && unmetPrerequisites(c, state).length === 0);

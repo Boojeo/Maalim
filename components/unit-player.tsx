@@ -21,8 +21,8 @@ export interface UnitPlayerProps {
   misconception: string | null;
   videos: ResolvedVideo[];
   explanation: React.ReactNode;
-  checkItem: Item | null;
-  checkSource: ItemSource | null;
+  /** One or more check questions, played in order (demo mode has one per clip step). */
+  checks: { item: Item; source: ItemSource | null }[];
   nextConcept: { id: string; title: string } | null;
   showDev: boolean;
 }
@@ -35,6 +35,7 @@ export function UnitPlayer(p: UnitPlayerProps) {
   const locale = useLocale() as Lang;
   const { state, update } = useProgress();
   const [i, setI] = useState(0);
+  const [ci, setCi] = useState(0);
   const step: Step = STEPS[i];
   const title = locale === "ar" ? p.concept.title_ar : p.concept.title_en;
 
@@ -90,22 +91,27 @@ export function UnitPlayer(p: UnitPlayerProps) {
             </div>
           ) : (
             <VideoPlayer
-              video={{ id: "none", kind: "lesson", title_ar: "", credit: null, creditPending: true, blocked: "missing-file", clips: [] }}
+              video={{ id: "none", kind: "lesson", title_ar: "", credit: null, creditPending: true, blocked: "missing-file", draftCaptions: false, clips: [] }}
             />
           ))}
 
         {step === "explanation" && p.explanation}
 
+        {step === "check" && p.checks.length > 1 ? (
+          <p className="text-sm text-muted">{t("stepOf", { n: ci + 1, total: p.checks.length })}</p>
+        ) : null}
+
         {step === "check" &&
-          (p.checkItem ? (
+          (p.checks.length > 0 ? (
             <ItemPlayer
-              item={p.checkItem}
-              source={p.checkSource}
+              key={p.checks[ci].item.id}
+              item={p.checks[ci].item}
+              source={p.checks[ci].source}
               onResult={(ok) => {
                 update((s) => recordAttempt(s, p.concept.id, ok));
                 track(p.concept.id, ok ? "check_correct" : "check_wrong");
               }}
-              onContinue={() => setI(i + 1)}
+              onContinue={() => (ci + 1 < p.checks.length ? setCi(ci + 1) : setI(i + 1))}
             />
           ) : (
             pending("[CONTENT NEEDED: approved check question]")

@@ -24,7 +24,8 @@
     "review:pack": "tsx scripts/review-pack.ts",
     "fetch:candidates": "tsx scripts/fetch-candidates.ts",
     "import:source": "tsx scripts/import-from-source.ts",
-    "candidates:pack": "tsx scripts/candidates-pack.ts"
+    "candidates:pack": "tsx scripts/candidates-pack.ts",
+    "review:wudu": "tsx scripts/wudu-review-pack.ts"
   },
   "dependencies": {
     "@fontsource/ibm-plex-sans-arabic": "^5.3.0",

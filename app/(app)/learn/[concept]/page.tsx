@@ -2,9 +2,12 @@ import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import { ExplanationPanel } from "@/components/explanation-panel";
 import { SOURCE_LABEL } from "@/components/citation-chip";
+import { FutureWork } from "@/components/future-work";
+import { DemoSteps } from "@/components/demo-steps";
 import { UnitPlayer } from "@/components/unit-player";
 import { isLearnerUnit, needsBanner } from "@/lib/content-gate";
 import { getStore } from "@/lib/data";
+import { buildDemoItems, demoEnabled } from "@/lib/demo";
 import { isPlaceholder, type Lang } from "@/lib/types";
 import { resolveVideo } from "@/lib/videos";
 
@@ -17,6 +20,10 @@ export default async function UnitPage({ params }: { params: Promise<{ concept: 
   if (!concept) notFound();
 
   const locale = (await getLocale()) as Lang;
+  if (concept.availability === "future") {
+    const live = [...curriculum.concepts].sort((a, b) => a.order - b.order).find((c) => c.availability !== "future");
+    return <FutureWork title={locale === "ar" ? concept.title_ar : concept.title_en} liveHref={live ? `/learn/${live.id}` : null} />;
+  }
   const t = await getTranslations("unit");
   const unit = await store.getUnit(id);
   const showDev = needsBanner();
@@ -26,7 +33,9 @@ export default async function UnitPage({ params }: { params: Promise<{ concept: 
     const v = locale === "ar" ? ar : en;
     return v && (showDev || !isPlaceholder(v)) ? v : null;
   };
-  const hook = learnerUnit && unit ? pick(unit.hook_ar, unit.hook_en) : null;
+  const demo = demoEnabled();
+  // Demo mode shows the drafted hook (unverified, under the DEMO banner); otherwise only verified wording.
+  const hook = unit && (learnerUnit || demo) ? pick(unit.hook_ar, unit.hook_en) : null;
   const misconception = learnerUnit && unit ? pick(unit.misconception_ar, unit.misconception_en) : null;
 
   const allVideos = await store.getVideos(id);
@@ -36,14 +45,19 @@ export default async function UnitPage({ params }: { params: Promise<{ concept: 
   let passages = await store.getPassages({ conceptId: id, lang: locale, learner: true });
   if (passages.length === 0) passages = await store.getPassages({ conceptId: id, learner: true });
 
-  let checkItem = null;
-  let checkSource = null;
-  if (unit?.check_item_id) {
+  let checks: { item: import("@/lib/types").Item; source: { label: string; url: string | null } | null }[] = [];
+  const demoVideo = demo ? allVideos.find((v) => wanted.includes(v.id) && v.kind === "lesson") : undefined;
+  if (demoVideo) checks = buildDemoItems(demoVideo, locale);
+  else if (unit?.check_item_id) {
     const items = await store.getItems({ conceptId: id, learner: true });
-    checkItem = items.find((i) => i.id === unit.check_item_id) ?? null;
-    if (checkItem?.source_passage_id) {
-      const p = await store.getPassage(checkItem.source_passage_id);
-      if (p) checkSource = { label: `${SOURCE_LABEL[p.source]} · ${p.source_id}`, url: p.source_url };
+    const checkItem = items.find((i) => i.id === unit.check_item_id) ?? null;
+    if (checkItem) {
+      let source = null;
+      if (checkItem.source_passage_id) {
+        const p = await store.getPassage(checkItem.source_passage_id);
+        if (p) source = { label: `${SOURCE_LABEL[p.source]} · ${p.source_id}`, url: p.source_url };
+      }
+      checks = [{ item: checkItem, source }];
     }
   }
 
@@ -69,9 +83,13 @@ export default async function UnitPage({ params }: { params: Promise<{ concept: 
         hook={hook}
         misconception={misconception}
         videos={videos}
-        explanation={<ExplanationPanel conceptId={id} lang={locale} fallbackPassages={passages} showDev={showDev} />}
-        checkItem={checkItem}
-        checkSource={checkSource}
+        explanation={
+          <>
+            {demoVideo ? <DemoSteps video={demoVideo} lang={locale} /> : null}
+            <ExplanationPanel conceptId={id} lang={locale} fallbackPassages={passages} showDev={showDev} />
+          </>
+        }
+        checks={checks}
         nextConcept={nextC ? { id: nextC.id, title: locale === "ar" ? nextC.title_ar : nextC.title_en } : null}
         showDev={showDev}
       />

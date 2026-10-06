@@ -64,6 +64,11 @@ export function VideoPlayer({ video }: { video: ResolvedVideo }) {
           ) : null,
         )}
       </video>
+      {video.draftCaptions ? (
+        <p role="note" className="rounded-[var(--radius-btn)] bg-accent-soft p-2 text-sm">
+          {t("draftCaptions")}
+        </p>
+      ) : null}
       {sources.length > 1 ? (
         <div className="flex items-center justify-between gap-2">
           <Button variant="ghost" onClick={() => setIndex((i) => Math.max(0, i - 1))} disabled={index === 0}>
