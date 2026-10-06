@@ -98,3 +98,9 @@ Each phase ends with lint + typecheck + tests, a commit, a push, and a STATUS up
 - Next 16 renamed middleware to `proxy.ts`; not needed (locale is cookie-based).
 - Font: `@fontsource/ibm-plex-sans-arabic` (npm, OFL) instead of `next/font/google`, so builds do not depend on Google Fonts.
 - `@types/node` pinned to 22 (vitest peer conflict with 20).
+
+## Update 2026-10-06: video + content intake tooling
+- **Bug in my Phase 3 design, fixed:** captions were matched per video, but clips are cut per step, so one caption file would have been out of sync with every clip. Captions are now **per clip** (`videos/captions/<id>_<n>_<key>.<ar|en>.vtt`; whole clips use `<id>.<lang>.vtt`). A clip with no caption of its own is not shown. `scripts/split-captions.ts` cuts a full-timeline VTT into per-step files (text untouched). Tests + e2e updated (101 unit, 31 e2e pass).
+- **Wudu video (`wudu-main`, YouTube 6iSdWuL4zlQ):** `scripts/windows/make-wudu-clips.ps1` cuts/encodes the step clips on Windows from the downloaded file (reads the step times from `content/videos.json`, warns above 8 MB). **Not done:** (1) the clips themselves (the cloud session cannot see the Windows folder and YouTube is blocked here), (2) the creator's **written permission** (`permission` is still `pending`, so the app still shows the placeholder by design, rule 9), (3) `creator_credit`, (4) Arabic + English captions checked by a person, (5) the Sharia reviewer confirming the step timestamps.
+- **Passages:** this environment cannot reach quranenc.com / hadeethenc.com / youtube.com (network policy) and the code must not write Islamic text, so there is still **no verified content**. New intake path: a person fills `content/intake/passages.template.csv` with text copied verbatim → `npx tsx scripts/import-passages.ts` (stored as unverified) → the reviewer checks it → `npx tsx scripts/verify-passages.ts --by "Name" --ids …`. See `content/intake/README.md`.
+

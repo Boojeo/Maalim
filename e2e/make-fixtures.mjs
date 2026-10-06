@@ -13,5 +13,7 @@ for (const key of ["1_one", "2_two"]) {
   );
 }
 const vtt = (t) => `WEBVTT\n\n00:00:00.000 --> 00:00:02.000\n${t}\n`;
-fs.writeFileSync(path.join(dir, "captions", "wudu-main.en.vtt"), vtt("SYNTHETIC caption"));
-fs.writeFileSync(path.join(dir, "captions", "wudu-main.ar.vtt"), vtt("SYNTHETIC caption (ar)"));
+for (const key of ["1_one", "2_two"]) {
+  fs.writeFileSync(path.join(dir, "captions", `wudu-main_${key}.en.vtt`), vtt("SYNTHETIC caption"));
+  fs.writeFileSync(path.join(dir, "captions", `wudu-main_${key}.ar.vtt`), vtt("SYNTHETIC caption (ar)"));
+}

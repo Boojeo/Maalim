@@ -18,7 +18,7 @@ export function VideoPlayer({ video }: { video: ResolvedVideo }) {
   const locale = useLocale();
   const [index, setIndex] = useState(0);
 
-  const sources = video.clips.length > 0 ? video.clips : video.fullSrc ? [{ n: 0, key: "full", label_en: "", src: video.fullSrc }] : [];
+  const sources = video.clips;
 
   if (video.blocked || sources.length === 0) {
     const reason = video.blocked ?? "missing-file";
@@ -52,14 +52,14 @@ export function VideoPlayer({ video }: { video: ResolvedVideo }) {
         className="aspect-video max-h-[70dvh] w-full rounded-[var(--radius-card)] bg-ink"
       >
         {order.map((l, i) =>
-          video.captions[l] ? (
+          current.captions[l] ? (
             <track
               key={l}
               kind="captions"
               srcLang={l}
               label={l === "ar" ? "العربية" : "English"}
-              src={video.captions[l]}
-              default={i === 0 || !video.captions[order[0]]}
+              src={current.captions[l]}
+              default={i === 0 || !current.captions[order[0]]}
             />
           ) : null,
         )}

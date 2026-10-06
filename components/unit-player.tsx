@@ -90,7 +90,7 @@ export function UnitPlayer(p: UnitPlayerProps) {
             </div>
           ) : (
             <VideoPlayer
-              video={{ id: "none", kind: "lesson", title_ar: "", credit: null, creditPending: true, blocked: "missing-file", clips: [], fullSrc: null, captions: {} }}
+              video={{ id: "none", kind: "lesson", title_ar: "", credit: null, creditPending: true, blocked: "missing-file", clips: [] }}
             />
           ))}
 

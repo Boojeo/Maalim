@@ -22,7 +22,7 @@ function pub(files: string[]): string {
 
 describe("resolveVideo", () => {
   it("blocks clips without granted permission, even if files exist", () => {
-    const dir = pub(["videos/v_1_hands.mp4", "videos/captions/v.en.vtt"]);
+    const dir = pub(["videos/v_1_hands.mp4", "videos/captions/v_1_hands.en.vtt"]);
     expect(resolveVideo(video({ permission: "pending" }), dir).blocked).toBe("permission");
   });
   it("blocks missing files", () => {
@@ -31,11 +31,23 @@ describe("resolveVideo", () => {
   it("blocks playback without captions", () => {
     expect(resolveVideo(video(), pub(["videos/v_1_hands.mp4"])).blocked).toBe("missing-captions");
   });
+  it("captions must belong to the clip: a whole-video caption file does not unlock a step clip", () => {
+    expect(resolveVideo(video(), pub(["videos/v_1_hands.mp4", "videos/captions/v.en.vtt"])).blocked).toBe("missing-captions");
+  });
+  it("only clips that have their own captions are offered", () => {
+    const two = video({ steps: [
+      { n: 1, key: "hands", label_en: "Hands", start: "0:00", end: "0:05", use: true },
+      { n: 2, key: "face", label_en: "Face", start: "0:05", end: "0:10", use: true },
+    ] });
+    const r = resolveVideo(two, pub(["videos/v_1_hands.mp4", "videos/v_2_face.mp4", "videos/captions/v_2_face.ar.vtt"]));
+    expect(r.blocked).toBeNull();
+    expect(r.clips.map((c) => c.key)).toEqual(["face"]);
+  });
   it("plays when granted + file + captions, and reports credit state", () => {
-    const r = resolveVideo(video(), pub(["videos/v_1_hands.mp4", "videos/captions/v.ar.vtt"]));
+    const r = resolveVideo(video(), pub(["videos/v_1_hands.mp4", "videos/captions/v_1_hands.ar.vtt"]));
     expect(r.blocked).toBeNull();
     expect(r.clips).toHaveLength(1);
-    expect(r.captions.ar).toBe("/videos/captions/v.ar.vtt");
+    expect(r.clips[0].captions.ar).toBe("/videos/captions/v_1_hands.ar.vtt");
     expect(r.credit).toBe("Someone");
     expect(resolveVideo(video({ creator_credit: "TODO: x" }), pub([])).creditPending).toBe(true);
   });
