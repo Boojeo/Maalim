@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { ExplanationReview } from "@/components/explanation-review";
 import { TokenGate } from "@/components/token-gate";
 import { CheckCircle2, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -98,6 +99,7 @@ function ReviewBody({ headers }: { headers: Record<string, string> }) {
           </div>
         </Card>
       ))}
+      <ExplanationReview headers={headers} reviewer={reviewer} onMessage={setMessage} />
     </div>
   );
 }

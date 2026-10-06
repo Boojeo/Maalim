@@ -9,7 +9,7 @@ test("ask: in-scope question is answered with citations", async ({ page }) => {
   await page.getByLabel("Your question").fill("What are the steps of wudu?");
   await page.getByRole("button", { name: "Ask", exact: true }).click();
   await expect(page.getByText("About: Wudu (ablution)")).toBeVisible();
-  await expect(page.locator("details summary", { hasText: "[1]" }).first()).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Sources 1:/ }).first()).toBeVisible();
   await expect(page.getByText("We always answer with sources, never without.")).toBeVisible();
   await page.screenshot({ path: "design/screens/ask-answer.en.png", fullPage: true });
 });

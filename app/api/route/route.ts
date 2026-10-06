@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { limited } from "@/lib/api-guard";
 import { getStore } from "@/lib/data";
 import { retrieve } from "@/lib/retrieval";
 import { routeQuestion } from "@/lib/router";
@@ -13,6 +14,8 @@ export const dynamic = "force-dynamic";
 const Body = z.object({ question: z.string().min(1).max(500), lang: z.enum(["ar", "en"]) });
 
 export async function POST(req: Request) {
+  const tooMany = limited(req, "route", 60);
+  if (tooMany) return tooMany;
   const parsed = Body.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "invalid_request" }, { status: 400 });
   const { question, lang } = parsed.data;

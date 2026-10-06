@@ -14,6 +14,7 @@ import type {
   ItemStatus,
   Passage,
   ProgressEvent,
+  StudyResult,
   Referral,
   ReferralStatus,
   ReferralTexts,
@@ -153,6 +154,31 @@ export function createSupabaseStore(client?: SupabaseClient): DataStore {
     async listReferrals() {
       return (must(await db.from("referrals").select("*").order("created_at", { ascending: false })) as Row[]).map(
         (r) => r as unknown as Referral,
+      );
+    },
+    async listExplanations() {
+      return (must(await db.from("explanations_cache").select("*")) as Row[]).map((r) => r as unknown as CachedExplanation);
+    },
+    async setExplanationStatus(key: ExplanationKey, status, reviewer) {
+      const r = must(
+        await db
+          .from("explanations_cache")
+          .update({ status, reviewed_by: reviewer })
+          .eq("concept_id", key.concept_id)
+          .eq("level", key.level)
+          .eq("lang", key.lang)
+          .eq("query_hash", key.query_hash)
+          .select()
+          .maybeSingle(),
+      ) as Row | null;
+      return r ? (r as unknown as CachedExplanation) : null;
+    },
+    async addStudyResult(r: StudyResult) {
+      must(await db.from("study_results").insert(r));
+    },
+    async listStudyResults() {
+      return (must(await db.from("study_results").select("group_code,concept_id,pre_correct,pre_total,post_correct,post_total,day")) as Row[]).map(
+        (r) => r as unknown as StudyResult,
       );
     },
     async addEvent(e: ProgressEvent) {

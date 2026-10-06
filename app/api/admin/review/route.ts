@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { isAuthorized } from "@/lib/admin-auth";
+import { limited } from "@/lib/api-guard";
 import { getStore } from "@/lib/data";
 import { checkItem } from "@/lib/item-check";
 
@@ -8,6 +9,8 @@ export const dynamic = "force-dynamic";
 
 /** Draft items with their auto-check results (answerable from source span, verified source). */
 export async function GET(req: Request) {
+  const tooMany = limited(req, "admin", 120);
+  if (tooMany) return tooMany;
   // ?probe=1 answers 200 either way, so a locked page does not log a 401 in the browser console.
   if (new URL(req.url).searchParams.get("probe") === "1") return NextResponse.json({ authorized: isAuthorized(req, "ADMIN_TOKEN") });
   if (!isAuthorized(req, "ADMIN_TOKEN")) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
@@ -34,6 +37,8 @@ const Body = z.object({
 });
 
 export async function POST(req: Request) {
+  const tooMany = limited(req, "admin", 120);
+  if (tooMany) return tooMany;
   if (!isAuthorized(req, "ADMIN_TOKEN")) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   const parsed = Body.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "invalid_request" }, { status: 400 });

@@ -86,6 +86,13 @@ export async function explain(
   const key = { concept_id: concept.id, level: concept.level, lang: outLang, query_hash };
   const hit = await store.getCachedExplanation(key);
   const byId = new Map(passages.map((p) => [p.id, p]));
+  // Production option: only reviewer-approved generated explanations are shown; everything else is the verbatim source.
+  const requireApproved = process.env.EXPLAIN_REQUIRE_APPROVED === "1";
+  const verbatimResult = (cached: boolean, llm: ExplainResult["llm"] = null, dropped = 0, raw = 0, kept = 0): ExplainResult => ({
+    mode: "verbatim", conceptId: concept.id, lang: outLang, sentences: [], passages, droppedCount: dropped, rawSentences: raw,
+    keptSentences: kept, cached, llm, latencyMs: performance.now() - t0,
+  });
+  if (hit && (hit.status === "rejected" || (requireApproved && hit.status !== "approved"))) return verbatimResult(true);
   if (hit) {
     const cachedIds = hit.citations.map((c) => c.passage_id);
     const shown = cachedIds.map((id) => byId.get(id)).filter((p): p is Passage => !!p);
@@ -111,6 +118,14 @@ export async function explain(
     return { mode: "verbatim", conceptId: concept.id, lang: outLang, sentences: [], passages, droppedCount: g.dropped.length, rawSentences: g.sentences.length + g.dropped.length, keptSentences: g.sentences.length, cached: false, llm: llmInfo, latencyMs: performance.now() - t0 };
   }
 
+  if (requireApproved) {
+    // Cache the guarded text for the reviewer, but show only the verbatim source until it is approved.
+    await store.putCachedExplanation({
+      concept_id: concept.id, level: concept.level, lang: outLang, query_hash, text: JSON.stringify(g.sentences),
+      citations: [...new Set(g.sentences.flatMap((s) => s.passageIds))].map((id) => toCitation(byId.get(id)!)), status: "pending", created_at: new Date().toISOString(),
+    });
+    return verbatimResult(false, llmInfo, g.dropped.length, g.sentences.length + g.dropped.length, g.sentences.length);
+  }
   const citedIds = [...new Set(g.sentences.flatMap((s) => s.passageIds))];
   const cited = citedIds.map((id) => byId.get(id)!).filter(Boolean);
   await store.putCachedExplanation({

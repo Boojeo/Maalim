@@ -173,7 +173,10 @@
     "counts": "Draft {draft} · Approved {approved} · Rejected {rejected}",
     "unauthorized": "Enter the access token to continue.",
     "saved": "Saved",
-    "needName": "Enter your name before deciding."
+    "needName": "Enter your name before deciding.",
+    "explanations": "Generated explanations",
+    "explanationsHint": "Every sentence already cites a verified passage. Reject an explanation to show the verbatim source instead.",
+    "noExplanations": "No generated explanations yet."
   },
   "ask": {
     "title": "Ask a question",

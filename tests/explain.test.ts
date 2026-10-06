@@ -158,3 +158,38 @@ describe("explain()", () => {
     if (r.mode === "generated") for (const s of r.sentences) expect(P1 + " Each part of the sample procedure is repeated twice before moving on. SYNTHETIC TEST PASSAGE THREE. The sample note applies only to the synthetic fixture and has no other meaning.").toContain(s.text.replace(/\.$/, ""));
   });
 });
+
+describe("explanation review (approve / reject) and approved-only mode", () => {
+  const llm = () => stub("The sample procedure has three parts [1].\nEach part of the sample procedure is repeated twice [2].");
+
+  it("a rejected explanation is never shown again: the verbatim source is returned and the model is not re-called", async () => {
+    const l = llm();
+    await explain({ conceptId: "wudu", lang: "en" }, { store, llm: l });
+    const entries = await store.listExplanations();
+    expect(entries).toHaveLength(1);
+    await store.setExplanationStatus({ concept_id: "wudu", level: "L2", lang: "en", query_hash: entries[0].query_hash }, "rejected", "Reviewer");
+    const r = await explain({ conceptId: "wudu", lang: "en" }, { store, llm: l });
+    expect(r.mode).toBe("verbatim");
+    expect(r.sentences).toEqual([]);
+    expect(l.calls).toBe(1);
+    expect((await store.listExplanations())[0]).toMatchObject({ status: "rejected", reviewed_by: "Reviewer" });
+  });
+  it("EXPLAIN_REQUIRE_APPROVED=1: generated text stays hidden (verbatim shown) until a reviewer approves it", async () => {
+    process.env.EXPLAIN_REQUIRE_APPROVED = "1";
+    try {
+      const l = llm();
+      const first = await explain({ conceptId: "wudu", lang: "en" }, { store, llm: l });
+      expect(first.mode).toBe("verbatim");
+      const [entry] = await store.listExplanations();
+      expect(entry.status).toBe("pending");
+      expect(JSON.parse(entry.text)).toHaveLength(2); // saved for the reviewer
+      expect((await explain({ conceptId: "wudu", lang: "en" }, { store, llm: l })).mode).toBe("verbatim");
+      await store.setExplanationStatus({ concept_id: "wudu", level: "L2", lang: "en", query_hash: entry.query_hash }, "approved", "Reviewer");
+      const approved = await explain({ conceptId: "wudu", lang: "en" }, { store, llm: l });
+      expect(approved.mode).toBe("generated");
+      expect(l.calls).toBe(1);
+    } finally {
+      delete process.env.EXPLAIN_REQUIRE_APPROVED;
+    }
+  });
+});

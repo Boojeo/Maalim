@@ -29,9 +29,13 @@ test("unit flow: hook -> video with captions -> explanation with chips -> check 
   await expect(page.locator("span", { hasText: "The sample procedure has three parts" }).first()).toBeVisible();
   await expect(page.getByText("Every sentence comes from a verified source")).toBeVisible();
   await expect(page.getByText("SYNTHETIC UNVERIFIED")).toHaveCount(0);
-  await expect(page.locator("details summary", { hasText: "[1]" }).first()).toBeVisible();
-  await page.locator("details summary", { hasText: "[1]" }).first().click();
-  await expect(page.getByText("Verbatim source text").first()).toBeVisible();
+  const chip = page.getByRole("button", { name: /^Sources 1:/ }).first(); // the same passage can be cited by several sentences
+  await expect(chip).toBeVisible();
+  await expect(chip).toHaveAttribute("aria-expanded", "false");
+  await chip.click();
+  await expect(chip).toHaveAttribute("aria-expanded", "true");
+  await expect(page.getByText("Verbatim source text")).toBeVisible(); // one shared panel, not one per chip
+  await expect(page.getByText("HadeethEnc · SYN-1")).toBeVisible();
   await page.screenshot({ path: "design/screens/unit-explanation.en.png", fullPage: true });
 
   await page.getByRole("button", { name: "Next", exact: true }).click();

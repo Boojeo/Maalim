@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { limited } from "@/lib/api-guard";
 import { getStore } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +12,8 @@ const Body = z.object({
 
 /** Opt-in anonymous counters. Only sent if the learner switched sharing on; stores no identifier and only the day. */
 export async function POST(req: Request) {
+  const tooMany = limited(req, "events", 120);
+  if (tooMany) return tooMany;
   const parsed = Body.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "invalid_request" }, { status: 400 });
   const store = getStore();

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { CitationChip } from "@/components/citation-chip";
+import { CitedText } from "@/components/cited-text";
 import { ContentPending } from "@/components/content-pending";
 import type { ExplainResult } from "@/lib/explain";
 import type { Lang, Passage } from "@/lib/types";
@@ -64,10 +64,8 @@ export function ExplanationPanel({
     ) : (
       <div className="space-y-3">
         <p className="text-sm font-bold text-muted">{t("verbatimNote")}</p>
-        {passages.map((p, i) => (
-          <div key={p.id} lang={p.lang} dir={p.lang === "ar" ? "rtl" : "ltr"}>
-            {p.text} <CitationChip n={i + 1} passage={p} />
-          </div>
+        {passages.map((p) => (
+          <CitedText key={p.id} lang={p.lang} items={[{ text: p.text, ids: [p.id] }]} passages={[p]} showPassageText={false} />
         ))}
       </div>
     );
@@ -87,25 +85,12 @@ export function ExplanationPanel({
   if (r.mode === "none") return <ContentPending showRaw={showDev} raw="[CONTENT NEEDED: verified passages for this concept]" />;
   if (r.mode === "verbatim") return verbatim(r.passages);
 
-  const order = [...new Set(r.sentences.flatMap((s) => s.passageIds))];
-  const byId = new Map(r.passages.map((p) => [p.id, p]));
-  const dir = r.lang === "ar" ? "rtl" : "ltr";
   return (
-    <div className="space-y-3" lang={r.lang} dir={dir}>
+    <div className="space-y-3">
       <p className="text-sm font-bold text-muted" lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
         {t("generatedNote")}
       </p>
-      <div className="leading-loose">
-        {r.sentences.map((s, i) => (
-          <span key={i}>
-            {s.text}{" "}
-            {s.passageIds.map((id) => {
-              const p = byId.get(id);
-              return p ? <CitationChip key={id} n={order.indexOf(id) + 1} passage={p} /> : null;
-            })}{" "}
-          </span>
-        ))}
-      </div>
+      <CitedText lang={r.lang} items={r.sentences.map((s) => ({ text: s.text, ids: s.passageIds }))} passages={r.passages} />
     </div>
   );
 }

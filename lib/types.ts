@@ -124,8 +124,21 @@ export interface CachedExplanation {
   query_hash: string;
   text: string;
   citations: Citation[];
-  status: "pending" | "approved";
+  /** pending = generated, awaiting a reviewer; approved / rejected = reviewer decision. */
+  status: "pending" | "approved" | "rejected";
+  reviewed_by?: string | null;
   created_at: string;
+}
+
+/** One finished A/B study run (anonymous; pre and post share a row, so no id is needed). */
+export interface StudyResult {
+  group_code: "A" | "B";
+  concept_id: string;
+  pre_correct: number;
+  pre_total: number;
+  post_correct: number;
+  post_total: number;
+  day: string;
 }
 
 export type ReferralStatus = "new" | "seen" | "closed";

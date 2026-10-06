@@ -12,6 +12,7 @@ import type {
   Item,
   Passage,
   ProgressEvent,
+  StudyResult,
   Referral,
   ReferralStatus,
   ReferralTexts,
@@ -26,9 +27,10 @@ interface Runtime {
   explanations: CachedExplanation[];
   referrals: Referral[];
   events: ProgressEvent[];
+  study: StudyResult[];
 }
 
-const emptyRuntime = (): Runtime => ({ itemOverrides: {}, extraItems: [], explanations: [], referrals: [], events: [] });
+const emptyRuntime = (): Runtime => ({ itemOverrides: {}, extraItems: [], explanations: [], referrals: [], events: [], study: [] });
 
 function dataDir(): string {
   if (process.env.LOCAL_DATA_DIR) return process.env.LOCAL_DATA_DIR;
@@ -153,6 +155,28 @@ export function createLocalStore(contentDir = process.env.CONTENT_DIR ?? path.jo
     },
     async listReferrals() {
       return loadRuntime().referrals.slice().sort((a, b) => b.created_at.localeCompare(a.created_at));
+    },
+    async listExplanations() {
+      return loadRuntime().explanations;
+    },
+    async setExplanationStatus(key: ExplanationKey, status, reviewer) {
+      const rt = loadRuntime();
+      const e = rt.explanations.find(
+        (x) => x.concept_id === key.concept_id && x.level === key.level && x.lang === key.lang && x.query_hash === key.query_hash,
+      );
+      if (!e) return null;
+      e.status = status;
+      e.reviewed_by = reviewer;
+      saveRuntime(rt);
+      return e;
+    },
+    async addStudyResult(r) {
+      const rt = loadRuntime();
+      rt.study.push(r);
+      saveRuntime(rt);
+    },
+    async listStudyResults() {
+      return loadRuntime().study;
     },
     async addEvent(e) {
       const rt = loadRuntime();

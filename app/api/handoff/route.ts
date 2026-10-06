@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { limited } from "@/lib/api-guard";
 import { getStore } from "@/lib/data";
 import { HandoffBody, findIdentifier } from "@/lib/handoff";
 
@@ -9,6 +10,8 @@ export const dynamic = "force-dynamic";
  * a concept, a level, a one-way question hash and the consented text. Obvious contact details are refused.
  */
 export async function POST(req: Request) {
+  const tooMany = limited(req, "handoff", 6);
+  if (tooMany) return tooMany;
   const parsed = HandoffBody.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "invalid_request" }, { status: 400 });
   const { conceptId, level, questionHash, summary } = parsed.data;

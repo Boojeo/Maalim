@@ -7,6 +7,7 @@ import type {
   Lang,
   Passage,
   ProgressEvent,
+  StudyResult,
   Referral,
   ReferralStatus,
   ReferralTexts,
@@ -39,9 +40,13 @@ export interface DataStore {
   getReferralTexts(): Promise<ReferralTexts>;
   getCachedExplanation(key: ExplanationKey): Promise<CachedExplanation | null>;
   putCachedExplanation(entry: CachedExplanation): Promise<void>;
+  listExplanations(): Promise<CachedExplanation[]>;
+  setExplanationStatus(key: ExplanationKey, status: "approved" | "rejected", reviewer: string): Promise<CachedExplanation | null>;
   addReferral(r: Omit<Referral, "id" | "created_at" | "status">): Promise<Referral>;
   listReferrals(): Promise<Referral[]>;
   setReferralStatus(id: string, status: ReferralStatus): Promise<void>;
   addEvent(e: ProgressEvent): Promise<void>;
   listEvents(): Promise<ProgressEvent[]>;
+  addStudyResult(r: StudyResult): Promise<void>;
+  listStudyResults(): Promise<StudyResult[]>;
 }
