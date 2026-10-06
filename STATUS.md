@@ -162,3 +162,7 @@ Each phase ends with lint + typecheck + tests, a commit, a push, and a STATUS up
 - **Reviewer pack:** `review/WUDU_REVIEW.pdf` (`npm run review:wudu`): 15 verbatim candidate hadith to tick, clip steps/timestamps, the questions, every draft caption line with a correction column, and a permission/sign-off block.
 - **Bug fixed:** the e2e teardown deleted the whole `public/videos/captions/` folder, which silently removed the real captions from my previous commit. Captions restored; teardown now removes only its own files.
 - **To go live:** Vercel → Environment Variables: `DEMO_CONTENT=1`, `ADMIN_TOKEN`, `MENTOR_TOKEN`; redeploy. Screens: `design/screens/demo/`.
+
+## Update 2026-10-06 (8): map order
+- Wudu is the first landmark; future-work topics follow it as plain, non-clickable dashed cards (map and /learn list). The unit's "next landmark" skips future topics. `/learn/<future>` still shows the Future-work page if opened by URL.
+- The Sharia reviewer reported (verbally, via the owner) that the wudu demo is good. **Not recorded in the repo**: no reviewer name or sign-off scope was given, so nothing was marked verified and the caption `NOTE DRAFT` markers stay (they only show in DEMO mode).

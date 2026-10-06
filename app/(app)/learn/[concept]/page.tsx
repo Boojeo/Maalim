@@ -63,7 +63,7 @@ export default async function UnitPage({ params }: { params: Promise<{ concept: 
 
   const ordered = [...curriculum.concepts].sort((a, b) => a.order - b.order);
   const idx = ordered.findIndex((c) => c.id === id);
-  const nextC = ordered[idx + 1] ?? null;
+  const nextC = ordered.slice(idx + 1).find((c) => c.availability !== "future") ?? null;
 
   return (
     <>

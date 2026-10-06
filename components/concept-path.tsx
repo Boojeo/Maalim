@@ -8,6 +8,19 @@ import { useProgress } from "@/lib/progress-client";
 import { cn } from "@/lib/utils";
 import type { Concept, Lang } from "@/lib/types";
 
+/** A link for built landmarks; a plain, non-interactive card for future work. */
+function Wrapper({ href, className, children, ...rest }: { href?: string; className?: string; children: React.ReactNode; "data-status"?: string }) {
+  return href ? (
+    <Link href={href} className={className} {...rest}>
+      {children}
+    </Link>
+  ) : (
+    <div className={className} {...rest}>
+      {children}
+    </div>
+  );
+}
+
 const ICON = { locked: Lock, available: Play, in_progress: Play, done: Check } as const;
 
 /** Vertical path of landmarks (F1). Locked landmarks stay tappable: the unit shows a calm "builds on" note. */
@@ -16,7 +29,7 @@ export function ConceptPath({ concepts }: { concepts: Concept[] }) {
   const locale = useLocale() as Lang;
   const { state } = useProgress();
   const name = (c: Concept) => (locale === "ar" ? c.title_ar : c.title_en);
-  const ordered = [...concepts].sort((a, b) => a.order - b.order);
+  const ordered = [...concepts].sort((a, b) => Number(a.availability === "future") - Number(b.availability === "future") || a.order - b.order);
   const byId = new Map(concepts.map((c) => [c.id, c]));
   const next = recommend(concepts, state).primary;
   const hasFuture = concepts.some((c) => c.availability === "future");
@@ -54,9 +67,9 @@ export function ConceptPath({ concepts }: { concepts: Concept[] }) {
                 </span>
                 {idx < ordered.length - 1 ? <span aria-hidden className="mt-1 w-0.5 flex-1 bg-line" /> : null}
               </div>
-              <Link
-                href={`/learn/${c.id}`}
-                data-status={status}
+              <Wrapper
+                href={future ? undefined : `/learn/${c.id}`}
+                data-status={future ? "future" : status}
                 className={cn(
                   "mb-1 block min-h-11 flex-1 rounded-[var(--radius-card)] border-[3px] bg-surface p-4",
                   future ? "border-dashed border-line" : status === "locked" ? "border-line" : "border-outline shadow-hard",
@@ -76,7 +89,7 @@ export function ConceptPath({ concepts }: { concepts: Concept[] }) {
                     {t("after", { list: prereqText })}
                   </span>
                 ) : null}
-              </Link>
+              </Wrapper>
             </li>
           );
         })}
