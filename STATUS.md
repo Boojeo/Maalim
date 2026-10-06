@@ -127,3 +127,12 @@ Each phase ends with lint + typecheck + tests, a commit, a push, and a STATUS up
 - Option C applied across the app (see above). 145 unit tests, 37 e2e tests (axe on 10 pages × ar/en) pass.
 - The environment's network policy now allows hadeethenc.com, quranenc.com and youtube.com (checked from this session).
 
+## Update 2026-10-06 (5): passages tooling, candidates, credits
+- **Network is open** (hadeethenc.com, quranenc.com, youtube.com reachable). Node's `fetch` ignores the proxy by default, so the source scripts call `enableEnvProxy()` (undici).
+- **Source clients** (`lib/sources.ts`, tested with a fake API, 6 tests): HadeethEnc category listing/items and QuranEnc ayat, copied **byte-for-byte** (tests assert odd whitespace and quotes survive), always `verified: false`, ids like `wudu-hd3313-en`.
+- **Candidates fetched, not chosen:** `npm run fetch:candidates -- --all` wrote `content/intake/candidates/<concept>.json` (15 per concept, 90 total: Arabic + English text, attribution, grade, link), listed from the source site's own folders in the site's own order (`content/intake/source-categories.json`). The assistant did not select, rank or filter by meaning. `review/CANDIDATE_PASSAGES.pdf` (52 pages) lets the Sharia reviewer tick which to use per topic.
+- **After the reviewer ticks:** `npm run import:source -- --concept wudu --level L2 --hadeethenc 3313,8375` (or `--quranenc <translation_key> --refs 112:1-4` with references the reviewer gives) → unverified passages → reviewer checks each against its link → `npm run verify:passages -- --by "Name" --ids …` → `npm run check:content`. Still **no passage is verified or imported**: `content/passages.json` is unchanged.
+- **Creator credits** for the three YouTube videos were filled from YouTube's public oEmbed channel names (no video downloaded). **Permission is still `pending`** for all.
+- **Video blocked here:** YouTube returns "Sign in to confirm you're not a bot" for this server (datacenter IP); I will not work around that. The video must be processed on the owner's PC (the downloaded file is there): `scripts/windows/make-wudu-clips.ps1` for the clips, then captions (`yt-dlp --write-subs`/manual) + `npm run split:captions -- wudu-main`.
+- **Checks:** lint, typecheck, 151 unit tests pass (e2e unchanged and passing as of the previous update).
+

@@ -1,0 +1,9 @@
+{
+  "_note": "Convenience map: which HadeethEnc category folders to LIST candidates from, per concept (matched by the site's own category titles). The assistant does not choose passages: the Sharia reviewer selects which candidates to use. Edit freely; find ids with: npx tsx scripts/fetch-candidates.ts --list-categories <regex>",
+  "wudu": [444, 441, 442],
+  "salah": [464, 461, 460],
+  "shahada": [88],
+  "five-pillars": [88],
+  "tawhid": [72, 73],
+  "quran": [12, 78]
+}

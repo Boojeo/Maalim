@@ -3,22 +3,13 @@
 import { execSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
-import { chromium } from "@playwright/test";
+import { esc, table, writePack } from "../lib/review-html";
 import { loadRouterCases } from "../lib/router-eval";
 import { loadRules, routeQuestion } from "../lib/router";
 import type { Curriculum, Passage, ReferralFile, Unit, VideoEntry } from "../lib/types";
 
 const root = process.cwd();
 const read = <T,>(f: string): T => JSON.parse(fs.readFileSync(path.join(root, f), "utf8")) as T;
-const esc = (s: unknown) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-const isAr = (s: string) => /[؀-ۿ]/.test(s);
-const cell = (s: unknown) => `<td${isAr(String(s)) ? ' dir="rtl" lang="ar"' : ""}>${esc(s)}</td>`;
-const decision = '<td class="dec">☐ Approve &nbsp; ☐ Edit &nbsp; ☐ Reject<br><br>Note:</td>';
-const table = (head: string[], rows: string[][], withDecision = false) =>
-  `<table><thead><tr>${head.map((h) => `<th>${esc(h)}</th>`).join("")}${withDecision ? "<th>Decision</th>" : ""}</tr></thead><tbody>${rows
-    .map((r) => `<tr>${r.map(cell).join("")}${withDecision ? decision : ""}</tr>`)
-    .join("")}</tbody></table>`;
-
 const cur = read<Curriculum>("content/curriculum.json");
 const units = read<{ units: Unit[] }>("content/units.json").units;
 const refs = read<ReferralFile>("content/referrals.json");
@@ -87,7 +78,7 @@ sections.push(`<h2>D. Video clips</h2><p>Rule: a clip is shown only with the cre
     (v.steps.length ? table(["Step", "Key", "Label", "From", "To", "Used", "Note"], v.steps.map((s) => [String(s.n), s.key, s.label_en, s.start, s.end, s.use ? "yes" : "no", s.note ?? ""]), true) : "<p>No steps (shown whole or reference only).</p>")).join(""));
 
 sections.push(`<h2>E. Source passages (the only text the app quotes and cites)</h2>
-<p>Each passage must be exactly as published at its source. Check the text against the link, then approve. ${passages.filter((p) => !p.text.startsWith("[CONTENT NEEDED")).length === 0 ? "<strong>No real passage has been added yet</strong>: the table lists the placeholders waiting to be filled." : ""}</p>` +
+<p>Each passage must be exactly as published at its source. Check the text against the link, then approve. A separate file, <strong>CANDIDATE_PASSAGES.pdf</strong>, lists candidate hadith (Arabic + English, verbatim) for you to choose from. ${passages.filter((p) => !p.text.startsWith("[CONTENT NEEDED")).length === 0 ? "<strong>No real passage has been added yet</strong>: the table lists the placeholders waiting to be filled." : ""}</p>` +
   table(["id", "Concept", "Lang", "Source · ID", "Link", "Text (verbatim)", "Verified now"],
     passages.map((p) => [p.id, p.concept_id, p.lang, `${p.source} · ${p.source_id}`, p.source_url, p.text, p.verified ? `yes (${p.verified_by})` : "no"]), true) +
   `<p class="note">After you approve, the team runs <code>verify:passages --by "Your name"</code>. Only then can learners see a passage.</p>`);
@@ -100,29 +91,7 @@ sections.push(`<h2>F. What your approval unlocks</h2>` + table(["You approve", "
   ["Video (D)", "set permission, credit and timestamps in content/videos.json", "The clip plays with captions"],
 ]));
 
-const font = (w: number, subset: string) => `@font-face{font-family:"Plex";font-weight:${w};src:url("file://${root}/node_modules/@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-${subset}-${w}-normal.woff2") format("woff2");unicode-range:${subset === "arabic" ? "U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF" : "U+0000-00FF"};}`;
-const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Ma'ālim review pack</title><style>
-${[400, 700].flatMap((w) => [font(w, "arabic"), font(w, "latin")]).join("\n")}
-@page{size:A4;margin:14mm}
-body{font-family:"Plex",system-ui,sans-serif;font-size:10.5pt;line-height:1.5;color:#1F2933}
-h1{color:#0F5E5A;font-size:20pt}h2{color:#0F5E5A;border-bottom:2px solid #C9A24B;padding-bottom:3px;margin-top:22px;page-break-after:avoid}h3{margin-bottom:4px;page-break-after:avoid}
-table{border-collapse:collapse;width:100%;margin:6px 0 14px;font-size:9pt}th,td{border:1px solid #bbb;padding:4px 6px;vertical-align:top;text-align:start}th{background:#f1ece2}
-td[dir=rtl]{font-size:10.5pt}.dec{width:120px;font-size:8.5pt;color:#444}.box{border:2px solid #0F5E5A;border-radius:8px;padding:6px 12px}.meta,.note{color:#52606D}
-tr{page-break-inside:avoid}code{background:#f1ece2;padding:0 3px}
-</style></head><body>${sections.join("\n")}</body></html>`;
-
-const out = path.join(root, "review");
-fs.mkdirSync(out, { recursive: true });
-fs.writeFileSync(path.join(out, "REVIEW_PACK.html"), html);
-
-async function main() {
-  const exe = "/opt/pw-browsers/chromium-1194/chrome-linux/chrome";
-  const browser = await chromium.launch({ executablePath: fs.existsSync(exe) ? exe : undefined });
-  const page = await browser.newPage();
-  await page.goto(`file://${path.join(out, "REVIEW_PACK.html")}`);
-  await page.evaluate(() => document.fonts.ready);
-  await page.pdf({ path: path.join(out, "REVIEW_PACK.pdf"), format: "A4", printBackground: true, margin: { top: "14mm", bottom: "14mm", left: "12mm", right: "12mm" } });
-  await browser.close();
-  console.log("wrote review/REVIEW_PACK.html and review/REVIEW_PACK.pdf");
-}
-main();
+writePack("REVIEW_PACK", "Ma'ālim review pack", sections.join("\n")).catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

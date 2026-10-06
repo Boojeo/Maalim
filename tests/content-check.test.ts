@@ -29,7 +29,7 @@ describe("content integrity gate (runs before production builds)", () => {
     expect(checkContent(dir).join("\n")).toContain("approved but");
   });
   it("fails when a video is granted without a creator credit", () => {
-    const dir = copy((f) => { f.videos.videos[0].permission = "granted"; });
+    const dir = copy((f) => { f.videos.videos[0].permission = "granted"; f.videos.videos[0].creator_credit = "TODO: creator"; });
     expect(checkContent(dir).join("\n")).toContain("creator credit");
   });
   it("detects prerequisite cycles and unknown prerequisites", () => {

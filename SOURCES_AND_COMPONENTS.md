@@ -26,4 +26,8 @@
 | Eval sets (`eval/router.jsonl`, `eval/router_extra.jsonl`, `eval/explain.jsonl`) | Test data | starter pack + implementer | Router and explainer evaluation. Labels are drafts without a Sharia reviewer; extra cases are implementer-written | 2026-10-04 | Project licence; review pending |
 | Supabase migrations (`supabase/migrations`) | Code (ours) | this repo | Schema, RLS, pgvector search function | 2026-10-04 | Project licence |
 | Hosted LLM / embedding provider | Model/API | NOT CHOSEN | Adapters exist for OpenAI-compatible, Anthropic and ALLaM endpoints; no key is configured, so the mock adapters were used for all numbers in EVAL.md | | TO CONFIRM when a key is set |
+| HadeethEnc API (hadeethenc.com/api/v1) | Content source | hadeethenc.com | Candidate hadith and, once a reviewer selects and verifies them, cited passages; fetched verbatim by `scripts/fetch-candidates.ts` / `import-from-source.ts` (2026-10-06). Licence/terms of use: TO CONFIRM with the site | 2026-10-06 | TO CONFIRM |
+| QuranEnc API (quranenc.com/api/v1) | Content source | quranenc.com | Verbatim ayah text/translation for references chosen by the reviewer (importer ready, nothing imported yet) | 2026-10-06 | TO CONFIRM |
+| YouTube oEmbed (public) | Metadata | youtube.com | Channel names used for `creator_credit` of the three listed videos (no video was downloaded) | 2026-10-06 | n/a (metadata only) |
+| undici | Library (dev) | npm | Lets Node scripts use the sandbox proxy | 2026-10-06 | MIT |
 
