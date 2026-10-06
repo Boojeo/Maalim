@@ -13,3 +13,9 @@ tsconfig.tsbuildinfo
 next-env.d.ts
 /test-results/
 .data/
+
+# Windows tool binaries
+/ffmpeg.exe
+/ffplay.exe
+/ffprobe.exe
+/yt-dlp.exe

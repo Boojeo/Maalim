@@ -141,3 +141,16 @@ Each phase ends with lint + typecheck + tests, a commit, a push, and a STATUS up
 - Six wudu step clips cut (all < 8 MB), step timestamps tightened to about +/-1.5 s (mouth-nose, face, head, feet adjusted; head now includes the ears).
 - Arabic + English captions exist but are **unchecked machine drafts** (Whisper large-v3, dialect speech, visible errors): a person must correct every cue.
 - **Owner override:** at the owner's instruction `wudu-main` has `permission: "granted"` and `timestamps_verified: true` for now. This is NOT the creator's written permission nor the Sharia reviewer's check; revert to `pending` / `false` if they are not obtained. Details: `review/VIDEO_WORK_2026-10-06.md`.
+
+## Update 2026-10-06 (6): finalization pass
+- **Merged `video/wudu-clips`** (6 step clips, all < 8 MB, plus draft AR/EN captions, tightened timestamps). `content/videos.json` has `wudu-main` as `permission: granted` / `timestamps_verified: true` by the **owner's explicit temporary override** (see `review/VIDEO_WORK_2026-10-06.md`). Neither is a confirmation from the creator or the Sharia reviewer.
+- **Safety gate added:** captions are machine drafts (`NOTE DRAFT`, some English lines are wrong, e.g. the arms step). They are treated like unverified content: `lib/videos.ts` hides draft captions from learners (clip stays blocked as "missing captions") unless `DEV_ALLOW_UNVERIFIED=1` outside production. A person corrects each cue and deletes the `NOTE DRAFT` line; the clip then plays. Test added.
+- `.gitignore` now covers the Windows tool binaries (`ffmpeg.exe`, `yt-dlp.exe`, …).
+- **Checks:** lint, typecheck, 152 unit tests, `check:content`, `next build`, 37 e2e tests pass.
+
+### What is left before submission (people / keys, not code)
+1. **Passages:** Sharia reviewer ticks candidates (`review/CANDIDATE_PASSAGES.pdf`) → `npm run import:source …` → `npm run verify:passages -- --by "Name" --ids …`. Until then learners see the "content pending review" state; nothing religious is shown.
+2. **Unit wording, referral wording, check questions, misconception/fix text:** reviewer approves drafts (`npm run verify:content -- units|referrals --by "Name"`); the last two are human-supplied.
+3. **Wudu clip:** correct AR/EN captions and remove `NOTE DRAFT`; get the creator's written permission and the reviewer's timestamp check, or set `permission` back to `pending`.
+4. **Env vars on Vercel:** `LLM_*`, `EMBEDDING_*`, `SUPABASE_*` (migrations 0001–0003), `ADMIN_TOKEN`, `MENTOR_TOKEN`; then `npm run seed`, `npm run eval` for real-model numbers. Without them the mock adapters and local fallback run.
+5. Optional items (pgvector queries, more router cases, wudu-workplace clip) intentionally left.

@@ -1,8 +1,9 @@
 // Resolves which clip files exist for a video entry. A clip is playable only if permission is
-// "granted" (CLAUDE.md rule 9), the file exists, and at least one caption track exists.
+// "granted" (CLAUDE.md rule 9), the file exists, and at least one checked caption track exists
+// (captions marked "NOTE DRAFT" are hidden from learners until a person removes the marker).
 import fs from "node:fs";
 import path from "node:path";
-import { isPlayableVideo } from "./content-gate";
+import { isPlayableVideo, unverifiedAllowed } from "./content-gate";
 import type { Lang, VideoEntry } from "./types";
 
 export type VideoBlock = "permission" | "missing-file" | "missing-captions" | null;
@@ -27,6 +28,15 @@ export interface ResolvedVideo {
   clips: ResolvedClip[];
 }
 
+/** Machine/unchecked captions carry a "NOTE DRAFT" line; they count as unverified (CLAUDE.md rule 2 spirit). */
+function isDraftCaption(file: string): boolean {
+  try {
+    return /^NOTE\s+DRAFT/m.test(fs.readFileSync(file, "utf8").slice(0, 600));
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Files, relative to public/:
  *  - step clip:   videos/<id>_<n>_<key>.mp4  + videos/captions/<id>_<n>_<key>.<ar|en>.vtt
@@ -35,13 +45,17 @@ export interface ResolvedVideo {
  * Captions are per clip because step clips are cut from a longer video: a caption file for the whole
  * video would be out of sync with every step clip (scripts/split-captions.ts produces the per-clip files).
  */
-export function resolveVideo(v: VideoEntry, publicDir = path.join(process.cwd(), "public")): ResolvedVideo {
+export function resolveVideo(
+  v: VideoEntry,
+  publicDir = path.join(process.cwd(), "public"),
+  allowDraftCaptions = unverifiedAllowed(),
+): ResolvedVideo {
   const exists = (rel: string) => fs.existsSync(path.join(publicDir, rel));
   const captionsFor = (base: string): Partial<Record<Lang, string>> => {
     const out: Partial<Record<Lang, string>> = {};
     for (const lang of ["ar", "en"] as const) {
       const rel = `/videos/captions/${base}.${lang}.vtt`;
-      if (exists(rel)) out[lang] = rel;
+      if (exists(rel) && (allowDraftCaptions || !isDraftCaption(path.join(publicDir, rel)))) out[lang] = rel;
     }
     return out;
   };

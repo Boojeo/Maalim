@@ -51,6 +51,13 @@ describe("resolveVideo", () => {
     expect(r.credit).toBe("Someone");
     expect(resolveVideo(video({ creator_credit: "TODO: x" }), pub([])).creditPending).toBe(true);
   });
+  it("draft (machine) captions are hidden from learners and shown only when unverified content is allowed", () => {
+    const dir = pub(["videos/v_1_hands.mp4"]);
+    fs.mkdirSync(path.join(dir, "videos/captions"), { recursive: true });
+    fs.writeFileSync(path.join(dir, "videos/captions/v_1_hands.en.vtt"), "WEBVTT\n\nNOTE DRAFT, unchecked\n\n00:00:00.000 --> 00:00:01.000\nx\n");
+    expect(resolveVideo(video(), dir, false).blocked).toBe("missing-captions");
+    expect(resolveVideo(video(), dir, true).blocked).toBeNull();
+  });
   it("in the repo's real videos.json every video whose permission is not 'granted' is blocked", async () => {
     const { createLocalStore } = await import("@/lib/data/local");
     const vids = await createLocalStore().getVideos("wudu");
