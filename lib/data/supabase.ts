@@ -5,7 +5,7 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import fs from "node:fs";
 import path from "node:path";
 import { getEnv } from "../env";
-import { isLearnerItem, isLearnerPassage } from "../content-gate";
+import { isLearnerItem, isLearnerPassage, releaseReferralTexts } from "../content-gate";
 import type {
   CachedExplanation,
   Concept,
@@ -16,8 +16,8 @@ import type {
   ProgressEvent,
   StudyResult,
   Referral,
+  ReferralFile,
   ReferralStatus,
-  ReferralTexts,
   Stage,
   VideoEntry,
 } from "../types";
@@ -129,8 +129,8 @@ export function createSupabaseStore(client?: SupabaseClient): DataStore {
       ) as Row | null;
       return r ? toItem(r) : null;
     },
-    async getReferralTexts(): Promise<ReferralTexts> {
-      return readFile<{ referrals: ReferralTexts }>("referrals.json").referrals;
+    async getReferralTexts() {
+      return releaseReferralTexts(readFile<ReferralFile>("referrals.json"));
     },
     async getCachedExplanation(key: ExplanationKey) {
       const r = must(

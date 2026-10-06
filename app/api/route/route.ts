@@ -29,7 +29,7 @@ export async function POST(req: Request) {
   let referralText: string | null = null;
   if (decision.handoff) {
     const texts = await getStore().getReferralTexts();
-    const t = (decision.level === "L3" ? texts.L3 : decision.reason === "no-reference" ? texts.out_of_scope : texts.L4)[lang];
+    const t = (decision.urgent ? texts.crisis : decision.level === "L3" ? texts.L3 : decision.reason === "no-reference" ? texts.out_of_scope : texts.L4)[lang];
     referralText = t && !isPlaceholder(t) ? t : null; // placeholders never reach the learner
   }
 

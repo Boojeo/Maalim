@@ -1,6 +1,6 @@
 // The single place that decides what a learner may see (CLAUDE.md rules 2, 7, 9).
 import { getEnv } from "./env";
-import { isPlaceholder, type Item, type Passage, type Unit, type VideoEntry } from "./types";
+import { isPlaceholder, type Item, type Lang, type Passage, type ReferralFile, type ReferralTexts, type Unit, type VideoEntry } from "./types";
 
 /** Unverified content is visible only outside production AND with DEV_ALLOW_UNVERIFIED=1. */
 export function unverifiedAllowed(): boolean {
@@ -30,6 +30,15 @@ export function isLearnerItem(
 
 export function isLearnerUnit(u: Unit, allowUnverified = unverifiedAllowed()): boolean {
   return allowUnverified || u.verified;
+}
+
+/** Hand-off wording reaches learners only after a named reviewer verified it; otherwise empty strings (the UI uses its neutral built-in default). */
+export function releaseReferralTexts(file: ReferralFile, allowUnverified = unverifiedAllowed()): ReferralTexts {
+  const released = allowUnverified || (file.verified && !!file.reviewed_by);
+  const blank = { ar: "", en: "" } as Record<Lang, string>;
+  const pick = (t: Record<Lang, string> | undefined) => (released && t ? { ar: isPlaceholder(t.ar) ? "" : t.ar, en: isPlaceholder(t.en) ? "" : t.en } : blank);
+  const r = file.referrals;
+  return { L3: pick(r.L3), L4: pick(r.L4), out_of_scope: pick(r.out_of_scope), crisis: pick(r.crisis) };
 }
 
 /** A clip may be played only if permission is granted (CLAUDE.md rule 9). */

@@ -16,6 +16,11 @@ ALLaM endpoint, mock). Embeddings through lib/embeddings.ts (multilingual model,
    yourself. All religious content comes from /content/*.json (verified, reviewed by a person).
    If content is missing: use a clearly marked placeholder ("[CONTENT NEEDED: ...]"), list it
    in STATUS.md, and continue with other work.
+   **Owner decision (2026-10-06):** Claude may DRAFT neutral learner-facing wording that makes no religious claim
+   (unit hook questions, hand-off and crisis wording) so the Sharia reviewer can edit and approve it. Drafts are stored
+   with `verified: false` and never reach learners until a named reviewer verifies them. Quotations (Quran, hadith),
+   rulings, "misconception and fix" text, source selection and anything that states what Islam says remain human-supplied;
+   passages may be fetched verbatim from the official source APIs by code, as unverified, never written by the model.
 2. Passages with "verified": false must never reach a learner. They are visible only when
    DEV_ALLOW_UNVERIFIED=1, with a permanent red "UNVERIFIED CONTENT" banner. A production
    build must fail if any shown passage is unverified.

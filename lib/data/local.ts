@@ -5,7 +5,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
-import { isLearnerItem, isLearnerPassage } from "../content-gate";
+import { isLearnerItem, isLearnerPassage, releaseReferralTexts } from "../content-gate";
 import type {
   CachedExplanation,
   Curriculum,
@@ -14,8 +14,8 @@ import type {
   ProgressEvent,
   StudyResult,
   Referral,
+  ReferralFile,
   ReferralStatus,
-  ReferralTexts,
   Unit,
   VideoEntry,
 } from "../types";
@@ -119,7 +119,7 @@ export function createLocalStore(contentDir = process.env.CONTENT_DIR ?? path.jo
       return allItems().find((i) => i.id === id) ?? null;
     },
     async getReferralTexts() {
-      return read<{ referrals: ReferralTexts }>("referrals.json").referrals;
+      return releaseReferralTexts(read<ReferralFile>("referrals.json"));
     },
     async getCachedExplanation(key: ExplanationKey) {
       return (

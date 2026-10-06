@@ -1,17 +1,24 @@
 {
-  "_note": "Referral text shown to the learner for L3 (refer) and L4 (abstain). CONTENT_TODO #7: Mohammed must write these. Placeholders only.",
+  "_note": "DRAFT hand-off wording (drafted by Claude on the owner's instruction, 2026-10-06). It makes no religious claim and never answers the question. NOT shown to learners until a named Sharia reviewer edits/approves it and sets verified=true (npx tsx scripts/verify-content.ts referrals --by \"Name\"). Until then the app uses its own built-in neutral default wording.",
+  "verified": false,
+  "reviewed_by": null,
+  "drafted_by": "claude (draft)",
   "referrals": {
     "L3": {
-      "ar": "[CONTENT NEEDED: L3 referral text, Arabic]",
-      "en": "[CONTENT NEEDED: L3 referral text, English]"
+      "ar": "هذا السؤال لا نجيب عنه بأنفسنا. يمكن لشخص مؤهَّل أن ينظر فيه معك، ويسعدنا أن نحوّله إلى مرشد.",
+      "en": "This is a question we do not answer ourselves. A qualified person can look at it with you, and we can pass it to a mentor."
     },
     "L4": {
-      "ar": "[CONTENT NEEDED: L4 referral text, Arabic]",
-      "en": "[CONTENT NEEDED: L4 referral text, English]"
+      "ar": "هذا الأمر يتعلق بحالتك الخاصة، ولا نجيب عنه بأنفسنا. أنت تستحق أن يستمع إليك شخص حقيقي، ويمكننا تحويله إلى مرشد.",
+      "en": "This is about your own situation, so we do not answer it ourselves. You deserve to be heard by a real person, and we can pass it to a mentor."
     },
     "out_of_scope": {
-      "ar": "[CONTENT NEEDED: out-of-scope text, Arabic]",
-      "en": "[CONTENT NEEDED: out-of-scope text, English]"
+      "ar": "هذا خارج ما يمكننا الإجابة عنه من مصادرنا الموثّقة. يمكن لشخص أن يساعدك فيه.",
+      "en": "This is outside what we can answer from our verified sources. A person can help you with it."
+    },
+    "crisis": {
+      "ar": "يبدو أن الأمر ثقيل عليك الآن. أنت تستحق دعمًا من شخص حقيقي. إذا كنت في خطر فتواصل الآن مع خدمات الطوارئ في بلدك أو مع شخص تثق به.",
+      "en": "It sounds like things are heavy right now. You deserve support from a real person. If you may be in danger, please contact local emergency services or someone you trust right now."
     }
   }
 }

@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const pages = ["/", "/learn", "/learn/wudu", "/practise", "/ask", "/me", "/study", "/demo", "/dev"];
+const pages = ["/", "/learn", "/learn/wudu", "/practise", "/ask", "/me", "/study", "/demo", "/dev", "/dev/ui-options"];
 
 for (const locale of ["ar", "en"] as const) {
   test.describe(`accessibility (${locale}, 360px)`, () => {

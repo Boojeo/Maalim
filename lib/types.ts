@@ -158,6 +158,14 @@ export interface ReferralTexts {
   L3: Record<Lang, string>;
   L4: Record<Lang, string>;
   out_of_scope: Record<Lang, string>;
+  crisis: Record<Lang, string>;
+}
+
+/** content/referrals.json: wording is only released to learners once a named reviewer has verified it. */
+export interface ReferralFile {
+  verified: boolean;
+  reviewed_by: string | null;
+  referrals: ReferralTexts;
 }
 
 /** Anonymous, opt-in progress counters. No identifiers, no timestamps finer than a day. */

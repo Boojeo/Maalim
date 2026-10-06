@@ -17,7 +17,7 @@ A guided, video-based learning journey for new Muslims, with grounded explanatio
 | F7 | Ask → handoff with preview before sending → mentor dashboard (anonymous) | `/ask`, `/mentor` |
 | F8 | Eval harness (router + explainer ×3 at temperature 0 → `EVAL.md`) | `npm run eval` |
 | – | Demo script page following the 5-minute story | `/demo` |
-| – | Content status for developers | `/dev` |
+| – | Content status for developers; design alternatives (A/B/C) | `/dev`, `/dev/ui-options` |
 | F9 | Optional anonymous A/B pre/post study (static page vs unit); results with limits in the mentor dashboard | `/study`, `/mentor` |
 
 ## Run it
@@ -46,6 +46,8 @@ In a cloud session or on Vercel, set the variables from `.env.example` in the en
 | `npm run test:e2e` | Builds, serves with **synthetic** fixture content, runs Playwright (flows, RTL, axe accessibility, no console errors) |
 | `npm run eval` | Router + explainer ×3, guard stress test → `EVAL.md` |
 | `npm run eval:router` | Router pass rate with every failure listed |
+| `npm run review:pack` | Rebuild `review/REVIEW_PACK.pdf` for the Sharia reviewer |
+| `npm run verify:content -- units|referrals --by "Name"` | Reviewer sign-off for drafted wording |
 | `npm run check:content` | Content integrity gate (also runs before `npm run build`) |
 | `npm run generate:items` | Draft practice items from verified passages (needs verified content) |
 | `npm run seed` | Load `/content/*.json` into Supabase (no-op without credentials) |
